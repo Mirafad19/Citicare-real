@@ -1,0 +1,64 @@
+{
+  "entities": {
+    "Inquiry": {
+      "title": "Inquiry",
+      "description": "A contact form submission from a potential patient.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Full name of the inquirer" },
+        "email": { "type": "string", "format": "email", "description": "Email address" },
+        "phone": { "type": "string", "description": "Phone number" },
+        "service": { "type": "string", "description": "Service they are interested in" },
+        "message": { "type": "string", "description": "The inquiry message" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp of submission" }
+      },
+      "required": ["name", "email", "message", "createdAt"]
+    },
+    "Patient": {
+      "title": "Patient",
+      "description": "A patient record in the EMR.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "age": { "type": "integer" },
+        "sex": { "type": "string", "enum": ["Male", "Female", "Other"] },
+        "diagnosis": { "type": "string" },
+        "status": { "type": "string", "enum": ["Active", "Stable", "Critical"] },
+        "allergies": { "type": "array", "items": { "type": "string" } },
+        "createdBy": { "type": "string", "description": "UID of the specialist who created this record" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "age", "sex", "status", "createdBy"]
+    },
+    "Consultation": {
+      "title": "Consultation",
+      "description": "A medical consultation record.",
+      "type": "object",
+      "properties": {
+        "patientId": { "type": "string" },
+        "specialistId": { "type": "string" },
+        "chiefComplaint": { "type": "string" },
+        "history": { "type": "string" },
+        "diagnosis": { "type": "string" },
+        "plan": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["patientId", "specialistId", "chiefComplaint", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/inquiries/{inquiryId}": {
+      "schema": "Inquiry",
+      "description": "Collection of visitor inquiries"
+    },
+    "/patients/{patientId}": {
+      "schema": "Patient",
+      "description": "Collection of patient records"
+    },
+    "/patients/{patientId}/consultations/{consultationId}": {
+      "schema": "Consultation",
+      "description": "Subcollection of consultations for a specific patient"
+    }
+  }
+}

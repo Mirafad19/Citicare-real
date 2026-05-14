@@ -1,0 +1,100 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // 0. Default Deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // --- Helpers ---
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function emailVerified() {
+      return request.auth.token.email_verified == true;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == 'fadahunsi.miracle@gmail.com' ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // --- Validation Blueprints ---
+
+    function isValidInquiry(data) {
+      return data.keys().hasAll(['name', 'email', 'message', 'createdAt']) &&
+             data.keys().size() <= 6 &&
+             data.name is string && data.name.size() > 0 && data.name.size() <= 100 &&
+             data.email is string && data.email.size() <= 100 &&
+             data.message is string && data.message.size() > 0 && data.message.size() <= 5000 &&
+             data.createdAt == request.time;
+    }
+
+    function isValidPatient(data) {
+      return data.keys().hasAll(['name', 'age', 'sex', 'status', 'createdBy', 'createdAt']) &&
+             data.keys().size() <= 10 &&
+             data.name is string && data.name.size() > 0 && data.name.size() <= 100 &&
+             data.age is int && data.age >= 0 && data.age <= 150 &&
+             data.sex in ['Male', 'Female', 'Other'] &&
+             data.status in ['Active', 'Stable', 'Critical'] &&
+             data.createdBy == request.auth.uid &&
+             data.createdAt == request.time;
+    }
+
+    function isValidConsultation(data) {
+      return data.keys().hasAll(['patientId', 'specialistId', 'chiefComplaint', 'createdAt']) &&
+             data.keys().size() <= 10 &&
+             data.patientId is string &&
+             data.specialistId == request.auth.uid &&
+             data.createdAt == request.time;
+    }
+
+    // --- Collection Routes ---
+
+    match /inquiries/{inquiryId} {
+      allow create: if isValidId(inquiryId) && isValidInquiry(incoming());
+      allow read, list: if isAdmin();
+    }
+
+    match /patients/{patientId} {
+      allow create: if isSignedIn() && emailVerified() && isValidId(patientId) && isValidPatient(incoming());
+      allow read, get, list: if isSignedIn() && emailVerified();
+      allow update: if isSignedIn() && emailVerified() && (
+        isAdmin() || (
+          existing().createdBy == request.auth.uid && 
+          isValidPatient(incoming()) &&
+          incoming().diff(existing()).affectedKeys().hasOnly(['diagnosis', 'status', 'updatedAt', 'allergies'])
+        )
+      );
+    }
+
+    match /patients/{patientId}/consultations/{consultationId} {
+      allow create: if isSignedIn() && emailVerified() && isValidId(consultationId) && isValidConsultation(incoming());
+      allow read, get, list: if isSignedIn() && emailVerified();
+    }
+
+    match /admins/{adminId} {
+      allow read: if isSignedIn();
+    }
+  }
+}
