@@ -10,23 +10,23 @@ import { StaggerTestimonials } from '@/components/StaggerTestimonials';
 
 const slides = [
   {
-    image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=2000",
+    image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=2000",
     subtitle: "Healthcare Reimagined",
     title: "Addressing your healthcare needs, Every Time",
     description: "A trusted digital healthcare platform delivering personalized medical services, expert consultations, and continuous follow-up care tailored to meet your needs.",
   },
   {
-    image: "https://images.unsplash.com/photo-1576091160550-217359f4ecf8?auto=format&fit=crop&q=80&w=2000",
+    image: "https://www.image2url.com/r2/default/images/1778798331921-6358ebab-1a6e-4082-a655-cf373bfac93a.png",
     subtitle: "Qualified Professionals",
     title: "Access to world-class medical experts",
     description: "We connect you with licensed and verified healthcare professionals who are committed to your total wellbeing and long-term health guidance.",
   },
   {
-    image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=2000",
+    image: "https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&q=80&w=2000",
     subtitle: "Continuous Care",
     title: "Healthcare that never ends at the door",
     description: "Our platform ensures continuous monitoring, personalized insights, and comprehensive health guidance even after your consultation.",
-  }
+  },
 ];
 
 export default function Home() {
@@ -66,11 +66,11 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section with Slanted Slider */}
-      <section className="relative w-full h-[calc(100vh-140px)] min-h-[600px] bg-[#F1F5F9] overflow-hidden border-b border-slate-200">
-        <div className="max-w-[1440px] mx-auto h-full flex flex-col md:flex-row relative">
+      <section className="relative w-full min-h-[750px] bg-[#F1F5F9] overflow-hidden">
+        <div className="max-w-[1440px] mx-auto min-h-[750px] flex flex-col md:flex-row relative">
           
           {/* Left Side: Content */}
-          <div className="w-full md:w-[45%] h-full flex items-center z-20 px-6 lg:px-20 py-12 md:py-0 bg-[#F1F5F9]">
+          <div className="w-full md:w-[45%] min-h-[500px] md:h-full flex items-center z-30 px-6 lg:px-20 py-12 md:py-20 bg-[#F1F5F9]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentSlide}
@@ -90,10 +90,10 @@ export default function Home() {
                   <p className="text-lg text-[#5c5c5c] font-medium leading-relaxed max-w-md pt-4">
                     {slides[currentSlide].description}
                   </p>
-                  <div className="pt-8">
+                  <div className="pt-8 relative z-30">
                     <Link 
                       to="/services" 
-                      className="inline-flex items-center gap-6 bg-[#2563EB] hover:bg-[#1d4ed8] text-white pl-2 pr-10 py-2 rounded-full font-sans font-bold text-lg tracking-wide transition-all shadow-xl shadow-blue-500/20 group"
+                      className="inline-flex items-center gap-6 bg-[#2563EB] hover:bg-[#1d4ed8] text-white pl-2 pr-10 py-2 rounded-full font-sans font-bold text-lg tracking-wide transition-all shadow-2xl shadow-blue-500/40 group overflow-hidden"
                     >
                       <div className="h-12 w-12 flex items-center justify-center bg-white/20 rounded-full group-hover:bg-white/30 transition-all">
                         <Zap className="h-6 w-6 fill-current" />
@@ -134,10 +134,7 @@ export default function Home() {
                   <img 
                     src={slides[currentSlide].image} 
                     alt="Healthcare Professional" 
-                    className={cn(
-                      "h-full w-full object-cover transition-all duration-700",
-                      imagesLoaded ? "blur-0" : "blur-lg scale-110"
-                    )}
+                    className="h-full w-full object-cover transition-all duration-700 blur-0"
                     loading="eager"
                   />
                   {/* Subtle gradient for mobile readability */}
@@ -175,7 +172,7 @@ export default function Home() {
                 image: "https://images.unsplash.com/photo-1584432810601-6c7f27d2362b?auto=format&fit=crop&q=80&w=800",
                 desc: "Access qualified doctors from the comfort of your home. Get accurate diagnoses, prescriptions, and professional advice.",
                 buttonText: "BOOK NOW",
-                color: "bg-blue-50 border-blue-100",
+                color: "bg-blue-100 border-blue-200 shadow-blue-500/10",
                 buttonColor: "bg-blue-600 hover:bg-blue-700"
               },
               {
@@ -183,7 +180,7 @@ export default function Home() {
                 image: "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&q=80&w=800",
                 desc: "We bring professional care to your doorstep, including medical consultations, psychiatric services, and nursing care.",
                 buttonText: "LEARN MORE",
-                color: "bg-emerald-50 border-emerald-100",
+                color: "bg-emerald-100 border-emerald-200 shadow-emerald-500/10",
                 buttonColor: "bg-emerald-600 hover:bg-emerald-700"
               },
               {
@@ -191,8 +188,8 @@ export default function Home() {
                 image: "https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&q=80&w=800",
                 desc: "Direct access to experts in Cardiology, OB/GYN, Surgery, Orthopedics, Mental Health, and more specialty areas.",
                 buttonText: "VIEW SPECIALTIES",
-                color: "bg-indigo-50 border-indigo-100",
-                buttonColor: "bg-indigo-600 hover:bg-indigo-700"
+                color: "bg-amber-100 border-amber-200 shadow-amber-500/10",
+                buttonColor: "bg-amber-600 hover:bg-amber-700"
               }
             ].map((service, i) => (
               <motion.div
@@ -201,11 +198,10 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className={cn("flex flex-col rounded-[3rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 group border-2", service.color)}
+                className={cn("flex flex-col rounded-[3rem] overflow-hidden shadow-xl transition-all duration-500 group", service.color)}
               >
                 <div className="h-64 overflow-hidden relative">
                   <img src={service.image} alt={service.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-black/10 transition-opacity group-hover:opacity-0" />
                 </div>
                 <div className="p-10 flex flex-col items-center text-center flex-grow space-y-6">
                   <h3 className="text-3xl font-black text-[#1e3a8a] tracking-tight uppercase leading-tight">{service.title}</h3>
@@ -256,8 +252,8 @@ export default function Home() {
                   <span className="font-bold text-[#1e3a8a]">Personalized Guidance</span>
                 </div>
               </div>
-                  <Button asChild size="lg" className="bg-[#005FA3] hover:bg-[#004d80] text-white rounded-full px-12 h-16 text-lg font-bold">
-                    <Link to="/about">Learn About Citicare</Link>
+                  <Button render={<Link to="/about">Learn About Citicare</Link>} size="lg" className="bg-[#005FA3] hover:bg-[#004d80] text-white rounded-full px-12 h-16 text-lg font-bold">
+                    Learn About Citicare
                   </Button>
             </div>
             <div className="flex-1">
@@ -311,7 +307,7 @@ export default function Home() {
                 Book a consultation with our licensed and verified healthcare professionals. Join thousands of patients who trust Citicare for their medical needs and ongoing wellness guidance.
               </p>
               <div className="flex flex-wrap gap-6 pt-4">
-                <Button size="lg" className="bg-white text-blue-500 hover:bg-white/90 rounded-full px-12 h-20 text-xl font-black uppercase tracking-widest shadow-2xl transition-all hover:scale-105 active:scale-95 border-none">
+                <Button render={<Link to="/contact">Book Appointment</Link>} size="lg" className="bg-white text-blue-500 hover:bg-white/90 rounded-full px-12 h-20 text-xl font-black uppercase tracking-widest shadow-2xl transition-all hover:scale-105 active:scale-95 border-none">
                   Book Appointment
                 </Button>
                 <Link to="/contact" className="inline-flex items-center justify-center border-2 border-white/40 text-white hover:bg-white/10 rounded-full px-12 h-20 text-xl font-black uppercase tracking-widest transition-all hover:scale-105 active:scale-95">
@@ -373,7 +369,7 @@ export default function Home() {
                  />
                  <div className="absolute inset-0 bg-blue-600/5 mix-blend-multiply" />
                </div>
-               <div className="absolute -bottom-10 -left-10 -right-10 bg-white p-12 rounded-[4rem] shadow-2xl border border-slate-100 z-20">
+               <div className="absolute -bottom-10 -left-10 -right-10 bg-white p-12 rounded-[4rem] shadow-2xl z-20">
                   <div className="flex flex-col md:flex-row items-center justify-between gap-8">
                     <div className="space-y-2 text-center md:text-left">
                       <div className="font-black text-[#1e3a8a] text-2xl uppercase tracking-tight">General Inquiries</div>
@@ -397,7 +393,7 @@ export default function Home() {
             Ready to experience <br />quality healthcare?
           </h2>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
-            <Button size="lg" className="bg-white text-blue-500 hover:bg-white/90 rounded-full px-16 h-24 text-2xl font-black uppercase tracking-widest shadow-2xl transition-all hover:-translate-y-2 border-none">
+            <Button render={<Link to="/contact">Book Now</Link>} size="lg" className="bg-white text-blue-500 hover:bg-white/90 rounded-full px-16 h-24 text-2xl font-black uppercase tracking-widest shadow-2xl transition-all hover:-translate-y-2 border-none cursor-pointer">
                Book Now
             </Button>
             <Link to="/contact" className="inline-flex items-center justify-center border-2 border-white/40 text-white hover:bg-white/10 rounded-full px-16 h-24 text-2xl font-black uppercase tracking-widest shadow-2xl transition-all hover:-translate-y-2">

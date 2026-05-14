@@ -24,11 +24,11 @@ export function Navbar() {
   return (
     <div className="w-full flex flex-col">
       <TopBar />
-      <header className="sticky top-0 z-50 w-full bg-[#F1F5F9] border-b border-slate-200 shadow-sm px-6 lg:px-24">
+      <header className="sticky top-0 z-50 w-full bg-[#F1F5F9] shadow-sm px-6 lg:px-24">
         <div className="max-w-[1440px] mx-auto flex h-28 items-center justify-between">
           {/* Logo Area */}
           <Link to="/" className="flex items-center gap-3 shrink-0">
-             <div className="h-20 md:h-24 w-auto flex items-center justify-start overflow-hidden bg-white px-6 rounded-2xl shadow-sm border border-slate-100">
+             <div className="h-20 md:h-24 w-auto flex items-center justify-start overflow-hidden">
                 <img 
                   src="https://www.image2url.com/r2/default/images/1778793792491-b1b6686e-ac45-4d5b-b39c-d970f1d5d1da.png" 
                   alt="Citicare Logo" 
@@ -72,18 +72,16 @@ export function Navbar() {
 
             {/* Mobile Menu Trigger */}
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="lg:hidden rounded-full hover:bg-slate-100 text-[#1A1A1A]">
-                  <Menu className="h-7 w-7" />
-                </Button>
-              </SheetTrigger>
+              <SheetTrigger render={<Button variant="ghost" size="icon" className="lg:hidden rounded-full hover:bg-slate-100 text-[#1A1A1A]" />}>
+              <Menu className="h-7 w-7" />
+            </SheetTrigger>
               <SheetContent side="right" className="w-full sm:max-w-md border-l border-border bg-white p-0">
                 <div className="flex flex-col h-full">
-                  <div className="p-8 border-b border-border">
+                  <div className="p-8 bg-white">
                   <img 
                     src="https://www.image2url.com/r2/default/images/1778793792491-b1b6686e-ac45-4d5b-b39c-d970f1d5d1da.png" 
                     alt="Citicare Logo" 
-                    className="h-10 w-auto object-contain bg-white px-2 py-1 rounded-lg"
+                    className="h-10 w-auto object-contain"
                     referrerPolicy="no-referrer"
                   />
                   </div>

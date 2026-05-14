@@ -86,19 +86,19 @@ export default function About() {
               title: "Our Mission",
               icon: <Target className="h-10 w-10 text-blue-600" />,
               text: "To bridge the gap between quality healthcare expertise and patient accessibility through informed, continuous, and technology-driven care.",
-              color: "bg-blue-50 border-blue-100"
+              color: "bg-blue-100/50"
             },
             {
               title: "Our Goal",
               icon: <Zap className="h-10 w-10 text-emerald-600" />,
               text: "Not just treating illnesses—we are improving lives through personalized insights, routine screenings, and compassionate medical guidance.",
-              color: "bg-emerald-50 border-emerald-100"
+              color: "bg-emerald-100/50"
             }
           ].map((card, i) => (
             <motion.div
               key={i}
               whileHover={{ y: -10 }}
-              className={cn("p-16 rounded-[4rem] border-2 transition-all duration-500 space-y-8 shadow-sm hover:shadow-2xl", card.color)}
+              className={cn("p-16 rounded-[4rem] transition-all duration-500 space-y-8 shadow-sm hover:shadow-2xl", card.color)}
             >
               <div className="h-20 w-20 bg-white rounded-3xl flex items-center justify-center shadow-lg">
                 {card.icon}
@@ -120,11 +120,11 @@ export default function About() {
            </div>
            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
              {[
-               { title: "Compassion", desc: "We care for your family like they are our own.", icon: <Heart className="h-12 w-12" />, color: "bg-rose-50 border-rose-100 text-rose-600" },
-               { title: "Integrity", desc: "Honesty and transparency in every care plan.", icon: <Shield className="h-12 w-12" />, color: "bg-blue-50 border-blue-100 text-blue-600" },
-               { title: "Excellence", desc: "Striving for the highest quality of healthcare.", icon: <Star className="h-12 w-12" />, color: "bg-amber-50 border-amber-100 text-amber-600" }
+               { title: "Compassion", desc: "We care for your family like they are our own.", icon: <Heart className="h-12 w-12" />, color: "bg-rose-100 text-rose-600" },
+               { title: "Integrity", desc: "Honesty and transparency in every care plan.", icon: <Shield className="h-12 w-12" />, color: "bg-blue-100 text-blue-600" },
+               { title: "Excellence", desc: "Striving for the highest quality of healthcare.", icon: <Star className="h-12 w-12" />, color: "bg-amber-100 text-amber-600" }
              ].map((val, i) => (
-               <div key={i} className={cn("p-12 rounded-[4rem] border-2 text-center space-y-6 transition-all duration-500 shadow-sm hover:shadow-xl", val.color)}>
+               <div key={i} className={cn("p-12 rounded-[4rem] text-center space-y-6 transition-all duration-500 shadow-sm hover:shadow-xl", val.color)}>
                   <div className="h-24 w-24 mx-auto bg-white rounded-3xl flex items-center justify-center shadow-lg">
                     {val.icon}
                   </div>

@@ -111,11 +111,9 @@ export default function PatientDetail() {
   return (
     <div className="space-y-10 pb-12 font-sans">
       <div className="flex items-center justify-between">
-        <Button variant="ghost" asChild className="rounded-full text-[#5C5C5C] hover:bg-muted hover:text-primary transition-all">
-           <Link to="/emr/dashboard">
+        <Button variant="ghost" render={<Link to="/emr/dashboard" />} className="rounded-full text-[#5C5C5C] hover:bg-muted hover:text-primary transition-all">
              <ChevronLeft className="h-4 w-4 mr-2" />
              Records Overview
-           </Link>
         </Button>
         <div className="flex gap-4">
            <Button variant="outline" className="rounded-2xl h-11 px-6 font-medium border-border text-[#5C5C5C] hover:bg-accent transition-all">Print File</Button>
