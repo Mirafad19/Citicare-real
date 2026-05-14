@@ -59,7 +59,7 @@ export default function About() {
             </div>
 
             <div className="flex-1 relative">
-               <div className="rounded-[4rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.2)] relative z-10 border-8 border-[#F1F5F9]">
+               <div className="rounded-[4rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.2)] relative z-10">
                  <img 
                    src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&q=80&w=1400" 
                    alt="Modern Digital Consultation" 
@@ -67,7 +67,7 @@ export default function About() {
                  />
                  <div className="absolute inset-0 bg-blue-600/5 mix-blend-multiply" />
                </div>
-               <div className="absolute -bottom-10 -right-10 bg-blue-500 text-white p-12 rounded-[3.5rem] shadow-2xl z-20 hidden md:block border-4 border-white">
+               <div className="absolute -bottom-10 -right-10 bg-blue-500 text-white p-12 rounded-[3.5rem] shadow-2xl z-20 hidden md:block border-none">
                   <div className="text-center">
                     <div className="text-4xl font-black mb-1 uppercase tracking-tighter">Verified</div>
                     <div className="font-bold uppercase tracking-widest text-[10px] opacity-80">Licensed Professionals</div>

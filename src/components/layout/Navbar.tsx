@@ -9,6 +9,7 @@ const navLinks = [
   { name: 'Home', href: '/' },
   { name: 'About Us', href: '/about' },
   { name: 'Our Services', href: '/services' },
+  { name: 'FAQ', href: '/faq' },
   { name: 'Certification', href: '/certification' },
   { name: 'Career', href: '/career' },
   { name: 'Contact', href: '/contact' },
@@ -27,11 +28,11 @@ export function Navbar() {
         <div className="max-w-[1440px] mx-auto flex h-28 items-center justify-between">
           {/* Logo Area */}
           <Link to="/" className="flex items-center gap-3 shrink-0">
-             <div className="h-20 md:h-24 w-auto flex items-center justify-start overflow-hidden">
+             <div className="h-20 md:h-24 w-auto flex items-center justify-start overflow-hidden bg-white px-6 rounded-2xl shadow-sm border border-slate-100">
                 <img 
-                  src="https://www.image2url.com/r2/default/images/1778747658631-1c6d2430-b64c-467f-84ca-29aef402e5ea.png" 
+                  src="https://www.image2url.com/r2/default/images/1778793792491-b1b6686e-ac45-4d5b-b39c-d970f1d5d1da.png" 
                   alt="Citicare Logo" 
-                  className="h-full w-auto object-contain scale-110"
+                  className="h-full w-auto object-contain"
                   referrerPolicy="no-referrer"
                 />
              </div>
@@ -79,12 +80,12 @@ export function Navbar() {
               <SheetContent side="right" className="w-full sm:max-w-md border-l border-border bg-white p-0">
                 <div className="flex flex-col h-full">
                   <div className="p-8 border-b border-border">
-                    <img 
-                      src="https://www.image2url.com/r2/default/images/1778747658631-1c6d2430-b64c-467f-84ca-29aef402e5ea.png" 
-                      alt="Citicare Logo" 
-                      className="h-10 w-auto object-contain"
-                      referrerPolicy="no-referrer"
-                    />
+                  <img 
+                    src="https://www.image2url.com/r2/default/images/1778793792491-b1b6686e-ac45-4d5b-b39c-d970f1d5d1da.png" 
+                    alt="Citicare Logo" 
+                    className="h-10 w-auto object-contain bg-white px-2 py-1 rounded-lg"
+                    referrerPolicy="no-referrer"
+                  />
                   </div>
                   <nav className="flex-grow flex flex-col p-8 gap-4 overflow-y-auto">
                     {navLinks.map((link) => (

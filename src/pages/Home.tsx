@@ -6,6 +6,8 @@ import { CheckCircle2, ChevronRight, Check, Zap, ArrowRight, Star, ShieldCheck, 
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 
+import { StaggerTestimonials } from '@/components/StaggerTestimonials';
+
 const slides = [
   {
     image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=2000",
@@ -14,7 +16,7 @@ const slides = [
     description: "A trusted digital healthcare platform delivering personalized medical services, expert consultations, and continuous follow-up care tailored to meet your needs.",
   },
   {
-    image: "https://images.unsplash.com/photo-1559839734-2b71f1e3b778?auto=format&fit=crop&q=80&w=2000",
+    image: "https://images.unsplash.com/photo-1576091160550-217359f4ecf8?auto=format&fit=crop&q=80&w=2000",
     subtitle: "Qualified Professionals",
     title: "Access to world-class medical experts",
     description: "We connect you with licensed and verified healthcare professionals who are committed to your total wellbeing and long-term health guidance.",
@@ -64,7 +66,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section with Slanted Slider */}
-      <section className="relative w-full h-[600px] md:h-[750px] bg-[#F1F5F9] overflow-hidden border-b border-slate-200">
+      <section className="relative w-full h-[calc(100vh-140px)] min-h-[600px] bg-[#F1F5F9] overflow-hidden border-b border-slate-200">
         <div className="max-w-[1440px] mx-auto h-full flex flex-col md:flex-row relative">
           
           {/* Left Side: Content */}
@@ -226,13 +228,13 @@ export default function Home() {
       <section className="py-24 bg-[#F8FAFC]">
         <div className="max-w-[1440px] mx-auto px-6 lg:px-24">
           <div className="flex flex-col lg:flex-row items-center gap-16">
-            <div className="flex-1 space-y-8">
-              <div className="space-y-4">
-                <span className="text-[#005FA3] font-black tracking-widest text-sm uppercase block">A New Era of Healthcare</span>
-                <h2 className="text-4xl lg:text-6xl font-black text-[#1e3a8a] leading-tight">
-                  Bridging the gap between individuals and quality care.
-                </h2>
-              </div>
+                <div className="flex-1 space-y-8">
+                  <div className="space-y-4">
+                    <span className="text-[#005FA3] font-black tracking-widest text-sm uppercase block">A New Era of Healthcare</span>
+                    <h2 className="text-4xl lg:text-6xl font-black text-[#1e3a8a] leading-tight text-left">
+                      Bridging the gap between individuals and quality care.
+                    </h2>
+                  </div>
               <p className="text-xl text-[#5c5c5c] leading-relaxed">
                 Citicare is a patient-centered digital healthcare platform committed to connecting you with the right professionals. We ensure that care does not end after consultation through continuous follow-up and personalized insights.
               </p>
@@ -254,14 +256,14 @@ export default function Home() {
                   <span className="font-bold text-[#1e3a8a]">Personalized Guidance</span>
                 </div>
               </div>
-              <Button size="lg" className="bg-[#005FA3] hover:bg-[#004d80] text-white rounded-full px-12 h-16 text-lg font-bold">
-                Learn About Citicare
-              </Button>
+                  <Button asChild size="lg" className="bg-[#005FA3] hover:bg-[#004d80] text-white rounded-full px-12 h-16 text-lg font-bold">
+                    <Link to="/about">Learn About Citicare</Link>
+                  </Button>
             </div>
             <div className="flex-1">
               <div className="relative">
                 <div className="absolute -top-10 -left-10 w-40 h-40 bg-[#005FA3]/10 rounded-full -z-10 blur-3xl" />
-                <div className="rounded-[4rem] overflow-hidden shadow-2xl border-8 border-white">
+                <div className="rounded-[4rem] overflow-hidden shadow-2xl">
                   <img 
                     src="https://images.unsplash.com/photo-1516733725897-1aa73b87c8e8?auto=format&fit=crop&q=80&w=1400" 
                     alt="Elderly Care" 
@@ -288,9 +290,9 @@ export default function Home() {
             <div className="flex-1 order-2 lg:order-1">
               <div className="relative">
                 <div className="absolute -top-10 -left-10 w-64 h-64 bg-white/20 rounded-full blur-[100px]" />
-                <div className="relative z-10 rounded-[4rem] overflow-hidden border-8 border-white/20 shadow-2xl">
+                <div className="relative z-10 rounded-[4rem] overflow-hidden shadow-2xl">
                   <img 
-                    src="https://images.unsplash.com/photo-1559839734-2b71f1e3b778?auto=format&fit=crop&q=80&w=1200" 
+                    src="https://images.unsplash.com/photo-1504813184591-01572f98c85f?auto=format&fit=crop&q=80&w=1200" 
                     alt="Digital Healthcare Consultation" 
                     className="w-full h-[550px] object-cover"
                   />
@@ -321,64 +323,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials (Image 5) */}
+      {/* Testimonials */}
       <section className="py-24 bg-white overflow-hidden">
         <div className="max-w-[1440px] mx-auto px-6 lg:px-24">
           <div className="text-center mb-20 space-y-4">
             <span className="text-[#005FA3] font-black uppercase tracking-[0.4em] text-sm block">Kind Feedback</span>
             <h2 className="text-5xl lg:text-7xl font-black text-[#1e3a8a] leading-tight">
-              Happy words from our clients
+              Happy words from our patients
             </h2>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                text: "The care and attention my father received was exceptional. The Citicare team are not just professionals, they are like family.",
-                author: "Mrs. Adebayo",
-                role: "Daughter of Patient",
-                color: "bg-blue-50 border-blue-100 text-blue-600"
-              },
-              {
-                text: "Citicare's online consultation was so seamless. I got my diagnosis and prescription within minutes without leaving my house.",
-                author: "Mr. Johnson",
-                role: "Patient",
-                color: "bg-indigo-50 border-indigo-100 text-indigo-600"
-              },
-              {
-                text: "Citicare Integrated Health has been a blessing to our family. Their medical experts are top-notch and very reliable.",
-                author: "Dr. Okechukwu",
-                role: "Patient's Family",
-                color: "bg-rose-50 border-rose-100 text-rose-600"
-              }
-            ].map((testimonial, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ y: -10 }}
-                className={cn("p-12 rounded-[3.5rem] border-2 transition-all duration-500 shadow-sm hover:shadow-2xl flex flex-col justify-between", testimonial.color)}
-              >
-                <div>
-                  <div className="flex gap-2 mb-8">
-                    {[...Array(5)].map((_, j) => (
-                      <Star key={j} className="h-6 w-6 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-xl font-bold italic mb-10 leading-relaxed text-[#1e3a8a]">
-                    "{testimonial.text}"
-                  </p>
-                </div>
-                <div className="flex items-center gap-4 border-t border-black/5 pt-8">
-                  <div className="h-14 w-14 bg-white rounded-full flex items-center justify-center font-black text-xl shadow-inner">
-                    {testimonial.author[0]}
-                  </div>
-                  <div>
-                    <div className="font-black text-[#1e3a8a]">{testimonial.author}</div>
-                    <div className="text-xs font-black uppercase tracking-widest opacity-60">{testimonial.role}</div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <StaggerTestimonials />
         </div>
       </section>
 
@@ -410,7 +365,7 @@ export default function Home() {
                </div>
             </div>
             <div className="relative">
-               <div className="rounded-[4rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.2)] h-[700px] border-8 border-white bg-slate-200">
+               <div className="rounded-[4rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.2)] h-[700px] bg-slate-200">
                  <img 
                    src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80&w=1400" 
                    alt="Citicare Medical Center" 

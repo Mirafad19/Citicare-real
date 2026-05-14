@@ -13,9 +13,13 @@ export function Footer() {
         <div className="grid gap-16 md:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-8">
             <Link to="/" className="block">
-              <div className="flex items-center gap-2 text-white">
-                <ShieldCheck className="h-10 w-10 text-[#2563EB]" />
-                <span className="text-2xl font-black tracking-tight uppercase">Citicare</span>
+              <div className="bg-white p-6 rounded-2xl inline-block shadow-lg border border-white/10">
+                <img 
+                  src="https://www.image2url.com/r2/default/images/1778793792491-b1b6686e-ac45-4d5b-b39c-d970f1d5d1da.png" 
+                  alt="Citicare Logo" 
+                  className="h-16 w-auto object-contain"
+                  referrerPolicy="no-referrer"
+                />
               </div>
             </Link>
             <div className="space-y-4">

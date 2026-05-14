@@ -30,8 +30,8 @@ export default function Services() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Header */}
-      <section className="bg-[#005FA3] py-24 md:py-36 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-white/5 [clip-path:polygon(20%_0,100%_0,100%_100%,0%_100%)]" />
+      <section className="bg-blue-600 py-24 md:py-36 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center opacity-10" />
         <div className="max-w-[1440px] mx-auto px-6 lg:px-24 relative z-10 text-white">
           <div className="max-w-3xl space-y-8">
             <motion.div
@@ -75,7 +75,7 @@ export default function Services() {
                   </p>
                   <div className="w-full pt-4 space-y-3">
                     {service.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-center gap-3 text-[#1e3a8a] font-bold text-sm bg-white/50 p-3 rounded-2xl border border-white">
+                      <div key={idx} className="flex items-center gap-3 text-[#1e3a8a] font-bold text-sm bg-white/50 p-3 rounded-2xl">
                         <CheckCircle2 className="h-4 w-4 text-[#005FA3]" />
                         <span>{feature}</span>
                       </div>
