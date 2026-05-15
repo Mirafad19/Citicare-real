@@ -10,6 +10,7 @@ import About from './pages/About';
 import Services from './pages/Services';
 import Values from './pages/Values';
 import Contact from './pages/Contact';
+import Booking from './pages/Booking';
 import FAQ from './pages/FAQ';
 import EMRDashboard from './pages/emr/Dashboard';
 import PatientDetail from './pages/emr/PatientDetail';
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="/services" element={<WebsiteLayout><Services /></WebsiteLayout>} />
           <Route path="/values" element={<WebsiteLayout><Values /></WebsiteLayout>} />
           <Route path="/contact" element={<WebsiteLayout><Contact /></WebsiteLayout>} />
+          <Route path="/book" element={<WebsiteLayout><Booking /></WebsiteLayout>} />
           <Route path="/faq" element={<WebsiteLayout><FAQ /></WebsiteLayout>} />
 
           {/* EMR Portal */}

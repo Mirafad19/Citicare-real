@@ -87,7 +87,7 @@ export default function Home() {
                   <h1 className="text-5xl lg:text-[80px] font-sans font-black text-[#1e3a8a] leading-[0.95] tracking-tight">
                     {slides[currentSlide].title}
                   </h1>
-                  <p className="text-lg text-[#5c5c5c] font-medium leading-relaxed max-w-md pt-4">
+                  <p className="text-lg text-[#334155] font-medium leading-relaxed max-w-md pt-4">
                     {slides[currentSlide].description}
                   </p>
                   <div className="pt-8 relative z-30">
@@ -165,11 +165,17 @@ export default function Home() {
       {/* Service Cards (Image 1) */}
       <section className="py-24 bg-white">
         <div className="max-w-[1440px] mx-auto px-6 lg:px-24">
+          <div className="text-center mb-16 space-y-4">
+            <span className="text-[#005FA3] font-black uppercase tracking-[0.4em] text-sm block">Professional Care</span>
+            <h2 className="text-4xl lg:text-7xl font-black text-[#1e3a8a] leading-[0.9] tracking-tighter uppercase">
+              Our Healthcare <br />Service Solutions
+            </h2>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
               {
                 title: "Online Medical Consultations",
-                image: "https://images.unsplash.com/photo-1584432810601-6c7f27d2362b?auto=format&fit=crop&q=80&w=800",
+                image: "https://overwhelming-turquoise-bh8kfyaxjt.edgeone.app/telehealth.jpg",
                 desc: "Access qualified doctors from the comfort of your home. Get accurate diagnoses, prescriptions, and professional advice.",
                 buttonText: "BOOK NOW",
                 color: "bg-blue-100 border-blue-200 shadow-blue-500/10",
@@ -205,10 +211,10 @@ export default function Home() {
                 </div>
                 <div className="p-10 flex flex-col items-center text-center flex-grow space-y-6">
                   <h3 className="text-3xl font-black text-[#1e3a8a] tracking-tight uppercase leading-tight">{service.title}</h3>
-                  <p className="text-[#5c5c5c] mb-4 leading-relaxed font-bold opacity-80">
+                  <p className="text-[#334155] mb-4 leading-relaxed font-bold opacity-90">
                     {service.desc}
                   </p>
-                  <Link to="/services" className="w-full mt-auto">
+                  <Link to="/book" className="w-full mt-auto">
                     <Button className={cn("w-full text-white rounded-full h-14 font-black uppercase tracking-widest text-xs shadow-lg transition-transform active:scale-95", service.buttonColor)}>
                       {service.buttonText}
                     </Button>
@@ -231,7 +237,7 @@ export default function Home() {
                       Bridging the gap between individuals and quality care.
                     </h2>
                   </div>
-              <p className="text-xl text-[#5c5c5c] leading-relaxed">
+              <p className="text-xl text-[#334155] leading-relaxed">
                 Citicare is a patient-centered digital healthcare platform committed to connecting you with the right professionals. We ensure that care does not end after consultation through continuous follow-up and personalized insights.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pb-4">
@@ -261,7 +267,7 @@ export default function Home() {
                 <div className="absolute -top-10 -left-10 w-40 h-40 bg-[#005FA3]/10 rounded-full -z-10 blur-3xl" />
                 <div className="rounded-[4rem] overflow-hidden shadow-2xl">
                   <img 
-                    src="https://images.unsplash.com/photo-1516733725897-1aa73b87c8e8?auto=format&fit=crop&q=80&w=1400" 
+                    src="https://www.image2url.com/r2/default/images/1778861274282-fc3009b9-31a4-401b-b0a6-38c7a85c2cbb.png" 
                     alt="Elderly Care" 
                     className="w-full h-full object-cover"
                   />
@@ -288,7 +294,7 @@ export default function Home() {
                 <div className="absolute -top-10 -left-10 w-64 h-64 bg-white/20 rounded-full blur-[100px]" />
                 <div className="relative z-10 rounded-[4rem] overflow-hidden shadow-2xl">
                   <img 
-                    src="https://images.unsplash.com/photo-1504813184591-01572f98c85f?auto=format&fit=crop&q=80&w=1200" 
+                    src="https://overwhelming-turquoise-bh8kfyaxjt.edgeone.app/telehealth.jpg" 
                     alt="Digital Healthcare Consultation" 
                     className="w-full h-[550px] object-cover"
                   />
@@ -307,11 +313,11 @@ export default function Home() {
                 Book a consultation with our licensed and verified healthcare professionals. Join thousands of patients who trust Citicare for their medical needs and ongoing wellness guidance.
               </p>
               <div className="flex flex-wrap gap-6 pt-4">
-                <Button render={<Link to="/contact">Book Appointment</Link>} size="lg" className="bg-white text-blue-500 hover:bg-white/90 rounded-full px-12 h-20 text-xl font-black uppercase tracking-widest shadow-2xl transition-all hover:scale-105 active:scale-95 border-none">
+                <Button render={<Link to="/book">Book Appointment</Link>} size="lg" className="bg-white text-blue-500 hover:bg-white/90 rounded-full px-12 h-20 text-xl font-black uppercase tracking-widest shadow-2xl transition-all hover:scale-105 active:scale-95 border-none">
                   Book Appointment
                 </Button>
                 <Link to="/contact" className="inline-flex items-center justify-center border-2 border-white/40 text-white hover:bg-white/10 rounded-full px-12 h-20 text-xl font-black uppercase tracking-widest transition-all hover:scale-105 active:scale-95">
-                  Contact Support
+                  General Inquiry
                 </Link>
               </div>
             </div>
@@ -344,7 +350,7 @@ export default function Home() {
                     Where we <span className="text-blue-500 italic">provide</span> our services.
                  </h2>
                </div>
-               <p className="text-xl text-[#5c5c5c] leading-relaxed font-bold opacity-80 max-w-xl">
+               <p className="text-xl text-[#334155] leading-relaxed font-bold opacity-90 max-w-xl">
                  A patient-centered digital healthcare platform committed to bridging the gap between individuals and quality healthcare services across Lagos.
                </p>
                <div className="grid grid-cols-2 gap-x-8 gap-y-6">
@@ -363,7 +369,7 @@ export default function Home() {
             <div className="relative">
                <div className="rounded-[4rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.2)] h-[700px] bg-slate-200">
                  <img 
-                   src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80&w=1400" 
+                   src="https://www.image2url.com/r2/default/images/1778863421981-11b203cd-3516-4af1-b896-2e0174ce5418.png" 
                    alt="Citicare Medical Center" 
                    className="w-full h-full object-cover"
                  />
@@ -393,17 +399,12 @@ export default function Home() {
             Ready to experience <br />quality healthcare?
           </h2>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
-            <Button render={<Link to="/contact">Book Now</Link>} size="lg" className="bg-white text-blue-500 hover:bg-white/90 rounded-full px-16 h-24 text-2xl font-black uppercase tracking-widest shadow-2xl transition-all hover:-translate-y-2 border-none cursor-pointer">
+            <Button render={<Link to="/book">Book Now</Link>} size="lg" className="bg-white text-blue-500 hover:bg-white/90 rounded-full px-16 h-24 text-2xl font-black uppercase tracking-widest shadow-2xl transition-all hover:-translate-y-2 border-none cursor-pointer">
                Book Now
             </Button>
             <Link to="/contact" className="inline-flex items-center justify-center border-2 border-white/40 text-white hover:bg-white/10 rounded-full px-16 h-24 text-2xl font-black uppercase tracking-widest shadow-2xl transition-all hover:-translate-y-2">
-               Contact Agent
+               Contact Us
             </Link>
-          </div>
-          <div className="pt-16 flex items-center justify-center gap-6 text-white/40 font-black uppercase tracking-[0.5em] text-[10px]">
-             <div className="h-[2px] w-20 bg-white/20" />
-             CITICARE HEALTH SOLUTIONS
-             <div className="h-[2px] w-20 bg-white/20" />
           </div>
         </div>
       </section>

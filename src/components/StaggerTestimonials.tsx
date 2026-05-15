@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Heart } from 'lucide-react';
+import { ChevronLeft, ChevronRight, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const SQRT_5000 = Math.sqrt(5000);
@@ -9,43 +9,43 @@ const SQRT_5000 = Math.sqrt(5000);
 const testimonials = [
   {
     tempId: 0,
-    testimonial: "The way Citicare take care of my mama, I no fit even explain. Dem be like family for real.",
-    by: "Abigail, Lagos Island",
+    testimonial: "The home nursing service was reliable. The nurse arrived on time and was very professional with the treatment.",
+    by: "A. Adebayo, Lekki",
   },
   {
     tempId: 1,
-    testimonial: "I was skeptical about online consultation, but Citicare changed my mind. Professional and very fast!",
-    by: "Dr. Olamide, Ikeja",
+    testimonial: "The online consultation saved me a lot of time. The doctor was attentive and the prescription process was smooth.",
+    by: "T. Okon, Ikeja",
   },
   {
     tempId: 2,
-    testimonial: "Citicare nurse dem too kind. Dem handle my treatment with so much love. God bless una!",
-    by: "Mama Tobi, Surulere",
+    testimonial: "Skilled care provided for my father's post-surgery recovery. We appreciated the consistent follow-ups.",
+    by: "O. Lawal, Surulere",
   },
   {
     tempId: 3,
-    testimonial: "The follow-up care is what makes Citicare different. They didn't just give drugs and go; they monitored my progress daily.",
-    by: "Emmanuel, Victoria Island",
+    testimonial: "The digital platform is straightforward. Scheduling a specialist appointment was much easier than expected.",
+    by: "E. Nwosu, Victoria Island",
   },
   {
     tempId: 4,
-    testimonial: "Citicare na standard! No more long hospital queues for me. The home service is a game-changer.",
-    by: "Bisi, Lekki Phase 1",
+    testimonial: "Efficient service and clear communication throughout the process. It's a practical solution for busy people.",
+    by: "B. Ajayi, Lekki",
   },
   {
     tempId: 5,
-    testimonial: "Highest quality medical care I've experienced in Lagos. Integrity and excellence at its peak.",
-    by: "Chief Adelaja, Ikoyi",
+    testimonial: "The medical staff was knowledgeable and the home visit was conducted with thorough care and attention.",
+    by: "M. Ibrahim, Ikoyi",
   },
   {
     tempId: 6,
-    testimonial: "My pikin don well finish! Thank you Citicare for the quick response. E too set!",
-    by: "Sikiru, Ajah",
+    testimonial: "Helpful guidance when we had questions about our infant's health. The response time was prompt.",
+    by: "S. Olumide, Ajah",
   },
   {
     tempId: 7,
-    testimonial: "Transparent billing and compassionate care. I recommend them to everyone who values their health.",
-    by: "Nneka, Gbagada",
+    testimonial: "A professional healthcare experience with clear billing. I would recommend their services for home care.",
+    by: "N. Obi, Gbagada",
   }
 ];
 
@@ -85,10 +85,10 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
       }}
     >
       <div className={cn(
-        "mb-6 h-14 w-14 rounded-2xl flex items-center justify-center font-black text-2xl",
-        isCenter ? "bg-white/20 text-white" : "bg-blue-50 text-blue-600"
+        "mb-6 h-14 w-14 rounded-full flex items-center justify-center font-black text-2xl",
+        isCenter ? "bg-white/20 text-white" : "bg-blue-100 text-blue-600"
       )}>
-        <Heart className="h-8 w-8 fill-current" />
+        <User className="h-8 w-8" />
       </div>
       <h3 className={cn(
         "text-lg sm:text-2xl font-bold leading-tight",

@@ -59,14 +59,14 @@ export function Navbar() {
             <div className="hidden lg:block h-10 w-[2px] bg-slate-200"></div>
             
             <Link 
-              to="/contact" 
+              to="/book" 
               className="hidden md:flex items-center gap-6 bg-[#2563EB] hover:bg-[#1d4ed8] text-white pl-2 pr-10 py-2 rounded-full font-sans font-bold text-lg tracking-wide transition-all shadow-xl shadow-blue-500/20 group relative overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
               <div className="h-12 w-12 flex items-center justify-center bg-white/20 rounded-full group-hover:bg-white/40 transition-all">
                 <ChevronRight className="h-7 w-7" />
               </div>
-              Enquiry
+              Book Now
             </Link>
 
 
