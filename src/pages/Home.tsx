@@ -175,7 +175,7 @@ export default function Home() {
             {[
               {
                 title: "Online Medical Consultations",
-                image: "https://overwhelming-turquoise-bh8kfyaxjt.edgeone.app/telehealth.jpg",
+                image: "https://www.image2url.com/r2/default/images/1778798331921-6358ebab-1a6e-4082-a655-cf373bfac93a.png",
                 desc: "Access qualified doctors from the comfort of your home. Get accurate diagnoses, prescriptions, and professional advice.",
                 buttonText: "BOOK NOW",
                 color: "bg-blue-100 border-blue-200 shadow-blue-500/10",
@@ -294,7 +294,7 @@ export default function Home() {
                 <div className="absolute -top-10 -left-10 w-64 h-64 bg-white/20 rounded-full blur-[100px]" />
                 <div className="relative z-10 rounded-[4rem] overflow-hidden shadow-2xl">
                   <img 
-                    src="https://overwhelming-turquoise-bh8kfyaxjt.edgeone.app/telehealth.jpg" 
+                    src="https://www.image2url.com/r2/default/images/1778798331921-6358ebab-1a6e-4082-a655-cf373bfac93a.png" 
                     alt="Digital Healthcare Consultation" 
                     className="w-full h-[550px] object-cover"
                   />
@@ -312,11 +312,11 @@ export default function Home() {
               <p className="text-xl lg:text-2xl text-blue-50 leading-relaxed font-bold opacity-90">
                 Book a consultation with our licensed and verified healthcare professionals. Join thousands of patients who trust Citicare for their medical needs and ongoing wellness guidance.
               </p>
-              <div className="flex flex-wrap gap-6 pt-4">
-                <Button render={<Link to="/book">Book Appointment</Link>} size="lg" className="bg-white text-blue-500 hover:bg-white/90 rounded-full px-12 h-20 text-xl font-black uppercase tracking-widest shadow-2xl transition-all hover:scale-105 active:scale-95 border-none">
+              <div className="flex flex-row gap-4 sm:gap-6 pt-4">
+                <Button render={<Link to="/book">Book Appointment</Link>} size="lg" className="flex-1 sm:flex-none bg-white text-blue-500 hover:bg-white/90 rounded-full px-8 sm:px-12 h-16 sm:h-20 text-sm sm:text-xl font-black uppercase tracking-widest shadow-2xl transition-all hover:scale-105 active:scale-95 border-none">
                   Book Appointment
                 </Button>
-                <Link to="/contact" className="inline-flex items-center justify-center border-2 border-white/40 text-white hover:bg-white/10 rounded-full px-12 h-20 text-xl font-black uppercase tracking-widest transition-all hover:scale-105 active:scale-95">
+                <Link to="/contact" className="flex-1 sm:flex-none inline-flex items-center justify-center border-2 border-white/40 text-white hover:bg-white/10 rounded-full px-8 sm:px-12 h-16 sm:h-20 text-sm sm:text-xl font-black uppercase tracking-widest transition-all hover:scale-105 active:scale-95 text-center">
                   General Inquiry
                 </Link>
               </div>

@@ -55,47 +55,49 @@ export default function Booking() {
             </p>
           </div>
 
-          <Card className="rounded-[4rem] border-none shadow-2xl overflow-hidden bg-white">
-            <CardContent className="p-0">
-              <div className="grid lg:grid-cols-5">
+          <Card className="rounded-[4rem] border-none shadow-2xl overflow-hidden bg-white p-0 gap-0">
+            <CardContent className="p-0 h-full">
+              <div className="grid lg:grid-cols-5 h-full overflow-hidden">
                 {/* Left Info Panel */}
-                <div className="lg:col-span-2 bg-[#1e3a8a] p-12 text-white space-y-12">
-                  <div className="space-y-4">
-                    <h3 className="text-3xl font-black uppercase tracking-tight">Booking Info</h3>
-                    <p className="text-blue-100/60 font-medium leading-relaxed">
-                      Please provide accurate details so we can match you with the right specialist.
-                    </p>
-                  </div>
+                <div className="lg:col-span-2 bg-[#1e3a8a] p-12 text-white space-y-12 flex flex-col justify-between">
+                  <div>
+                    <div className="space-y-4">
+                      <h3 className="text-3xl font-black uppercase tracking-tight">Booking Info</h3>
+                      <p className="text-blue-100/60 font-medium leading-relaxed">
+                        Please provide accurate details so we can match you with the right specialist.
+                      </p>
+                    </div>
 
-                  <div className="space-y-8">
-                    <div className="flex gap-4">
-                      <div className="h-12 w-12 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
-                        <Calendar className="h-6 w-6" />
+                    <div className="space-y-8 mt-12">
+                      <div className="flex gap-4">
+                        <div className="h-12 w-12 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
+                          <Calendar className="h-6 w-6" />
+                        </div>
+                        <div>
+                          <div className="font-bold text-sm text-blue-200 uppercase tracking-widest">Available Days</div>
+                          <div className="text-lg font-bold">Mon - Sun, 24/7</div>
+                        </div>
                       </div>
-                      <div>
-                        <div className="font-bold text-sm text-blue-200 uppercase tracking-widest">Available Days</div>
-                        <div className="text-lg font-bold">Mon - Sun, 24/7</div>
+                      <div className="flex gap-4">
+                        <div className="h-12 w-12 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
+                          <Clock className="h-6 w-6" />
+                        </div>
+                        <div>
+                          <div className="font-bold text-sm text-blue-200 uppercase tracking-widest">Response Time</div>
+                          <div className="text-lg font-bold">Within 2 Hours</div>
+                        </div>
                       </div>
                     </div>
-                    <div className="flex gap-4">
-                      <div className="h-12 w-12 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
-                        <Clock className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <div className="font-bold text-sm text-blue-200 uppercase tracking-widest">Response Time</div>
-                        <div className="text-lg font-bold">Within 2 Hours</div>
-                      </div>
-                    </div>
                   </div>
 
-                  <div className="pt-12 border-t border-white/10">
+                  <div className="pt-12 border-t border-white/10 mt-12">
                     <p className="text-sm font-bold text-blue-200/50 uppercase tracking-[0.2em]">Contact Support</p>
                     <p className="text-lg font-bold mt-2">+234 811 111 1111</p>
                   </div>
                 </div>
 
                 {/* Right Form Panel */}
-                <div className="lg:col-span-3 p-12">
+                <div className="lg:col-span-3 p-12 bg-white">
                   {submitted ? (
                     <motion.div 
                       initial={{ opacity: 0, scale: 0.9 }}

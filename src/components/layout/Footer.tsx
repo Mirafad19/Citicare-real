@@ -6,14 +6,14 @@ export function Footer() {
   return (
     <footer className="bg-[#2E5AAB] text-white overflow-hidden">
       {/* Top Bar: Logo & Socials */}
-      <div className="bg-[#2E5AAB] border-b border-white/5">
+      <div className="bg-[#2B529E] border-b border-white/5">
         <div className="max-w-[1440px] mx-auto flex items-center justify-between">
-          <Link to="/" className="relative flex items-center shrink-0">
-             <div className="bg-white h-40 px-12 md:px-24 flex items-center justify-center [clip-path:polygon(0_0,100%_0,90%_100%,0%_100%)]">
+          <Link to="/" className="relative flex items-center shrink-0 group">
+             <div className="bg-white h-32 md:h-44 px-12 md:px-24 flex items-center justify-center [clip-path:polygon(0_0,100%_0,90%_100%,0%_100%)]">
                 <img 
                   src="https://www.image2url.com/r2/default/images/1778793792491-b1b6686e-ac45-4d5b-b39c-d970f1d5d1da.png" 
                   alt="Citicare Logo" 
-                  className="h-24 md:h-28 w-auto object-contain"
+                  className="h-20 md:h-28 w-auto object-contain transition-transform group-hover:scale-105"
                   referrerPolicy="no-referrer"
                 />
              </div>
@@ -23,9 +23,9 @@ export function Footer() {
                <a 
                  key={i} 
                  href="#" 
-                 className="h-14 w-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 transition-all text-white/50 hover:text-white group"
+                 className="h-12 w-12 md:h-14 md:w-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 transition-all text-white/50 hover:text-white group"
                >
-                  <Icon className="h-6 w-6 transition-transform group-hover:scale-110" />
+                  <Icon className="h-5 w-5 md:h-6 md:w-6 transition-transform group-hover:scale-110" />
                </a>
              ))}
           </div>
@@ -78,11 +78,11 @@ export function Footer() {
             <h3 className="text-2xl font-black uppercase tracking-tight">Gallery</h3>
             <div className="grid grid-cols-3 gap-3">
               {[
-                "https://overwhelming-turquoise-bh8kfyaxjt.edgeone.app/telehealth.jpg",
                 "https://www.image2url.com/r2/default/images/1778798331921-6358ebab-1a6e-4082-a655-cf373bfac93a.png",
                 "https://www.image2url.com/r2/default/images/1778861274282-fc3009b9-31a4-401b-b0a6-38c7a85c2cbb.png",
                 "https://www.image2url.com/r2/default/images/1778863421981-11b203cd-3516-4af1-b896-2e0174ce5418.png",
                 "https://images.unsplash.com/photo-1559839734-2b71f1e3b778?auto=format&fit=crop&q=80&w=300",
+                "https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&q=80&w=300",
                 "https://images.unsplash.com/photo-1576091160550-217359f4ecf8?auto=format&fit=crop&q=80&w=300"
               ].map((img, i) => (
                 <div key={i} className="aspect-square rounded-xl overflow-hidden hover:scale-105 transition-transform cursor-pointer">
