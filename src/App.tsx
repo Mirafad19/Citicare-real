@@ -2,13 +2,16 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
-import { Chatbot } from './components/Chatbot';
 import { EMRLayout } from './components/emr/EMRLayout';
 import { AuthProvider } from './components/auth/AuthProvider';
 import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
+import HomeHealthcare from './pages/HomeHealthcare';
+import SpecialistCare from './pages/SpecialistCare';
+import Brochure from './pages/Brochure';
+import Search from './pages/Search';
 import Values from './pages/Values';
 import Contact from './pages/Contact';
 import Booking from './pages/Booking';
@@ -27,6 +30,10 @@ export default function App() {
           <Route path="/" element={<WebsiteLayout><Home /></WebsiteLayout>} />
           <Route path="/about" element={<WebsiteLayout><About /></WebsiteLayout>} />
           <Route path="/services" element={<WebsiteLayout><Services /></WebsiteLayout>} />
+          <Route path="/home-healthcare" element={<WebsiteLayout><HomeHealthcare /></WebsiteLayout>} />
+          <Route path="/specialist-care" element={<WebsiteLayout><SpecialistCare /></WebsiteLayout>} />
+          <Route path="/brochure" element={<WebsiteLayout><Brochure /></WebsiteLayout>} />
+          <Route path="/search" element={<WebsiteLayout><Search /></WebsiteLayout>} />
           <Route path="/values" element={<WebsiteLayout><Values /></WebsiteLayout>} />
           <Route path="/contact" element={<WebsiteLayout><Contact /></WebsiteLayout>} />
           <Route path="/book" element={<WebsiteLayout><Booking /></WebsiteLayout>} />
@@ -59,7 +66,6 @@ function WebsiteLayout({ children }: { children: React.ReactNode }) {
       <main className="flex-grow">
         {children}
       </main>
-      <Chatbot />
       <Footer />
     </div>
   );

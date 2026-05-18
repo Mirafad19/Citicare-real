@@ -10,19 +10,22 @@ const mainServices = [
     title: "Online Consultations",
     image: "https://www.image2url.com/r2/default/images/1778798331921-6358ebab-1a6e-4082-a655-cf373bfac93a.png",
     desc: "Access qualified doctors from the comfort of your home. Get accurate diagnoses, prescriptions, and professional medical advice.",
-    features: ["Virtual Diagnosis", "Digital Prescriptions", "Expert Advice", "24/7 Availability"]
+    features: ["Virtual Diagnosis", "Digital Prescriptions", "Expert Advice", "24/7 Availability"],
+    link: "/book"
   },
   {
     title: "Home Healthcare",
     image: "https://www.image2url.com/r2/default/images/1778861274282-fc3009b9-31a4-401b-b0a6-38c7a85c2cbb.png",
     desc: "We bring care to your doorstep. Our services include medical consultations, psychiatric services, and specialized nursing care.",
-    features: ["Nursing Care", "Psychiatric Support", "In-home Tests", "Vitals Monitoring"]
+    features: ["Nursing Care", "Psychiatric Support", "In-home Tests", "Vitals Monitoring"],
+    link: "/home-healthcare"
   },
   {
     title: "Specialist Care",
     image: "https://www.image2url.com/r2/default/images/1778863421981-11b203cd-3516-4af1-b896-2e0174ce5418.png",
     desc: "Direct access to specialty medical fields including Cardiology, Surgery, OB/GYN, Urology, and Mental Health practitioners.",
-    features: ["General Surgery", "Cardiology", "OB/GYN", "Mental Health"]
+    features: ["General Surgery", "Cardiology", "OB/GYN", "Mental Health"],
+    link: "/specialist-care"
   }
 ];
 
@@ -81,8 +84,8 @@ export default function Services() {
                       </div>
                     ))}
                   </div>
-                  <Button className="mt-8 bg-[#005FA3] hover:bg-[#004d80] text-white rounded-full px-10 h-14 font-black uppercase tracking-widest text-xs transition-all hover:scale-105 active:scale-95 shadow-xl shadow-blue-500/10">
-                    Get Started
+                  <Button nativeButton={false} render={<Link to={service.link} />} className="mt-8 bg-[#005FA3] hover:bg-[#004d80] text-white rounded-full px-10 h-14 font-black uppercase tracking-widest text-xs transition-all hover:scale-105 active:scale-95 shadow-xl shadow-blue-500/10 w-full">
+                    Learn More
                   </Button>
                 </div>
               </motion.div>

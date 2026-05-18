@@ -73,49 +73,51 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Gallery */}
+          {/* Our Expertise */}
           <div className="space-y-8">
-            <h3 className="text-2xl font-black uppercase tracking-tight">Gallery</h3>
-            <div className="grid grid-cols-3 gap-3">
+            <h3 className="text-2xl font-black uppercase tracking-tight">Our Expertise</h3>
+            <ul className="space-y-4">
               {[
-                "https://www.image2url.com/r2/default/images/1778798331921-6358ebab-1a6e-4082-a655-cf373bfac93a.png",
-                "https://www.image2url.com/r2/default/images/1778861274282-fc3009b9-31a4-401b-b0a6-38c7a85c2cbb.png",
-                "https://www.image2url.com/r2/default/images/1778863421981-11b203cd-3516-4af1-b896-2e0174ce5418.png",
-                "https://images.unsplash.com/photo-1559839734-2b71f1e3b778?auto=format&fit=crop&q=80&w=300",
-                "https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&q=80&w=300",
-                "https://images.unsplash.com/photo-1576091160550-217359f4ecf8?auto=format&fit=crop&q=80&w=300"
-              ].map((img, i) => (
-                <div key={i} className="aspect-square rounded-xl overflow-hidden hover:scale-105 transition-transform cursor-pointer">
-                  <img src={img} alt={`Gallery ${i}`} className="w-full h-full object-cover" />
-                </div>
+                "Critical Nursing Support",
+                "Geriatric Care Specialists",
+                "Advanced Telemedicine",
+                "Corporate Health Plans",
+                "Health Tech Integration"
+              ].map((item, i) => (
+                <li key={i} className="flex items-center gap-3 text-slate-300 font-bold group">
+                  <ChevronRight className="h-4 w-4 text-emerald-400 group-hover:translate-x-1 transition-transform" />
+                  {item}
+                </li>
               ))}
+            </ul>
+            <div className="pt-6">
+              <Button nativeButton={false} render={<Link to="/brochure" />} variant="outline" className="border-white/20 text-white hover:bg-white hover:text-blue-600 rounded-full font-black uppercase tracking-widest text-xs h-12 w-full">
+                Corporate Brochure
+              </Button>
             </div>
           </div>
 
-          {/* Location Map */}
+          {/* Contact & Global */}
           <div className="space-y-8">
-            <h3 className="text-2xl font-black uppercase tracking-tight">Location Map</h3>
-            <div className="rounded-3xl overflow-hidden shadow-2xl relative group h-48 border border-white/10">
-               <img 
-                 src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=600" 
-                 alt="Location Map Placeholder" 
-                 className="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
-               />
-               <div className="absolute inset-0 flex items-center justify-center">
-                 <div className="bg-blue-600 text-white px-6 py-3 rounded-full font-bold text-sm shadow-xl">Open In Maps</div>
-               </div>
-            </div>
+            <h3 className="text-2xl font-black uppercase tracking-tight">Global Support</h3>
             <div className="space-y-6">
                <div className="flex gap-4">
-                  <MapPin className="h-10 w-10 text-blue-300 shrink-0 mt-1" />
+                  <MapPin className="h-6 w-6 text-emerald-400 shrink-0" />
                   <p className="text-slate-300 font-bold leading-relaxed">
                     Lagos State, Nigeria.<br />
                     Serving VI, Lekki, and Ikeja.
                   </p>
                </div>
                <div className="flex gap-4">
-                  <Mail className="h-6 w-6 text-blue-300 shrink-0" />
-                  <p className="text-slate-300 font-bold text-sm">enquiries@citicarehealthltd.com</p>
+                  <Mail className="h-6 w-6 text-emerald-400 shrink-0" />
+                  <p className="text-slate-300 font-bold">enquiries@citicarehealthltd.com</p>
+               </div>
+               <div className="bg-white/5 p-6 rounded-3xl border border-white/10 space-y-3">
+                  <p className="text-xs font-black uppercase tracking-widest text-emerald-400">Newsletter</p>
+                  <div className="flex gap-2">
+                    <input type="text" placeholder="Email Address" className="bg-transparent border-b border-white/20 pb-2 text-sm focus:outline-none w-full" />
+                    <ArrowRight className="h-5 w-5 text-white/50" />
+                  </div>
                </div>
             </div>
           </div>

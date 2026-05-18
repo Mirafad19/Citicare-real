@@ -55,8 +55,8 @@ export default function Booking() {
             </p>
           </div>
 
-          <Card className="rounded-[4rem] border-none shadow-2xl overflow-hidden bg-white p-0 gap-0">
-            <CardContent className="p-0 h-full">
+          <div className="rounded-[4rem] border-none shadow-2xl overflow-hidden bg-white">
+            <div className="p-0 h-full">
               <div className="grid lg:grid-cols-5 h-full overflow-hidden">
                 {/* Left Info Panel */}
                 <div className="lg:col-span-2 bg-[#1e3a8a] p-12 text-white space-y-12 flex flex-col justify-between">
@@ -162,8 +162,8 @@ export default function Booking() {
                   )}
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
       </section>
     </div>

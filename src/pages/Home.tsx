@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { CheckCircle2, ChevronRight, Check, Zap, ArrowRight, Star, ShieldCheck, Phone } from 'lucide-react';
+import { CheckCircle2, ChevronRight, Check, Zap, ArrowRight, Star, ShieldCheck, Phone, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 
@@ -160,6 +160,41 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Brochure & License Strip */}
+      <section className="bg-blue-600 text-white py-8 border-b border-white/10">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-24">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24">
+            <Link 
+              to="/brochure" 
+              className="flex items-center gap-6 group hover:translate-y-[-2px] transition-transform"
+            >
+              <div className="h-16 w-16 bg-white/10 rounded-2xl flex items-center justify-center border border-white/20 group-hover:bg-white/20 transition-colors">
+                <FileText className="h-8 w-8 text-blue-200" />
+              </div>
+              <div>
+                <div className="text-sm font-black uppercase tracking-[0.2em] text-blue-200 mb-1">Company Profile</div>
+                <div className="text-2xl font-black uppercase tracking-tight">Download Our Brochure</div>
+              </div>
+            </Link>
+            
+            <div className="hidden md:block h-12 w-[1px] bg-white/20" />
+
+            <Link 
+              to="/contact" 
+              className="flex items-center gap-6 group hover:translate-y-[-2px] transition-transform"
+            >
+              <div className="h-16 w-16 bg-white/10 rounded-2xl flex items-center justify-center border border-white/20 group-hover:bg-white/20 transition-colors">
+                <ShieldCheck className="h-8 w-8 text-emerald-400" />
+              </div>
+              <div>
+                <div className="text-sm font-black uppercase tracking-[0.2em] text-blue-200 mb-1">Regulatory Standards</div>
+                <div className="text-2xl font-black uppercase tracking-tight">Government License</div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
 
 
       {/* Service Cards (Image 1) */}
@@ -179,23 +214,26 @@ export default function Home() {
                 desc: "Access qualified doctors from the comfort of your home. Get accurate diagnoses, prescriptions, and professional advice.",
                 buttonText: "BOOK NOW",
                 color: "bg-blue-100 border-blue-200 shadow-blue-500/10",
-                buttonColor: "bg-blue-600 hover:bg-blue-700"
+                buttonColor: "bg-blue-600 hover:bg-blue-700",
+                link: "/book"
               },
               {
                 title: "Home Healthcare Services",
-                image: "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&q=80&w=800",
+                image: "https://www.image2url.com/r2/default/images/1778861274282-fc3009b9-31a4-401b-b0a6-38c7a85c2cbb.png",
                 desc: "We bring professional care to your doorstep, including medical consultations, psychiatric services, and nursing care.",
                 buttonText: "LEARN MORE",
                 color: "bg-emerald-100 border-emerald-200 shadow-emerald-500/10",
-                buttonColor: "bg-emerald-600 hover:bg-emerald-700"
+                buttonColor: "bg-emerald-600 hover:bg-emerald-700",
+                link: "/home-healthcare"
               },
               {
                 title: "Specialist Consultation",
-                image: "https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&q=80&w=800",
+                image: "https://www.image2url.com/r2/default/images/1778863421981-11b203cd-3516-4af1-b896-2e0174ce5418.png",
                 desc: "Direct access to experts in Cardiology, OB/GYN, Surgery, Orthopedics, Mental Health, and more specialty areas.",
                 buttonText: "VIEW SPECIALTIES",
                 color: "bg-amber-100 border-amber-200 shadow-amber-500/10",
-                buttonColor: "bg-amber-600 hover:bg-amber-700"
+                buttonColor: "bg-amber-600 hover:bg-amber-700",
+                link: "/specialist-care"
               }
             ].map((service, i) => (
               <motion.div
@@ -214,11 +252,9 @@ export default function Home() {
                   <p className="text-[#334155] mb-4 leading-relaxed font-bold opacity-90">
                     {service.desc}
                   </p>
-                  <Link to="/book" className="w-full mt-auto">
-                    <Button className={cn("w-full text-white rounded-full h-14 font-black uppercase tracking-widest text-xs shadow-lg transition-transform active:scale-95", service.buttonColor)}>
-                      {service.buttonText}
-                    </Button>
-                  </Link>
+                <Button nativeButton={false} render={<Link to={service.link} />} className={cn("w-full mt-auto text-white rounded-full h-14 font-black uppercase tracking-widest text-xs shadow-lg transition-transform active:scale-95", service.buttonColor)}>
+                  {service.buttonText}
+                </Button>
                 </div>
               </motion.div>
             ))}
@@ -258,7 +294,7 @@ export default function Home() {
                   <span className="font-bold text-[#1e3a8a]">Personalized Guidance</span>
                 </div>
               </div>
-                  <Button render={<Link to="/about">Learn About Citicare</Link>} size="lg" className="bg-[#005FA3] hover:bg-[#004d80] text-white rounded-full px-12 h-16 text-lg font-bold">
+                  <Button nativeButton={false} render={<Link to="/about">Learn About Citicare</Link>} size="lg" className="bg-[#005FA3] hover:bg-[#004d80] text-white rounded-full px-12 h-16 text-lg font-bold">
                     Learn About Citicare
                   </Button>
             </div>
@@ -313,7 +349,7 @@ export default function Home() {
                 Book a consultation with our licensed and verified healthcare professionals. Join thousands of patients who trust Citicare for their medical needs and ongoing wellness guidance.
               </p>
               <div className="flex flex-row gap-4 sm:gap-6 pt-4">
-                <Button render={<Link to="/book">Book Appointment</Link>} size="lg" className="flex-1 sm:flex-none bg-white text-blue-500 hover:bg-white/90 rounded-full px-8 sm:px-12 h-16 sm:h-20 text-sm sm:text-xl font-black uppercase tracking-widest shadow-2xl transition-all hover:scale-105 active:scale-95 border-none">
+                <Button nativeButton={false} render={<Link to="/book">Book Appointment</Link>} size="lg" className="flex-1 sm:flex-none bg-white text-blue-500 hover:bg-white/90 rounded-full px-8 sm:px-12 h-16 sm:h-20 text-sm sm:text-xl font-black uppercase tracking-widest shadow-2xl transition-all hover:scale-105 active:scale-95 border-none">
                   Book Appointment
                 </Button>
                 <Link to="/contact" className="flex-1 sm:flex-none inline-flex items-center justify-center border-2 border-white/40 text-white hover:bg-white/10 rounded-full px-8 sm:px-12 h-16 sm:h-20 text-sm sm:text-xl font-black uppercase tracking-widest transition-all hover:scale-105 active:scale-95 text-center">
@@ -399,7 +435,7 @@ export default function Home() {
             Ready to experience <br />quality healthcare?
           </h2>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
-            <Button render={<Link to="/book">Book Now</Link>} size="lg" className="bg-white text-blue-500 hover:bg-white/90 rounded-full px-16 h-24 text-2xl font-black uppercase tracking-widest shadow-2xl transition-all hover:-translate-y-2 border-none cursor-pointer">
+            <Button nativeButton={false} render={<Link to="/book">Book Now</Link>} size="lg" className="bg-white text-blue-500 hover:bg-white/90 rounded-full px-16 h-24 text-2xl font-black uppercase tracking-widest shadow-2xl transition-all hover:-translate-y-2 border-none cursor-pointer">
                Book Now
             </Button>
             <Link to="/contact" className="inline-flex items-center justify-center border-2 border-white/40 text-white hover:bg-white/10 rounded-full px-16 h-24 text-2xl font-black uppercase tracking-widest shadow-2xl transition-all hover:-translate-y-2">

@@ -104,12 +104,12 @@ export default function Contact() {
               className="relative"
             >
               <div className="absolute -top-12 -left-12 w-64 h-64 bg-primary/5 rounded-full blur-[100px] -z-10"></div>
-              <Card className="rounded-[4rem] border border-border shadow-2xl overflow-hidden bg-white p-0 gap-0">
+              <div className="rounded-[4rem] border border-border shadow-2xl overflow-hidden bg-white">
                 <div className="bg-[#005FA3] p-12 text-white text-center">
                    <h3 className="text-4xl font-black uppercase tracking-tight">Send a Message</h3>
                    <p className="text-white/60 text-xs mt-3 uppercase tracking-widest font-bold">Typical response time: 2-4 hours</p>
                 </div>
-                <CardContent className="p-12 space-y-8">
+                <div className="p-12 space-y-8">
                   {submitted ? (
                     <motion.div 
                       initial={{ opacity: 0, scale: 0.9 }}
@@ -168,8 +168,8 @@ export default function Contact() {
                       </Button>
                     </form>
                   )}
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </motion.div>
          </div>
       </section>
