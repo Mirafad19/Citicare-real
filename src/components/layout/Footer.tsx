@@ -78,20 +78,22 @@ export function Footer() {
             <h3 className="text-2xl font-black uppercase tracking-tight">Our Expertise</h3>
             <ul className="space-y-4">
               {[
-                "Critical Nursing Support",
-                "Geriatric Care Specialists",
-                "Advanced Telemedicine",
-                "Corporate Health Plans",
-                "Health Tech Integration"
+                { name: "Critical Nursing Support", href: "/specialist-care" },
+                { name: "Geriatric Care Specialists", href: "/home-healthcare" },
+                { name: "Advanced Telemedicine", href: "/services" },
+                { name: "Corporate Health Plans", href: "/brochure" },
+                { name: "Health Tech Integration", href: "/about" }
               ].map((item, i) => (
-                <li key={i} className="flex items-center gap-3 text-slate-300 font-bold group">
-                  <ChevronRight className="h-4 w-4 text-emerald-400 group-hover:translate-x-1 transition-transform" />
-                  {item}
+                <li key={i}>
+                  <Link to={item.href} className="flex items-center gap-3 text-slate-300 font-bold group hover:text-blue-400 transition-colors">
+                    <ChevronRight className="h-4 w-4 text-emerald-400 group-hover:translate-x-1 transition-transform" />
+                    {item.name}
+                  </Link>
                 </li>
               ))}
             </ul>
             <div className="pt-6">
-              <Button nativeButton={false} render={<Link to="/brochure" />} variant="outline" className="border-white/20 text-white hover:bg-white hover:text-blue-600 rounded-full font-black uppercase tracking-widest text-xs h-12 w-full">
+              <Button nativeButton={false} render={<Link to="/brochure" />} className="bg-white/10 hover:bg-white text-white hover:text-blue-600 border border-white/20 rounded-full font-black uppercase tracking-widest text-xs h-12 w-full">
                 Corporate Brochure
               </Button>
             </div>

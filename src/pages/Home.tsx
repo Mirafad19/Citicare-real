@@ -13,13 +13,13 @@ const slides = [
     image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=2000",
     subtitle: "Healthcare Reimagined",
     title: "Addressing your healthcare needs, Every Time",
-    description: "A trusted digital healthcare platform delivering personalized medical services, expert consultations, and continuous follow-up care tailored to meet your needs.",
+    description: "A trusted digital healthcare platform delivering personalized medical services, expert consultations, and continuous follow up care tailored to meet your needs.",
   },
   {
     image: "https://www.image2url.com/r2/default/images/1778798331921-6358ebab-1a6e-4082-a655-cf373bfac93a.png",
     subtitle: "Qualified Professionals",
-    title: "Access to world-class medical experts",
-    description: "We connect you with licensed and verified healthcare professionals who are committed to your total wellbeing and long-term health guidance.",
+    title: "Access to world class medical experts",
+    description: "We connect you with licensed and verified healthcare professionals who are committed to your total wellbeing and long term health guidance.",
   },
   {
     image: "https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&q=80&w=2000",
@@ -210,7 +210,7 @@ export default function Home() {
             {[
               {
                 title: "Online Medical Consultations",
-                image: "https://www.image2url.com/r2/default/images/1778798331921-6358ebab-1a6e-4082-a655-cf373bfac93a.png",
+                image: "https://www.image2url.com/r2/default/images/1779135029219-8df8ef4c-fc3b-4a62-a339-511279acff6c.png",
                 desc: "Access qualified doctors from the comfort of your home. Get accurate diagnoses, prescriptions, and professional advice.",
                 buttonText: "BOOK NOW",
                 color: "bg-blue-100 border-blue-200 shadow-blue-500/10",
@@ -228,7 +228,7 @@ export default function Home() {
               },
               {
                 title: "Specialist Consultation",
-                image: "https://www.image2url.com/r2/default/images/1778863421981-11b203cd-3516-4af1-b896-2e0174ce5418.png",
+                image: "https://www.image2url.com/r2/default/images/1778798331921-6358ebab-1a6e-4082-a655-cf373bfac93a.png",
                 desc: "Direct access to experts in Cardiology, OB/GYN, Surgery, Orthopedics, Mental Health, and more specialty areas.",
                 buttonText: "VIEW SPECIALTIES",
                 color: "bg-amber-100 border-amber-200 shadow-amber-500/10",
@@ -274,7 +274,7 @@ export default function Home() {
                     </h2>
                   </div>
               <p className="text-xl text-[#334155] leading-relaxed">
-                Citicare is a patient-centered digital healthcare platform committed to connecting you with the right professionals. We ensure that care does not end after consultation through continuous follow-up and personalized insights.
+                Citicare is a patient centered digital healthcare platform committed to connecting you with the right professionals. We ensure that care does not end after consultation through continuous follow up and personalized insights.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pb-4">
                 <div className="flex items-center gap-3">
@@ -287,7 +287,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="h-4 w-4 bg-[#005FA3] rounded-full" />
-                  <span className="font-bold text-[#1e3a8a]">Continuous Follow-up</span>
+                  <span className="font-bold text-[#1e3a8a]">Continuous Follow Up</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="h-4 w-4 bg-[#005FA3] rounded-full" />
@@ -435,11 +435,11 @@ export default function Home() {
             Ready to experience <br />quality healthcare?
           </h2>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
-            <Button nativeButton={false} render={<Link to="/book">Book Now</Link>} size="lg" className="bg-white text-blue-500 hover:bg-white/90 rounded-full px-16 h-24 text-2xl font-black uppercase tracking-widest shadow-2xl transition-all hover:-translate-y-2 border-none cursor-pointer">
+            <Link to="/book" className="inline-flex items-center justify-center bg-white text-blue-500 hover:bg-white/90 rounded-full px-16 h-24 text-2xl font-black uppercase tracking-widest shadow-2xl transition-all hover:-translate-y-2 border-none cursor-pointer">
                Book Now
-            </Button>
+            </Link>
             <Link to="/contact" className="inline-flex items-center justify-center border-2 border-white/40 text-white hover:bg-white/10 rounded-full px-16 h-24 text-2xl font-black uppercase tracking-widest shadow-2xl transition-all hover:-translate-y-2">
-               Contact Us
+               Contact Us Now
             </Link>
           </div>
         </div>

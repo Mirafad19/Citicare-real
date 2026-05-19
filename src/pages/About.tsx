@@ -42,10 +42,10 @@ export default function About() {
               </div>
               <div className="space-y-6 text-xl text-[#5c5c5c] font-bold leading-relaxed">
                 <p>
-                  <span className="text-blue-500 font-black uppercase tracking-tight">Citicare Integrated Health Solutions Ltd</span> is a patient-centered digital healthcare platform committed to bridging the gap between individuals and quality healthcare services.
+                  <span className="text-blue-500 font-black uppercase tracking-tight">Citicare Integrated Health Solutions Ltd</span> is a patient centered digital healthcare platform committed to bridging the gap between individuals and quality healthcare services.
                 </p>
                 <p>
-                  We connect patients with the right healthcare professionals while ensuring that care does not end after consultation. Our system provides continuous follow-up, personalized health insights, and guidance tailored to each patient’s unique needs.
+                  We connect patients with the right healthcare professionals while ensuring that care does not end after consultation. Our system provides continuous follow up, personalized health insights, and guidance tailored to each patient’s unique needs.
                 </p>
                 <p>
                   We believe healthcare should be accessible, efficient, and individualized. That is why we combine technology with compassionate care to deliver a seamless healthcare experience.
@@ -61,8 +61,8 @@ export default function About() {
             <div className="flex-1 relative">
                <div className="rounded-[4rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.2)] relative z-10">
                  <img 
-                   src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&q=80&w=1400" 
-                   alt="Modern Digital Consultation" 
+                   src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&q=80&w=1400" 
+                   alt="Compassionate Medical Care" 
                    className="w-full h-[600px] object-cover"
                  />
                  <div className="absolute inset-0 bg-blue-600/5 mix-blend-multiply" />

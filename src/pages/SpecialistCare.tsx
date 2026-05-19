@@ -20,7 +20,7 @@ const specialties = [
   {
     icon: Scissors,
     name: "General Surgery",
-    desc: "Pre-operative consultations and surgical management from board-certified surgical experts.",
+    desc: "Pre operative consultations and surgical management from board certified surgical experts.",
     color: "bg-slate-50 text-slate-600 border-slate-100"
   },
   {
@@ -32,7 +32,7 @@ const specialties = [
   {
     icon: Activity,
     name: "Orthopedics",
-    desc: "Expert diagnosis and treatment of musculo-skeletal issues, joint pain, and sports injuries.",
+    desc: "Expert diagnosis and treatment of musculo skeletal issues, joint pain, and sports injuries.",
     color: "bg-emerald-50 text-emerald-600 border-emerald-100"
   },
   {
@@ -73,7 +73,7 @@ export default function SpecialistCare() {
               transition={{ delay: 0.2 }}
               className="text-xl text-slate-600 font-medium leading-relaxed max-w-2xl mx-auto"
             >
-              Direct access to a network of board-certified specialists across multiple medical fields. No long wait times—just expert care when you need it most.
+              Direct access to a network of board certified specialists across multiple medical fields. No long wait times—just expert care when you need it most.
             </motion.p>
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -134,10 +134,10 @@ export default function SpecialistCare() {
                 </p>
                 <div className="space-y-4">
                   {[
-                    "Verified Board-Certified Practitioners",
+                    "Verified Board Certified Practitioners",
                     "Integrated Patient Records (EMR)",
                     "Digital Prescriptions & Referrals",
-                    "Follow-up Telehealth Sessions"
+                    "Follow up Telehealth Sessions"
                   ].map((text, i) => (
                     <div key={i} className="flex items-center gap-3 font-bold">
                       <ShieldCheck className="h-6 w-6 text-blue-400" />

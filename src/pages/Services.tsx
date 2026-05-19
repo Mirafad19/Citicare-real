@@ -98,7 +98,7 @@ export default function Services() {
       <section className="py-24 bg-white">
         <div className="max-w-[1440px] mx-auto px-6 lg:px-24">
           <div className="text-center mb-16 space-y-4">
-            <h2 className="text-4xl lg:text-6xl font-black text-[#1e3a8a]">Preventive & Follow-Up Care</h2>
+            <h2 className="text-4xl lg:text-6xl font-black text-[#1e3a8a]">Preventive & Follow Up Care</h2>
             <p className="text-xl text-[#5c5c5c] font-medium max-w-2xl mx-auto">Staying ahead of illness with continuous support and proactive monitoring.</p>
           </div>
           <div className="grid md:grid-cols-2 gap-12">
@@ -120,9 +120,9 @@ export default function Services() {
               <div className="h-20 w-20 bg-white rounded-2xl flex items-center justify-center text-[#005FA3] group-hover:scale-110 transition-transform">
                 <Heart className="h-10 w-10" />
               </div>
-              <h3 className="text-3xl font-black">Health Education & Follow-Up</h3>
+              <h3 className="text-3xl font-black">Health Education & Follow Up</h3>
               <p className="font-medium opacity-80 leading-relaxed">
-                Personalized health plans, continuous monitoring, and patient-specific medical guidance to ensure lasting health improvements.
+                Personalized health plans, continuous monitoring, and patient specific medical guidance to ensure lasting health improvements.
               </p>
               <ul className="space-y-3 font-bold">
                  <li>• Personalized Plans</li>
@@ -179,7 +179,7 @@ export default function Services() {
                   ))}
                </ul>
                <div className="pt-6">
-                 <Button className="bg-[#005FA3] hover:bg-[#004d80] text-white rounded-full px-12 h-16 font-black flex items-center gap-3">
+                 <Button nativeButton={false} render={<Link to="/book" />} className="bg-[#005FA3] hover:bg-[#004d80] text-white rounded-full px-12 h-16 font-black flex items-center gap-3">
                     Book Assessment <ChevronRight className="h-5 w-5" />
                  </Button>
                </div>
@@ -198,7 +198,7 @@ export default function Services() {
              Schedule a free home assessment with our care coordinators today.
            </p>
            <div className="flex flex-col sm:flex-row justify-center gap-6">
-              <Button size="lg" className="bg-white text-[#005FA3] hover:bg-slate-100 rounded-full px-12 h-20 text-xl font-black uppercase tracking-widest shadow-2xl transition-all hover:-translate-y-2">
+              <Button nativeButton={false} render={<Link to="/contact" />} size="lg" className="bg-white text-[#005FA3] hover:bg-slate-100 rounded-full px-12 h-20 text-xl font-black uppercase tracking-widest shadow-2xl transition-all hover:-translate-y-2">
                 Contact Us Now
               </Button>
               <Button size="lg" variant="outline" className="border-2 border-white/20 text-white hover:bg-white/10 rounded-full px-12 h-20 text-xl font-black uppercase tracking-widest transition-all hover:-translate-y-2">
