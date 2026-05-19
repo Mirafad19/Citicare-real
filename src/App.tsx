@@ -65,7 +65,7 @@ export default function App() {
 
 function WebsiteLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen flex-col bg-white font-sans text-slate-900 selection:bg-primary selection:text-white">
+    <div className="flex min-h-screen flex-col bg-white font-sans text-slate-900 selection:bg-primary selection:text-white w-full overflow-x-hidden relative">
       <Navbar />
       <main className="flex-grow">
         {children}

@@ -403,7 +403,7 @@ export default function Home() {
                </p>
                <div className="grid grid-cols-2 gap-x-8 gap-y-6">
                  {[
-                   "Ikeja Area", "Victoria Island", "Lekki Area", "Ikoyi Area", 
+                   "Ikeja Area", "Victoria Island", "Lagos Main", "Ikoyi Area", 
                    "Surulere Area", "Festac Area", "Magodo Area", "Ajah Area", 
                    "Lagos Island", "Alimosho", "Gbagada", "Yaba", "And many more..."
                  ].map((area, i) => {

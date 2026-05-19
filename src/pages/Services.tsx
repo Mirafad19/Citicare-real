@@ -201,7 +201,7 @@ export default function Services() {
               <Button nativeButton={false} render={<Link to="/contact" />} size="lg" className="bg-white text-[#005FA3] hover:bg-slate-100 rounded-full px-12 h-20 text-xl font-black uppercase tracking-widest shadow-2xl transition-all hover:-translate-y-2">
                 Contact Us Now
               </Button>
-              <Button size="lg" variant="outline" className="border-2 border-white/20 text-white hover:bg-white/10 rounded-full px-12 h-20 text-xl font-black uppercase tracking-widest transition-all hover:-translate-y-2">
+              <Button size="lg" variant="ghost" className="border-2 border-white/20 text-white hover:bg-white/10 rounded-full px-12 h-20 text-xl font-black uppercase tracking-widest transition-all hover:-translate-y-2">
                 Call Direct
               </Button>
            </div>

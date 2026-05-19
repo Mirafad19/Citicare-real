@@ -7,25 +7,25 @@ export function Footer() {
     <footer className="bg-[#2E5AAB] text-white overflow-hidden">
       {/* Top Bar: Logo & Socials */}
       <div className="bg-[#2B529E] border-b border-white/5">
-        <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <Link to="/" className="relative flex items-center shrink-0 group w-full md:w-auto">
-             <div className="bg-white h-24 md:h-44 px-6 md:px-24 flex items-center justify-center w-full md:w-auto lg:[clip-path:polygon(0_0,100%_0,90%_100%,0%_100%)]">
+        <div className="max-w-[1440px] mx-auto flex flex-row items-center justify-between gap-4 px-6 py-4 md:py-0">
+          <Link to="/" className="relative flex items-center shrink-0 group">
+             <div className="bg-white h-20 md:h-44 px-4 md:px-24 flex items-center justify-center lg:[clip-path:polygon(0_0,100%_0,90%_100%,0%_100%)]">
                 <img 
                   src="https://www.image2url.com/r2/default/images/1778793792491-b1b6686e-ac45-4d5b-b39c-d970f1d5d1da.png" 
                   alt="Citicare Logo" 
-                  className="h-14 md:h-28 w-auto object-contain transition-transform group-hover:scale-105"
+                  className="h-10 md:h-28 w-auto object-contain transition-transform group-hover:scale-105"
                   referrerPolicy="no-referrer"
                 />
              </div>
           </Link>
-          <div className="flex gap-4 px-6 pb-6 md:pb-0 md:pr-6 lg:pr-24 justify-center md:justify-start w-full md:w-auto">
+          <div className="flex gap-2 sm:gap-4 justify-end">
              {[Facebook, Instagram, Twitter, Linkedin].map((Icon, i) => (
                <a 
                  key={i} 
                  href="#" 
-                 className="h-12 w-12 md:h-14 md:w-14 rounded-none md:rounded-full bg-white/5 border-none md:border border-white/10 flex items-center justify-center hover:bg-blue-600 transition-all text-white/50 hover:text-white group"
+                 className="h-10 w-10 md:h-14 md:w-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-blue-600 transition-all text-white/50 hover:text-white group"
                >
-                  <Icon className="h-5 w-5 md:h-6 md:w-6 transition-transform group-hover:scale-110" />
+                  <Icon className="h-4 w-4 md:h-6 md:w-6 transition-transform group-hover:scale-110" />
                </a>
              ))}
           </div>
@@ -94,7 +94,7 @@ export function Footer() {
             </ul>
             <div className="pt-6">
               <div className="flex items-center justify-center bg-[#1e3a8a] text-sky-200 border border-sky-400/20 rounded-full font-black uppercase tracking-widest text-[10px] h-12 w-full select-none">
-                Brochure: Temporarily Offline
+                Company Brochure
               </div>
             </div>
           </div>
@@ -106,8 +106,7 @@ export function Footer() {
                <div className="flex gap-4">
                   <MapPin className="h-6 w-6 text-emerald-400 shrink-0" />
                   <p className="text-slate-300 font-bold leading-relaxed">
-                    Lagos State, Nigeria.<br />
-                    Serving VI, Lekki, and Ikeja.
+                    Lagos, Nigeria.
                   </p>
                </div>
                <div className="flex gap-4">

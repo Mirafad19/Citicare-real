@@ -12,9 +12,9 @@ export default function Terms() {
           Back to Home
         </Link>
 
-        <div className="bg-white p-12 md:p-20 rounded-[3.5rem] shadow-xl border border-slate-100 space-y-12">
+        <div className="bg-white p-6 md:p-20 rounded-none space-y-12 shadow-none border-none">
           <div className="space-y-4 border-b border-slate-100 pb-8 text-center md:text-left">
-            <div className="h-16 w-16 bg-blue-100 text-blue-600 rounded-3xl flex items-center justify-center mb-4 mx-auto md:mx-0">
+            <div className="h-16 w-16 bg-blue-100 text-blue-600 rounded-none flex items-center justify-center mb-4 mx-auto md:mx-0">
               <FileText className="h-8 w-8" />
             </div>
             <h1 className="text-4xl md:text-6xl font-black text-[#1e3a8a] uppercase leading-none">Terms of Service</h1>

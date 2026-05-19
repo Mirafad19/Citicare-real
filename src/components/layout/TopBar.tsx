@@ -38,7 +38,7 @@ export function TopBar() {
         </div>
 
         {/* Right Side */}
-        <div className="flex items-center gap-1">
+        <div className="hidden md:flex items-center gap-1">
           <div className="flex items-center gap-4 mr-6 border-r border-white/20 pr-6 py-1">
             <a href="#" className="hover:text-blue-200 transition-colors"><Facebook className="h-5 w-5" /></a>
             <a href="#" className="hover:text-pink-200 transition-colors"><Instagram className="h-5 w-5" /></a>
@@ -49,12 +49,12 @@ export function TopBar() {
           <div className="hidden lg:flex items-center gap-6">
             <div className="flex items-center gap-2 bg-white/5 px-4 py-1.5 rounded-full uppercase border border-white/10 select-none">
               <FileText className="h-4 w-4 text-blue-300" />
-              <span>Brochure: Offline</span>
+              <span>Company Brochure</span>
             </div>
             <div className="h-6 w-[1px] bg-white/20"></div>
             <div className="flex items-center gap-2 bg-white/5 px-4 py-1.5 rounded-full uppercase border border-white/10 select-none">
               <ShieldCheck className="h-4 w-4 text-emerald-400" />
-              <span>HEFAMAA License: Active</span>
+              <span>Government License</span>
             </div>
           </div>
         </div>

@@ -318,15 +318,19 @@ export default function Career() {
                       animate={{ opacity: 1, scale: 1 }}
                       className="text-center py-12 space-y-6"
                     >
-                      <div className="h-24 w-24 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-inner animate-bounce">
-                        <CheckCircle2 className="h-12 w-12" />
+                      <div className="relative mx-auto h-28 w-28 flex items-center justify-center bg-emerald-50 rounded-full border-4 border-emerald-500/10">
+                        <div className="h-20 w-20 bg-emerald-500 text-white rounded-full flex items-center justify-center shadow-lg shadow-emerald-500/20 animate-bounce">
+                          <CheckCircle2 className="h-10 w-10 stroke-[3]" />
+                        </div>
                       </div>
-                      <h4 className="text-2xl font-black text-[#1e3a8a] uppercase">Received!</h4>
-                      <p className="text-slate-600 font-medium leading-relaxed max-w-sm mx-auto">
-                        Thank you, <span className="font-bold text-[#1e3a8a]">{formData.fullName}</span>. 
-                        Our Clinical Operations & Recruitment deck has received your profile for the <strong>{formData.role}</strong> position. We will reach back within 2-3 operational days.
-                      </p>
-                      <Button onClick={() => setIsSubmitted(false)} variant="outline" className="border-slate-200 rounded-full px-8 h-12 uppercase tracking-widest font-bold text-xs">
+                      <div className="space-y-3">
+                        <h4 className="text-2xl font-black text-[#1e3a8a] uppercase">Application Received Successfully!</h4>
+                        <p className="text-slate-600 font-medium leading-relaxed max-w-sm mx-auto">
+                          Thank you, <span className="font-bold text-[#1e3a8a]">{formData.fullName}</span>. 
+                          Our Clinical Operations & Recruitment deck has received your profile for the <strong>{formData.role}</strong> position. We will reach back within 2-3 operational days.
+                        </p>
+                      </div>
+                      <Button onClick={() => setIsSubmitted(false)} variant="outline" className="border-emerald-500 text-emerald-600 hover:bg-emerald-50 rounded-full px-8 h-12 uppercase tracking-widest font-bold text-xs mt-4">
                         Submit another
                       </Button>
                     </motion.div>

@@ -139,14 +139,18 @@ export default function Contact() {
                       animate={{ opacity: 1, scale: 1 }}
                       className="text-center py-12 space-y-6"
                     >
-                      <div className="h-24 w-24 bg-accent text-primary rounded-full flex items-center justify-center mx-auto shadow-inner">
-                        <CheckCircle className="h-12 w-12" />
+                      <div className="relative mx-auto h-28 w-28 flex items-center justify-center bg-emerald-50 rounded-full border-4 border-emerald-500/10">
+                        <div className="h-20 w-20 bg-emerald-500 text-white rounded-full flex items-center justify-center shadow-lg shadow-emerald-500/20 animate-bounce">
+                          <CheckCircle className="h-10 w-10 stroke-[3]" />
+                        </div>
                       </div>
-                      <div className="space-y-2">
-                        <h3 className="text-3xl font-serif">Message Sent</h3>
-                        <p className="text-[#5C5C5C] font-medium leading-relaxed">Thank you for reaching out. A Citicare representative will contact you shortly.</p>
+                      <div className="space-y-3">
+                        <h3 className="text-3xl font-black uppercase tracking-tight text-emerald-600">Message Sent Successfully</h3>
+                        <p className="text-[#5C5C5C] font-semibold text-base leading-relaxed max-w-md mx-auto">
+                          Thank you for reaching out. Your request has been securely transmitted. A Citicare representative will contact you shortly.
+                        </p>
                       </div>
-                      <Button variant="outline" className="rounded-full h-14 px-8 border-primary text-primary mt-4" onClick={() => setSubmitted(false)}>Send another message</Button>
+                      <Button variant="outline" className="rounded-full h-14 px-8 border-emerald-500 text-emerald-600 hover:bg-emerald-50 font-bold uppercase tracking-wider mt-4" onClick={() => setSubmitted(false)}>Send another message</Button>
                     </motion.div>
                   ) : (
                     <form onSubmit={handleSubmit} className="space-y-8">

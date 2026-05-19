@@ -127,14 +127,18 @@ export default function Booking() {
                       animate={{ opacity: 1, scale: 1 }}
                       className="text-center py-20 space-y-6"
                     >
-                      <div className="h-24 w-24 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto shadow-inner">
-                        <CheckCircle className="h-12 w-12" />
+                      <div className="relative mx-auto h-28 w-28 flex items-center justify-center bg-emerald-50 rounded-full border-4 border-emerald-500/10">
+                        <div className="h-20 w-20 bg-emerald-500 text-white rounded-full flex items-center justify-center shadow-lg shadow-emerald-500/20 animate-bounce">
+                          <CheckCircle className="h-10 w-10 stroke-[3]" />
+                        </div>
                       </div>
-                      <div className="space-y-2">
-                        <h3 className="text-3xl font-black text-[#1e3a8a]">Request Received</h3>
-                        <p className="text-[#334155] font-medium leading-relaxed">We've received your booking request. Our team will contact you shortly to confirm the details.</p>
+                      <div className="space-y-3">
+                        <h3 className="text-3xl font-black uppercase tracking-tight text-emerald-600">Booking Sent Successfully</h3>
+                        <p className="text-[#334155] font-semibold text-base leading-relaxed max-w-md mx-auto">
+                          We have received your requested consultation details. A professional Citicare representative will call or email you shortly to confirm details and dates.
+                        </p>
                       </div>
-                      <Button variant="outline" className="rounded-full h-14 px-8 border-blue-600 text-blue-600 mt-4" onClick={() => setSubmitted(false)}>Make Another Booking</Button>
+                      <Button variant="outline" className="rounded-full h-14 px-8 border-emerald-500 text-emerald-600 hover:bg-emerald-50 font-bold uppercase tracking-wider mt-4" onClick={() => setSubmitted(false)}>Make Another Booking</Button>
                     </motion.div>
                   ) : (
                     <form onSubmit={handleSubmit} className="space-y-8">

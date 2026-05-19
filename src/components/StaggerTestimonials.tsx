@@ -10,7 +10,7 @@ const testimonials = [
   {
     tempId: 0,
     testimonial: "The home nursing service was reliable. The nurse arrived on time and was very professional with the treatment.",
-    by: "A. Adebayo, Lekki",
+    by: "A. Adebayo, Lagos",
   },
   {
     tempId: 1,
@@ -30,7 +30,7 @@ const testimonials = [
   {
     tempId: 4,
     testimonial: "Efficient service and clear communication throughout the process. It's a practical solution for busy people.",
-    by: "B. Ajayi, Lekki",
+    by: "B. Ajayi, Lagos",
   },
   {
     tempId: 5,
