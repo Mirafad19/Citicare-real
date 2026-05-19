@@ -8,7 +8,7 @@ export default function HomeHealthcare() {
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Hero Section */}
-      <section className="relative h-[60vh] flex items-center overflow-hidden">
+      <section className="relative min-h-[500px] md:h-[60vh] flex items-center py-20 md:py-0 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
             src="https://www.image2url.com/r2/default/images/1778861274282-fc3009b9-31a4-401b-b0a6-38c7a85c2cbb.png" 
@@ -98,11 +98,11 @@ export default function HomeHealthcare() {
 
             <div className="relative">
               <div className="absolute -inset-4 bg-emerald-500/10 rounded-[4rem] blur-3xl -z-10" />
-              <div className="bg-white p-4 rounded-[4rem] shadow-2xl">
+              <div className="bg-white p-0 lg:p-4 rounded-none lg:rounded-[4rem] shadow-none lg:shadow-2xl">
                 <img 
                   src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&q=80&w=1000" 
                   alt="Quality care" 
-                  className="rounded-[3rem] w-full object-cover h-[600px]"
+                  className="rounded-none lg:rounded-[3rem] w-full object-cover h-[350px] lg:h-[600px]"
                 />
               </div>
               
@@ -156,7 +156,7 @@ export default function HomeHealthcare() {
       {/* Final CTA */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6 lg:px-24">
-          <div className="bg-[#2E5AAB] rounded-[4rem] p-12 lg:p-24 text-center text-white relative overflow-hidden">
+          <div className="bg-[#2E5AAB] rounded-none lg:rounded-[4rem] p-6 lg:p-24 text-center text-white relative overflow-hidden">
             <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/hexellence.png')] opacity-10" />
             <h2 className="text-4xl lg:text-6xl font-black uppercase mb-8 relative z-10">Experience the Citicare Standard</h2>
             <p className="text-xl text-white/80 max-w-2xl mx-auto mb-12 relative z-10">

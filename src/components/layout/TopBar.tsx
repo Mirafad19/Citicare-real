@@ -47,15 +47,15 @@ export function TopBar() {
           </div>
           
           <div className="hidden lg:flex items-center gap-6">
-            <Link to="/brochure" className="flex items-center gap-2 bg-white/10 px-4 py-1.5 rounded-full hover:bg-white/20 transition-all uppercase border border-white/10 group">
-              <FileText className="h-4 w-4 text-blue-300 group-hover:scale-110 transition-transform" />
-              <span>Download Our Brochure</span>
-            </Link>
+            <div className="flex items-center gap-2 bg-white/5 px-4 py-1.5 rounded-full uppercase border border-white/10 select-none">
+              <FileText className="h-4 w-4 text-blue-300" />
+              <span>Brochure: Offline</span>
+            </div>
             <div className="h-6 w-[1px] bg-white/20"></div>
-            <Link to="/contact" className="flex items-center gap-2 bg-white/10 px-4 py-1.5 rounded-full hover:bg-white/20 transition-all uppercase border border-white/10 group">
-              <ShieldCheck className="h-4 w-4 text-emerald-400 group-hover:scale-110 transition-transform" />
-              <span>Government License</span>
-            </Link>
+            <div className="flex items-center gap-2 bg-white/5 px-4 py-1.5 rounded-full uppercase border border-white/10 select-none">
+              <ShieldCheck className="h-4 w-4 text-emerald-400" />
+              <span>HEFAMAA License: Active</span>
+            </div>
           </div>
         </div>
       </div>

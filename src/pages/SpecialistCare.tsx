@@ -100,7 +100,7 @@ export default function SpecialistCare() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="group bg-white p-10 rounded-[3rem] shadow-xl shadow-slate-200/50 border border-slate-100 hover:border-blue-200 transition-all hover:-translate-y-2"
+                className="group bg-white p-6 md:p-10 rounded-none lg:rounded-[3rem] shadow-none lg:shadow-xl shadow-slate-200/50 border-none lg:border border-slate-100 hover:border-blue-200 transition-all hover:-translate-y-2"
               >
                 <div className={`h-20 w-20 rounded-[2rem] ${item.color} flex items-center justify-center mb-8 group-hover:scale-110 transition-transform`}>
                   <item.icon className="h-10 w-10" />
@@ -120,7 +120,7 @@ export default function SpecialistCare() {
       {/* Trust & Stats */}
       <section className="py-24">
         <div className="container mx-auto px-6 lg:px-24">
-          <div className="bg-[#1e3a8a] rounded-[4rem] px-12 py-20 lg:p-24 text-white relative overflow-hidden">
+          <div className="bg-[#1e3a8a] rounded-none lg:rounded-[4rem] px-6 py-12 lg:p-24 text-white relative overflow-hidden">
             <img 
               src="https://www.image2url.com/r2/default/images/1778863421981-11b203cd-3516-4af1-b896-2e0174ce5418.png" 
               alt="Medical facility" 
@@ -147,19 +147,19 @@ export default function SpecialistCare() {
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-8 text-center">
-                <div className="bg-white/10 backdrop-blur-md p-10 rounded-[3rem] border border-white/10">
+                <div className="bg-white/10 backdrop-blur-md p-6 md:p-10 rounded-none lg:rounded-[3rem] border-none lg:border border-white/10">
                   <div className="text-6xl font-black mb-2">50+</div>
                   <div className="text-blue-200 font-black uppercase tracking-widest text-xs">Specialists</div>
                 </div>
-                <div className="bg-white/10 backdrop-blur-md p-10 rounded-[3rem] border border-white/10">
+                <div className="bg-white/10 backdrop-blur-md p-6 md:p-10 rounded-none lg:rounded-[3rem] border-none lg:border border-white/10">
                   <div className="text-6xl font-black mb-2">15</div>
                   <div className="text-blue-200 font-black uppercase tracking-widest text-xs">Departments</div>
                 </div>
-                <div className="bg-white/10 backdrop-blur-md p-10 rounded-[3rem] border border-white/10">
+                <div className="bg-white/10 backdrop-blur-md p-6 md:p-10 rounded-none lg:rounded-[3rem] border-none lg:border border-white/10">
                   <div className="text-6xl font-black mb-2">99%</div>
                   <div className="text-blue-200 font-black uppercase tracking-widest text-xs">Success Rate</div>
                 </div>
-                <div className="bg-white/10 backdrop-blur-md p-10 rounded-[3rem] border border-white/10">
+                <div className="bg-white/10 backdrop-blur-md p-6 md:p-10 rounded-none lg:rounded-[3rem] border-none lg:border border-white/10">
                   <div className="text-6xl font-black mb-2"><Activity className="h-12 w-12 mx-auto" /></div>
                   <div className="text-blue-200 font-black uppercase tracking-widest text-xs">Modern Tech</div>
                 </div>

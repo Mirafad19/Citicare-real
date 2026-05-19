@@ -7,23 +7,23 @@ export function Footer() {
     <footer className="bg-[#2E5AAB] text-white overflow-hidden">
       {/* Top Bar: Logo & Socials */}
       <div className="bg-[#2B529E] border-b border-white/5">
-        <div className="max-w-[1440px] mx-auto flex items-center justify-between">
-          <Link to="/" className="relative flex items-center shrink-0 group">
-             <div className="bg-white h-32 md:h-44 px-12 md:px-24 flex items-center justify-center [clip-path:polygon(0_0,100%_0,90%_100%,0%_100%)]">
+        <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+          <Link to="/" className="relative flex items-center shrink-0 group w-full md:w-auto">
+             <div className="bg-white h-24 md:h-44 px-6 md:px-24 flex items-center justify-center w-full md:w-auto lg:[clip-path:polygon(0_0,100%_0,90%_100%,0%_100%)]">
                 <img 
                   src="https://www.image2url.com/r2/default/images/1778793792491-b1b6686e-ac45-4d5b-b39c-d970f1d5d1da.png" 
                   alt="Citicare Logo" 
-                  className="h-20 md:h-28 w-auto object-contain transition-transform group-hover:scale-105"
+                  className="h-14 md:h-28 w-auto object-contain transition-transform group-hover:scale-105"
                   referrerPolicy="no-referrer"
                 />
              </div>
           </Link>
-          <div className="flex gap-4 pr-6 lg:pr-24">
-             {[Instagram, Instagram, Twitter, Linkedin].map((Icon, i) => (
+          <div className="flex gap-4 px-6 pb-6 md:pb-0 md:pr-6 lg:pr-24 justify-center md:justify-start w-full md:w-auto">
+             {[Facebook, Instagram, Twitter, Linkedin].map((Icon, i) => (
                <a 
                  key={i} 
                  href="#" 
-                 className="h-12 w-12 md:h-14 md:w-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 transition-all text-white/50 hover:text-white group"
+                 className="h-12 w-12 md:h-14 md:w-14 rounded-none md:rounded-full bg-white/5 border-none md:border border-white/10 flex items-center justify-center hover:bg-blue-600 transition-all text-white/50 hover:text-white group"
                >
                   <Icon className="h-5 w-5 md:h-6 md:w-6 transition-transform group-hover:scale-110" />
                </a>
@@ -81,7 +81,7 @@ export function Footer() {
                 { name: "Critical Nursing Support", href: "/specialist-care" },
                 { name: "Geriatric Care Specialists", href: "/home-healthcare" },
                 { name: "Advanced Telemedicine", href: "/services" },
-                { name: "Corporate Health Plans", href: "/brochure" },
+                { name: "Corporate Health Plans", href: "/about" },
                 { name: "Health Tech Integration", href: "/about" }
               ].map((item, i) => (
                 <li key={i}>
@@ -93,9 +93,9 @@ export function Footer() {
               ))}
             </ul>
             <div className="pt-6">
-              <Button nativeButton={false} render={<Link to="/brochure" />} className="bg-white/10 hover:bg-white text-white hover:text-blue-600 border border-white/20 rounded-full font-black uppercase tracking-widest text-xs h-12 w-full">
-                Corporate Brochure
-              </Button>
+              <div className="flex items-center justify-center bg-[#1e3a8a] text-sky-200 border border-sky-400/20 rounded-full font-black uppercase tracking-widest text-[10px] h-12 w-full select-none">
+                Brochure: Temporarily Offline
+              </div>
             </div>
           </div>
 
@@ -114,8 +114,8 @@ export function Footer() {
                   <Mail className="h-6 w-6 text-emerald-400 shrink-0" />
                   <p className="text-slate-300 font-bold">enquiries@citicarehealthltd.com</p>
                </div>
-               <div className="bg-white/5 p-6 rounded-3xl border border-white/10 space-y-3">
-                  <p className="text-xs font-black uppercase tracking-widest text-emerald-400">Newsletter</p>
+               <div className="bg-white/5 p-6 rounded-none md:rounded-3xl border-none md:border border-white/10 space-y-3">
+                  <p className="text-xs font-black uppercase tracking-widest text-[#22C55E]">Newsletter</p>
                   <div className="flex gap-2">
                     <input type="text" placeholder="Email Address" className="bg-transparent border-b border-white/20 pb-2 text-sm focus:outline-none w-full" />
                     <ArrowRight className="h-5 w-5 text-white/50" />
@@ -130,16 +130,16 @@ export function Footer() {
       {/* Bottom Footer Area */}
       <div className="bg-[#244A8F] py-8 border-t border-white/5">
         <div className="max-w-[1440px] mx-auto px-6 lg:px-24 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-blue-100/50 font-black uppercase tracking-widest text-xs">
+          <p className="text-white font-black uppercase tracking-widest text-xs">
             © 2026 Citicare. All rights reserved.
           </p>
           <div className="flex gap-10">
-            <Link to="/privacy" className="text-slate-500 hover:text-white transition-colors text-xs font-black uppercase tracking-widest">Privacy Policy</Link>
-            <Link to="/terms" className="text-slate-500 hover:text-white transition-colors text-xs font-black uppercase tracking-widest">Terms of Service</Link>
+            <Link to="/privacy" className="text-sky-300 hover:text-emerald-400 transition-colors text-xs font-black uppercase tracking-widest">Privacy Policy</Link>
+            <Link to="/terms" className="text-sky-300 hover:text-emerald-400 transition-colors text-xs font-black uppercase tracking-widest">Terms of Service</Link>
           </div>
           <button 
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="h-14 w-14 bg-white text-blue-600 rounded-2xl flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all shadow-xl shadow-blue-500/20"
+            className="h-14 w-14 bg-white text-blue-600 rounded-none md:rounded-2xl flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all shadow-none md:shadow-xl md:shadow-blue-500/20"
           >
             <ChevronRight className="h-8 w-8 -rotate-90" />
           </button>

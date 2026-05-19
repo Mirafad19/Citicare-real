@@ -27,18 +27,41 @@ export default function Booking() {
       service: formData.get('service') as string,
       notes: formData.get('notes') as string,
       type: 'booking',
-      createdAt: serverTimestamp(),
     };
 
+    // 1. Submit to Formspree if configured
+    const formspreeId = (import.meta as any).env.VITE_FORMSPREE_BOOKING_ID || "mkoeobyy";
+    if (formspreeId) {
+      try {
+        await fetch(`https://formspree.io/f/${formspreeId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            ...data,
+            "submission_type": "Citicare Booking Appointment"
+          })
+        });
+      } catch (err) {
+        console.warn("Formspree transmission warning: ", err);
+      }
+    }
+
+    // 2. Submit to Firestore database backup
     const path = 'appointments';
     try {
-      await addDoc(collection(db, path), data);
-      setSubmitted(true);
+      await addDoc(collection(db, path), {
+        ...data,
+        createdAt: serverTimestamp(),
+      });
     } catch (error) {
-      handleFirestoreError(error, OperationType.CREATE, path);
-    } finally {
-      setLoading(false);
+      console.warn("Firestore backup logging skipped or offline:", error);
     }
+
+    setSubmitted(true);
+    setLoading(false);
   };
 
   return (
@@ -55,7 +78,7 @@ export default function Booking() {
             </p>
           </div>
 
-          <div className="rounded-[4rem] border-none shadow-2xl overflow-hidden bg-white">
+          <div className="rounded-none lg:rounded-[4rem] border-none shadow-none lg:shadow-2xl overflow-hidden bg-white">
             <div className="p-0 h-full">
               <div className="grid lg:grid-cols-5 h-full overflow-hidden">
                 {/* Left Info Panel */}

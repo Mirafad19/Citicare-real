@@ -9,7 +9,6 @@ const mockData = [
   { title: "Online Consultation", type: "Service", link: "/book", desc: "Virtual doctor visits" },
   { title: "About Citicare", type: "Page", link: "/about", desc: "Our history and mission" },
   { title: "Book Appointment", type: "Action", link: "/book", desc: "Schedule a medical session" },
-  { title: "Corporate Brochure", type: "File", link: "/brochure", desc: "Download our official profile" },
   { title: "Contact Us", type: "Page", link: "/contact", desc: "Get in touch with our team" },
   { title: "Frequently Asked Questions", type: "Help", link: "/faq", desc: "Common queries and answers" },
   { title: "Our Values", type: "Page", link: "/values", desc: "Innovation, Quality, Compassion" }

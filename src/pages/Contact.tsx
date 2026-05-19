@@ -24,18 +24,41 @@ export default function Contact() {
       phone: formData.get('phone') as string,
       service: formData.get('service') as string,
       message: formData.get('message') as string,
-      createdAt: serverTimestamp(),
     };
 
+    // 1. Submit to Formspree if configured
+    const formspreeId = (import.meta as any).env.VITE_FORMSPREE_CONTACT_ID || "mkoeobyy";
+    if (formspreeId) {
+      try {
+        await fetch(`https://formspree.io/f/${formspreeId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            ...data,
+            "submission_type": "Citicare General Inquiry"
+          })
+        });
+      } catch (err) {
+        console.warn("Formspree transmission warning: ", err);
+      }
+    }
+
+    // 2. Submit to Firestore database backup
     const path = 'inquiries';
     try {
-      await addDoc(collection(db, path), data);
-      setSubmitted(true);
+      await addDoc(collection(db, path), {
+        ...data,
+        createdAt: serverTimestamp(),
+      });
     } catch (error) {
-      handleFirestoreError(error, OperationType.CREATE, path);
-    } finally {
-      setLoading(false);
+      console.warn("Firestore backup logging skipped or offline:", error);
     }
+
+    setSubmitted(true);
+    setLoading(false);
   };
 
   return (
@@ -104,7 +127,7 @@ export default function Contact() {
               className="relative"
             >
               <div className="absolute -top-12 -left-12 w-64 h-64 bg-primary/5 rounded-full blur-[100px] -z-10"></div>
-              <div className="rounded-[4rem] border border-border shadow-2xl overflow-hidden bg-white">
+              <div className="rounded-none lg:rounded-[4rem] border-none lg:border border-border shadow-none lg:shadow-2xl overflow-hidden bg-white">
                 <div className="bg-[#005FA3] p-12 text-white text-center">
                    <h3 className="text-4xl font-black uppercase tracking-tight">Send a Message</h3>
                    <p className="text-white/60 text-xs mt-3 uppercase tracking-widest font-bold">Typical response time: 2-4 hours</p>

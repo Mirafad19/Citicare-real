@@ -21,7 +21,7 @@ export default function About() {
               <ShieldCheck className="h-6 w-6" />
               <span>Established & Trusted</span>
             </div>
-            <h1 className="text-5xl md:text-8xl font-black leading-[0.95] tracking-tighter uppercase">
+            <h1 className="text-3xl sm:text-5xl md:text-8xl font-black leading-[0.95] tracking-tighter uppercase whitespace-normal break-words">
               Accessible, Efficient, <br/><span className="text-blue-200 italic">Compassionate</span> Care.
             </h1>
             <p className="text-xl md:text-2xl text-blue-50 leading-relaxed font-bold max-w-2xl opacity-90">
@@ -59,7 +59,7 @@ export default function About() {
             </div>
 
             <div className="flex-1 relative">
-               <div className="rounded-[4rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.2)] relative z-10">
+               <div className="rounded-none lg:rounded-[4rem] overflow-hidden shadow-none lg:shadow-[0_50px_100px_-20px_rgba(0,0,0,0.2)] relative z-10">
                  <img 
                    src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&q=80&w=1400" 
                    alt="Compassionate Medical Care" 
@@ -98,7 +98,7 @@ export default function About() {
             <motion.div
               key={i}
               whileHover={{ y: -10 }}
-              className={cn("p-16 rounded-[4rem] transition-all duration-500 space-y-8 shadow-sm hover:shadow-2xl", card.color)}
+              className={cn("p-6 md:p-16 rounded-none lg:rounded-[4rem] transition-all duration-500 space-y-8 shadow-none lg:shadow-sm hover:shadow-2xl", card.color)}
             >
               <div className="h-20 w-20 bg-white rounded-3xl flex items-center justify-center shadow-lg">
                 {card.icon}
@@ -124,7 +124,7 @@ export default function About() {
                { title: "Integrity", desc: "Honesty and transparency in every care plan.", icon: <Shield className="h-12 w-12" />, color: "bg-blue-100 text-blue-600" },
                { title: "Excellence", desc: "Striving for the highest quality of healthcare.", icon: <Star className="h-12 w-12" />, color: "bg-amber-100 text-amber-600" }
              ].map((val, i) => (
-               <div key={i} className={cn("p-12 rounded-[4rem] text-center space-y-6 transition-all duration-500 shadow-sm hover:shadow-xl", val.color)}>
+               <div key={i} className={cn("p-6 md:p-12 rounded-none lg:rounded-[4rem] text-center space-y-6 transition-all duration-500 shadow-none lg:shadow-sm hover:shadow-xl", val.color)}>
                   <div className="h-24 w-24 mx-auto bg-white rounded-3xl flex items-center justify-center shadow-lg">
                     {val.icon}
                   </div>

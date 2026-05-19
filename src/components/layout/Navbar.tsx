@@ -10,7 +10,6 @@ const navLinks = [
   { name: 'About Us', href: '/about' },
   { name: 'Our Services', href: '/services' },
   { name: 'FAQ', href: '/faq' },
-  { name: 'Certification', href: '/certification' },
   { name: 'Career', href: '/career' },
   { name: 'Contact', href: '/contact' },
 ];
@@ -103,7 +102,7 @@ export function Navbar() {
                     <Link 
                       to="/contact" 
                       onClick={() => setIsOpen(false)}
-                      className="mt-8 flex items-center justify-center gap-4 bg-[#3B82F6] text-white py-5 rounded-3xl font-sans font-bold text-lg shadow-2xl shadow-blue-500/20"
+                      className="mt-8 flex items-center justify-center gap-4 bg-[#3B82F6] text-white py-5 rounded-none md:rounded-3xl font-sans font-bold text-lg shadow-none md:shadow-2xl md:shadow-blue-500/20"
                     >
                       Process Enquiry
                     </Link>

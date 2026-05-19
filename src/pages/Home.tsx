@@ -32,6 +32,14 @@ const slides = [
 export default function Home() {
   const [currentSlide, setCurrentSlide] = React.useState(0);
   const [imagesLoaded, setImagesLoaded] = React.useState(false);
+  const [toastMessage, setToastMessage] = React.useState<string | null>(null);
+
+  const showToast = (msg: string) => {
+    setToastMessage(msg);
+    setTimeout(() => {
+      setToastMessage(null);
+    }, 5000);
+  };
 
   React.useEffect(() => {
     // Pre-load all images
@@ -161,36 +169,40 @@ export default function Home() {
       </section>
 
       {/* Brochure & License Strip */}
-      <section className="bg-blue-600 text-white py-8 border-b border-white/10">
+      <section className="bg-[#1E3A8A] text-white py-12 border-b border-white/10">
         <div className="max-w-[1440px] mx-auto px-6 lg:px-24">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24">
-            <Link 
-              to="/brochure" 
-              className="flex items-center gap-6 group hover:translate-y-[-2px] transition-transform"
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
+            <div 
+              className="w-full lg:w-auto flex items-center gap-6 bg-white/5 border-none lg:border-2 lg:border-dashed lg:border-white/20 p-6 md:px-10 rounded-none lg:rounded-[2.5rem] text-left select-none"
             >
-              <div className="h-16 w-16 bg-white/10 rounded-2xl flex items-center justify-center border border-white/20 group-hover:bg-white/20 transition-colors">
+              <div className="h-16 w-16 bg-white/10 rounded-2xl flex items-center justify-center border border-white/20 transition-colors shrink-0">
                 <FileText className="h-8 w-8 text-blue-200" />
               </div>
               <div>
-                <div className="text-sm font-black uppercase tracking-[0.2em] text-blue-200 mb-1">Company Profile</div>
-                <div className="text-2xl font-black uppercase tracking-tight">Download Our Brochure</div>
+                <div className="text-xs font-black uppercase tracking-[0.3em] text-blue-300 mb-1">Company Profile</div>
+                <div className="text-xl md:text-2xl font-black uppercase tracking-tight flex items-center gap-2">
+                  <span>Brochure</span>
+                  <span className="text-[9px] bg-amber-500/20 px-2 py-0.5 rounded-full uppercase font-bold text-amber-300 tracking-normal border border-amber-500/30">Offline</span>
+                </div>
               </div>
-            </Link>
+            </div>
             
-            <div className="hidden md:block h-12 w-[1px] bg-white/20" />
+            <div className="hidden lg:block h-16 w-[1px] bg-white/15" />
 
-            <Link 
-              to="/contact" 
-              className="flex items-center gap-6 group hover:translate-y-[-2px] transition-transform"
+            <div 
+              className="w-full lg:w-auto flex items-center gap-6 bg-white/5 border-none lg:border-2 lg:border-dashed lg:border-white/20 p-6 md:px-10 rounded-none lg:rounded-[2.5rem] text-left select-none"
             >
-              <div className="h-16 w-16 bg-white/10 rounded-2xl flex items-center justify-center border border-white/20 group-hover:bg-white/20 transition-colors">
+              <div className="h-16 w-16 bg-white/10 rounded-2xl flex items-center justify-center border border-white/20 transition-colors shrink-0">
                 <ShieldCheck className="h-8 w-8 text-emerald-400" />
               </div>
               <div>
-                <div className="text-sm font-black uppercase tracking-[0.2em] text-blue-200 mb-1">Regulatory Standards</div>
-                <div className="text-2xl font-black uppercase tracking-tight">Government License</div>
+                <div className="text-xs font-black uppercase tracking-[0.3em] text-blue-300 mb-1">Regulatory Standards</div>
+                <div className="text-xl md:text-2xl font-black uppercase tracking-tight flex items-center gap-2">
+                  <span>Government License</span>
+                  <span className="text-[9px] bg-emerald-500/20 px-2 py-0.5 rounded-full uppercase font-bold text-emerald-400 tracking-normal border border-emerald-500/30">Active</span>
+                </div>
               </div>
-            </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -242,7 +254,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className={cn("flex flex-col rounded-[3rem] overflow-hidden shadow-xl transition-all duration-500 group", service.color)}
+                className={cn("flex flex-col rounded-none md:rounded-[3rem] overflow-hidden shadow-none md:shadow-xl transition-all duration-500 group", service.color)}
               >
                 <div className="h-64 overflow-hidden relative">
                   <img src={service.image} alt={service.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -301,7 +313,7 @@ export default function Home() {
             <div className="flex-1">
               <div className="relative">
                 <div className="absolute -top-10 -left-10 w-40 h-40 bg-[#005FA3]/10 rounded-full -z-10 blur-3xl" />
-                <div className="rounded-[4rem] overflow-hidden shadow-2xl">
+                <div className="rounded-none lg:rounded-[4rem] overflow-hidden shadow-none lg:shadow-2xl">
                   <img 
                     src="https://www.image2url.com/r2/default/images/1778861274282-fc3009b9-31a4-401b-b0a6-38c7a85c2cbb.png" 
                     alt="Elderly Care" 
@@ -328,7 +340,7 @@ export default function Home() {
             <div className="flex-1 order-2 lg:order-1">
               <div className="relative">
                 <div className="absolute -top-10 -left-10 w-64 h-64 bg-white/20 rounded-full blur-[100px]" />
-                <div className="relative z-10 rounded-[4rem] overflow-hidden shadow-2xl">
+                <div className="relative z-10 rounded-none lg:rounded-[4rem] overflow-hidden shadow-none lg:shadow-2xl">
                   <img 
                     src="https://www.image2url.com/r2/default/images/1778798331921-6358ebab-1a6e-4082-a655-cf373bfac93a.png" 
                     alt="Digital Healthcare Consultation" 
@@ -393,17 +405,20 @@ export default function Home() {
                  {[
                    "Ikeja Area", "Victoria Island", "Lekki Area", "Ikoyi Area", 
                    "Surulere Area", "Festac Area", "Magodo Area", "Ajah Area", 
-                   "Lagos Island", "Alimosho", "Gbagada", "Yaba"
-                 ].map((area, i) => (
-                   <div key={i} className="flex items-center gap-4 text-[#1e3a8a] font-black text-lg group">
-                     <div className="h-3 w-3 bg-blue-500 rounded-full group-hover:scale-[2] transition-transform shadow-lg shadow-blue-500/40" />
-                     <span className="group-hover:translate-x-2 transition-transform">{area}</span>
-                   </div>
-                 ))}
+                   "Lagos Island", "Alimosho", "Gbagada", "Yaba", "And many more..."
+                 ].map((area, i) => {
+                   const isManyMore = area === "And many more...";
+                   return (
+                     <div key={i} className={`flex items-center gap-4 font-black text-lg group ${isManyMore ? 'text-emerald-600' : 'text-[#1e3a8a]'}`}>
+                       <div className={`h-3 w-3 rounded-full transition-transform shadow-lg group-hover:scale-[2] ${isManyMore ? 'bg-emerald-500 animate-pulse' : 'bg-blue-500'}`} />
+                       <span className={`group-hover:translate-x-2 transition-transform ${isManyMore ? 'italic font-black text-emerald-600' : ''}`}>{area}</span>
+                     </div>
+                   );
+                 })}
                </div>
             </div>
-            <div className="relative">
-               <div className="rounded-[4rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.2)] h-[700px] bg-slate-200">
+            <div className="relative w-full">
+               <div className="rounded-none lg:rounded-[4rem] overflow-hidden shadow-none lg:shadow-[0_50px_100px_-20px_rgba(0,0,0,0.2)] h-[300px] sm:h-[400px] lg:h-[700px] bg-slate-200">
                  <img 
                    src="https://www.image2url.com/r2/default/images/1778863421981-11b203cd-3516-4af1-b896-2e0174ce5418.png" 
                    alt="Citicare Medical Center" 
@@ -411,7 +426,7 @@ export default function Home() {
                  />
                  <div className="absolute inset-0 bg-blue-600/5 mix-blend-multiply" />
                </div>
-               <div className="absolute -bottom-10 -left-10 -right-10 bg-white p-12 rounded-[4rem] shadow-2xl z-20">
+               <div className="relative mt-6 lg:mt-0 lg:absolute lg:-bottom-10 lg:-left-10 lg:-right-10 bg-white p-6 lg:p-12 rounded-none lg:rounded-[4rem] shadow-none lg:shadow-2xl z-20 border-none">
                   <div className="flex flex-col md:flex-row items-center justify-between gap-8">
                     <div className="space-y-2 text-center md:text-left">
                       <div className="font-black text-[#1e3a8a] text-2xl uppercase tracking-tight">General Inquiries</div>
@@ -444,6 +459,26 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Floating Dynamic clinical notify Toast */}
+      <AnimatePresence>
+        {toastMessage && (
+          <motion.div 
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            className="fixed bottom-8 right-8 z-50 max-w-sm bg-slate-900/95 backdrop-blur-md text-white p-6 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-white/10 flex items-start gap-4"
+          >
+            <div className="h-10 w-10 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center shrink-0 border border-emerald-500/30">
+              <ShieldCheck className="h-6 w-6" />
+            </div>
+            <div className="space-y-1">
+              <p className="font-black text-xs uppercase tracking-widest text-[#005FA3]">Verified System Alert</p>
+              <p className="text-sm text-slate-200 font-bold leading-relaxed">{toastMessage}</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </div>
   );

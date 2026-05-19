@@ -65,7 +65,7 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.6 }}
-                className="bg-[#F1F5F9] rounded-[3rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col group border border-transparent hover:border-[#005FA3]/10"
+                className="bg-[#F1F5F9] rounded-none lg:rounded-[3rem] overflow-hidden shadow-none lg:shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col group border-none lg:border border-transparent hover:border-[#005FA3]/10"
               >
                 <div className="h-64 overflow-hidden relative">
                    <img src={service.image} alt={service.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -102,7 +102,7 @@ export default function Services() {
             <p className="text-xl text-[#5c5c5c] font-medium max-w-2xl mx-auto">Staying ahead of illness with continuous support and proactive monitoring.</p>
           </div>
           <div className="grid md:grid-cols-2 gap-12">
-            <div className="bg-[#F1F5F9] p-12 rounded-[3.5rem] space-y-6 group hover:bg-[#005FA3] hover:text-white transition-all duration-500">
+            <div className="bg-[#F1F5F9] p-6 md:p-12 rounded-none lg:rounded-[3.5rem] space-y-6 group hover:bg-[#005FA3] hover:text-white transition-all duration-500">
               <div className="h-20 w-20 bg-white rounded-2xl flex items-center justify-center text-[#005FA3] group-hover:scale-110 transition-transform">
                 <Activity className="h-10 w-10" />
               </div>
@@ -116,7 +116,7 @@ export default function Services() {
                  <li>• Proactive Screening</li>
               </ul>
             </div>
-            <div className="bg-[#F1F5F9] p-12 rounded-[3.5rem] space-y-6 group hover:bg-[#005FA3] hover:text-white transition-all duration-500">
+            <div className="bg-[#F1F5F9] p-6 md:p-12 rounded-none lg:rounded-[3.5rem] space-y-6 group hover:bg-[#005FA3] hover:text-white transition-all duration-500">
               <div className="h-20 w-20 bg-white rounded-2xl flex items-center justify-center text-[#005FA3] group-hover:scale-110 transition-transform">
                 <Heart className="h-10 w-10" />
               </div>
@@ -146,7 +146,7 @@ export default function Services() {
                   { icon: <UserCheck className="h-8 w-8" />, label: "Expert Staff", color: "bg-green-100 text-green-600" },
                   { icon: <ShieldCheck className="h-8 w-8" />, label: "Certified", color: "bg-purple-100 text-purple-600" }
                 ].map((item, i) => (
-                  <div key={i} className="bg-white p-10 rounded-[3rem] shadow-sm hover:shadow-xl transition-all duration-300 text-center space-y-4 border border-slate-100">
+                  <div key={i} className="bg-white p-6 md:p-10 rounded-none lg:rounded-[3rem] shadow-none lg:shadow-sm hover:shadow-xl transition-all duration-300 text-center space-y-4 border-none lg:border border-slate-100">
                     <div className={`h-16 w-16 mx-auto rounded-2xl flex items-center justify-center ${item.color}`}>
                       {item.icon}
                     </div>
