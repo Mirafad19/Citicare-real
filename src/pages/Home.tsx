@@ -181,8 +181,7 @@ export default function Home() {
               <div>
                 <div className="text-xs font-black uppercase tracking-[0.3em] text-blue-300 mb-1">Company Profile</div>
                 <div className="text-xl md:text-2xl font-black uppercase tracking-tight flex items-center gap-2">
-                  <span>Brochure</span>
-                  <span className="text-[9px] bg-amber-500/20 px-2 py-0.5 rounded-full uppercase font-bold text-amber-300 tracking-normal border border-amber-500/30">Offline</span>
+                  <span>Company Brochure</span>
                 </div>
               </div>
             </div>
@@ -199,7 +198,6 @@ export default function Home() {
                 <div className="text-xs font-black uppercase tracking-[0.3em] text-blue-300 mb-1">Regulatory Standards</div>
                 <div className="text-xl md:text-2xl font-black uppercase tracking-tight flex items-center gap-2">
                   <span>Government License</span>
-                  <span className="text-[9px] bg-emerald-500/20 px-2 py-0.5 rounded-full uppercase font-bold text-emerald-400 tracking-normal border border-emerald-500/30">Active</span>
                 </div>
               </div>
             </div>
