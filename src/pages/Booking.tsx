@@ -82,7 +82,7 @@ export default function Booking() {
             <div className="p-0 h-full">
               <div className="grid lg:grid-cols-5 h-full overflow-hidden">
                 {/* Left Info Panel */}
-                <div className="lg:col-span-2 bg-[#1e3a8a] p-12 text-white space-y-12 flex flex-col justify-between">
+                <div className="lg:col-span-2 bg-[#1e3a8a] p-6 md:p-12 text-white space-y-12 flex flex-col justify-between">
                   <div>
                     <div className="space-y-4">
                       <h3 className="text-3xl font-black uppercase tracking-tight">Booking Info</h3>
@@ -120,7 +120,7 @@ export default function Booking() {
                 </div>
 
                 {/* Right Form Panel */}
-                <div className="lg:col-span-3 p-12 bg-white">
+                <div className="lg:col-span-3 p-6 md:p-12 bg-white">
                   {submitted ? (
                     <motion.div 
                       initial={{ opacity: 0, scale: 0.9 }}

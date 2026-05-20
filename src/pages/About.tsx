@@ -52,7 +52,12 @@ export default function About() {
                 </p>
               </div>
               <div className="pt-6">
-                <Button className="bg-blue-500 hover:bg-blue-600 text-white rounded-full px-12 h-16 font-black uppercase tracking-widest text-xs shadow-xl">
+                <Button 
+                  onClick={() => {
+                    document.getElementById('mission-section')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="bg-blue-500 hover:bg-blue-600 text-white rounded-full px-12 h-16 font-black uppercase tracking-widest text-xs shadow-xl"
+                >
                   Discover Our Mission
                 </Button>
               </div>
@@ -79,7 +84,7 @@ export default function About() {
       </section>
 
       {/* Vision & Mission Grid with permanent colorful backgrounds */}
-      <section className="py-24 bg-[#F8FAFC]">
+      <section id="mission-section" className="py-24 bg-[#F8FAFC]">
         <div className="max-w-[1440px] mx-auto px-6 lg:px-24 grid md:grid-cols-2 gap-12">
           {[
             {
