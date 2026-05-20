@@ -17,6 +17,24 @@ export default function Career() {
 
   const [isSubmitted, setIsSubmitted] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
+  const [countdown, setCountdown] = React.useState(5);
+
+  React.useEffect(() => {
+    if (!isSubmitted) return;
+    setCountdown(5); // reset
+    const interval = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          window.location.href = '/'; // hard-refresh and redirect to homepage
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [isSubmitted]);
 
   const roles = [
     {
@@ -60,36 +78,32 @@ export default function Career() {
       type: 'career',
     };
 
-    // 1. Submit to Formspree if configured
+    // 1. Submit to Formspree if configured (non-blocking so the spinner doesn't hang)
     const formspreeId = (import.meta as any).env.VITE_FORMSPREE_CAREER_ID || "mkoeobyy";
     if (formspreeId) {
-      try {
-        await fetch(`https://formspree.io/f/${formspreeId}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({
-            ...data,
-            "submission_type": "Citicare Job Application"
-          })
-        });
-      } catch (err) {
+      fetch(`https://formspree.io/f/${formspreeId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          ...data,
+          "submission_type": "Citicare Job Application"
+        })
+      }).catch((err) => {
         console.warn("Formspree transmission warning: ", err);
-      }
+      });
     }
 
-    // 2. Submit to Firestore database backup
+    // 2. Submit to Firestore database backup (non-blocking so off-line or pending sync does not hang the UI)
     const path = 'careers';
-    try {
-      await addDoc(collection(db, path), {
-        ...data,
-        createdAt: serverTimestamp(),
-      });
-    } catch (error) {
+    addDoc(collection(db, path), {
+      ...data,
+      createdAt: serverTimestamp(),
+    }).catch((error) => {
       console.warn("Firestore backup logging skipped or offline:", error);
-    }
+    });
 
     setIsSubmitted(true);
     setLoading(false);
@@ -209,130 +223,166 @@ export default function Career() {
 
             {/* Application Form */}
             <div className="lg:col-span-12 xl:col-span-5">
-              <div className="bg-white p-6 md:p-10 rounded-none lg:rounded-[3.5rem] shadow-none lg:shadow-xl border-none lg:border border-slate-100 sticky top-36 space-y-8">
-                <div className="space-y-2">
-                  <h3 className="text-3xl font-black text-[#1e3a8a] uppercase">Apply Now</h3>
-                  <p className="text-slate-500 font-medium text-sm">Submit your interest and build your career with us.</p>
-                </div>
-
+              <div className="bg-white p-6 md:p-10 rounded-none lg:rounded-[3.5rem] shadow-none lg:shadow-xl border-none lg:border border-slate-100 sticky top-36 min-h-[500px] flex items-center justify-center">
                 <AnimatePresence mode="wait">
                   {!isSubmitted ? (
-                    <motion.form 
-                      key="form"
+                    <motion.div 
+                      key="form-wrapper"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
-                      onSubmit={handleSubmit} 
-                      className="space-y-6"
+                      className="space-y-8 w-full"
                     >
                       <div className="space-y-2">
-                        <label className="text-xs font-black uppercase tracking-wider text-slate-500">Full Name *</label>
-                        <input 
-                          type="text" 
-                          required
-                          value={formData.fullName}
-                          onChange={(e) => setFormData({...formData, fullName: e.target.value})}
-                          placeholder="your full name" 
-                          className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 h-14 font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2563EB] transition-all"
-                        />
+                        <h3 className="text-3xl font-black text-[#1e3a8a] uppercase">Apply Now</h3>
+                        <p className="text-slate-500 font-medium text-sm">Submit your interest and build your career with us.</p>
                       </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <form 
+                        onSubmit={handleSubmit} 
+                        className="space-y-6"
+                      >
                         <div className="space-y-2">
-                          <label className="text-xs font-black uppercase tracking-wider text-slate-500">Email Address *</label>
+                          <label className="text-xs font-black uppercase tracking-wider text-slate-500">Full Name *</label>
                           <input 
-                            type="email" 
+                            type="text" 
                             required
-                            value={formData.email}
-                            onChange={(e) => setFormData({...formData, email: e.target.value})}
-                            placeholder="your email" 
+                            value={formData.fullName}
+                            onChange={(e) => setFormData({...formData, fullName: e.target.value})}
+                            placeholder="your full name" 
                             className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 h-14 font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2563EB] transition-all"
                           />
                         </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <label className="text-xs font-black uppercase tracking-wider text-slate-500">Email Address *</label>
+                            <input 
+                              type="email" 
+                              required
+                              value={formData.email}
+                              onChange={(e) => setFormData({...formData, email: e.target.value})}
+                              placeholder="your email" 
+                              className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 h-14 font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2563EB] transition-all"
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-xs font-black uppercase tracking-wider text-slate-500">Phone Number *</label>
+                            <input 
+                              type="tel" 
+                              required
+                              value={formData.phone}
+                              onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                              placeholder="your phone number" 
+                              className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 h-14 font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2563EB] transition-all"
+                            />
+                          </div>
+                        </div>
+
                         <div className="space-y-2">
-                          <label className="text-xs font-black uppercase tracking-wider text-slate-500">Phone Number *</label>
-                          <input 
-                            type="tel" 
-                            required
-                            value={formData.phone}
-                            onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                            placeholder="your phone number" 
+                          <label className="text-xs font-black uppercase tracking-wider text-slate-500">Target Role *</label>
+                          <select 
+                            value={formData.role}
+                            onChange={(e) => setFormData({...formData, role: e.target.value})}
                             className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 h-14 font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2563EB] transition-all"
+                          >
+                            <option>Registered Nurse (RN) - Home Healthcare</option>
+                            <option>Geriatric Care Specialist / Caregiver</option>
+                            <option>Psychiatric Support Assistant</option>
+                            <option>Other Support Role</option>
+                          </select>
+                        </div>
+
+                        <div className="space-y-2">
+                          <label className="text-xs font-black uppercase tracking-wider text-slate-500">Clinical Experience *</label>
+                          <select 
+                            value={formData.experience}
+                            onChange={(e) => setFormData({...formData, experience: e.target.value})}
+                            className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 h-14 font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2563EB] transition-all"
+                          >
+                            <option>1-2 Years</option>
+                            <option>3-5 Years</option>
+                            <option>5+ Years</option>
+                          </select>
+                        </div>
+
+                        <div className="space-y-2">
+                          <label className="text-xs font-black uppercase tracking-wider text-slate-500">Brief Care Background Statement</label>
+                          <textarea 
+                            rows={4}
+                            value={formData.summary}
+                            onChange={(e) => setFormData({...formData, summary: e.target.value})}
+                            placeholder="Summarize your credentials or share your passion for healthcare..." 
+                            className="w-full bg-slate-50 border border-slate-200 rounded-3xl p-6 font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2563EB] transition-all resize-none"
                           />
                         </div>
-                      </div>
 
-                      <div className="space-y-2">
-                        <label className="text-xs font-black uppercase tracking-wider text-slate-500">Target Role *</label>
-                        <select 
-                          value={formData.role}
-                          onChange={(e) => setFormData({...formData, role: e.target.value})}
-                          className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 h-14 font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2563EB] transition-all"
-                        >
-                          <option>Registered Nurse (RN) - Home Healthcare</option>
-                          <option>Geriatric Care Specialist / Caregiver</option>
-                          <option>Psychiatric Support Assistant</option>
-                          <option>Other Support Role</option>
-                        </select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <label className="text-xs font-black uppercase tracking-wider text-slate-500">Clinical Experience *</label>
-                        <select 
-                          value={formData.experience}
-                          onChange={(e) => setFormData({...formData, experience: e.target.value})}
-                          className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 h-14 font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2563EB] transition-all"
-                        >
-                          <option>1-2 Years</option>
-                          <option>3-5 Years</option>
-                          <option>5+ Years</option>
-                        </select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <label className="text-xs font-black uppercase tracking-wider text-slate-500">Brief Care Background Statement</label>
-                        <textarea 
-                          rows={4}
-                          value={formData.summary}
-                          onChange={(e) => setFormData({...formData, summary: e.target.value})}
-                          placeholder="Summarize your credentials or share your passion for healthcare..." 
-                          className="w-full bg-slate-50 border border-slate-200 rounded-3xl p-6 font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2563EB] transition-all resize-none"
-                        />
-                      </div>
-
-                      <Button type="submit" disabled={loading} className="w-full bg-[#2563EB] hover:bg-blue-700 text-white rounded-full h-16 font-black uppercase tracking-widest text-xs shadow-xl transition-all flex items-center justify-center gap-2">
-                        {loading ? (
-                          <>
-                            <Loader2 className="h-5 w-5 animate-spin" />
-                            <span>Submitting Profile...</span>
-                          </>
-                        ) : (
-                          <span>Submit Application</span>
-                        )}
-                      </Button>
-                    </motion.form>
+                        <Button type="submit" disabled={loading} className="w-full bg-[#2563EB] hover:bg-blue-700 text-white rounded-full h-16 font-black uppercase tracking-widest text-xs shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer">
+                          {loading ? (
+                            <>
+                              <Loader2 className="h-5 w-5 animate-spin" />
+                              <span>Submitting Profile...</span>
+                            </>
+                          ) : (
+                            <span>Submit Application</span>
+                          )}
+                        </Button>
+                      </form>
+                    </motion.div>
                   ) : (
                     <motion.div 
-                      key="success"
-                      initial={{ opacity: 0, scale: 0.9 }}
+                      key="success-wrapper"
+                      initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      className="text-center py-12 space-y-6"
+                      exit={{ opacity: 0 }}
+                      className="text-center py-12 space-y-8 w-full max-w-sm mx-auto"
                     >
-                      <div className="relative mx-auto h-28 w-28 flex items-center justify-center bg-emerald-50 rounded-full border-4 border-emerald-500/10">
-                        <div className="h-20 w-20 bg-emerald-500 text-white rounded-full flex items-center justify-center shadow-lg shadow-emerald-500/20 animate-bounce">
-                          <CheckCircle2 className="h-10 w-10 stroke-[3]" />
+                      <div className="relative mx-auto h-32 w-32 flex items-center justify-center bg-emerald-50 rounded-full border-4 border-emerald-500/10">
+                        <div className="h-24 w-24 bg-emerald-500 text-white rounded-full flex items-center justify-center shadow-lg shadow-emerald-500/20">
+                          <CheckCircle2 className="h-12 w-12 stroke-[3]" />
                         </div>
                       </div>
-                      <div className="space-y-3">
-                        <h4 className="text-2xl font-black text-[#1e3a8a] uppercase">Application Received Successfully!</h4>
-                        <p className="text-slate-600 font-medium leading-relaxed max-w-sm mx-auto">
+                      <div className="space-y-4">
+                        <h4 className="text-2xl font-black text-[#1e3a8a] uppercase">Application Received <span className="text-emerald-600">Successfully!</span></h4>
+                        <p className="text-slate-600 font-semibold text-sm leading-relaxed max-w-sm mx-auto">
                           Thank you, <span className="font-bold text-[#1e3a8a]">{formData.fullName}</span>. 
-                          Our Clinical Operations & Recruitment deck has received your profile for the <strong>{formData.role}</strong> position. We will reach back within 2-3 operational days.
+                          Our Clinical Operations team has received your profile for the <strong>{formData.role}</strong> position. We will reach back within 2-3 operational days.
                         </p>
                       </div>
-                      <Button onClick={() => setIsSubmitted(false)} variant="outline" className="border-emerald-500 text-emerald-600 hover:bg-emerald-50 rounded-full px-8 h-12 uppercase tracking-widest font-bold text-xs mt-4">
-                        Submit another
-                      </Button>
+
+                      <div className="bg-slate-50 border border-slate-100 rounded-3xl p-6 max-w-sm mx-auto space-y-4 shadow-sm">
+                        <div className="flex items-center justify-center gap-3 text-slate-600 font-bold text-sm">
+                          <Loader2 className="h-5 w-5 animate-spin text-emerald-500" />
+                          <span>Redirecting in <strong className="text-emerald-600 text-lg font-black">{countdown}s</strong>...</span>
+                        </div>
+                        <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                          <motion.div 
+                            key={isSubmitted ? "active-bar-career" : "idle-bar-career"}
+                            initial={{ width: "100%" }}
+                            animate={{ width: "0%" }}
+                            transition={{ duration: 5, ease: "linear" }}
+                            className="bg-emerald-500 h-full"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col gap-3 pt-2">
+                        <Button 
+                          variant="outline" 
+                          className="rounded-full h-12 px-8 border-slate-200 text-slate-700 hover:bg-slate-50 font-bold uppercase tracking-wider text-xs cursor-pointer" 
+                          onClick={() => {
+                            window.location.href = '/';
+                          }}
+                        >
+                          Go Back Now
+                        </Button>
+                        <Button 
+                          variant="ghost" 
+                          className="rounded-full h-12 px-6 text-slate-400 hover:text-slate-600 font-bold uppercase tracking-wider text-xs cursor-pointer" 
+                          onClick={() => setIsSubmitted(false)}
+                        >
+                          Post another profile
+                        </Button>
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>

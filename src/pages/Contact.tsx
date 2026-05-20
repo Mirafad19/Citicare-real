@@ -12,6 +12,24 @@ import { handleFirestoreError, OperationType } from '@/lib/firestore-utils';
 export default function Contact() {
   const [loading, setLoading] = React.useState(false);
   const [submitted, setSubmitted] = React.useState(false);
+  const [countdown, setCountdown] = React.useState(5);
+
+  React.useEffect(() => {
+    if (!submitted) return;
+    setCountdown(5); // reset
+    const interval = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          window.location.href = '/'; // Redirect and hard-refresh to home
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [submitted]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -26,36 +44,32 @@ export default function Contact() {
       message: formData.get('message') as string,
     };
 
-    // 1. Submit to Formspree if configured
+    // 1. Submit to Formspree if configured (non-blocking so the spinner doesn't hang)
     const formspreeId = (import.meta as any).env.VITE_FORMSPREE_CONTACT_ID || "mkoeobyy";
     if (formspreeId) {
-      try {
-        await fetch(`https://formspree.io/f/${formspreeId}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({
-            ...data,
-            "submission_type": "Citicare General Inquiry"
-          })
-        });
-      } catch (err) {
+      fetch(`https://formspree.io/f/${formspreeId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          ...data,
+          "submission_type": "Citicare General Inquiry"
+        })
+      }).catch((err) => {
         console.warn("Formspree transmission warning: ", err);
-      }
+      });
     }
 
-    // 2. Submit to Firestore database backup
+    // 2. Submit to Firestore database backup (non-blocking so off-line or pending sync does not hang the UI)
     const path = 'inquiries';
-    try {
-      await addDoc(collection(db, path), {
-        ...data,
-        createdAt: serverTimestamp(),
-      });
-    } catch (error) {
+    addDoc(collection(db, path), {
+      ...data,
+      createdAt: serverTimestamp(),
+    }).catch((error) => {
       console.warn("Firestore backup logging skipped or offline:", error);
-    }
+    });
 
     setSubmitted(true);
     setLoading(false);
@@ -126,33 +140,69 @@ export default function Contact() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="relative w-full overflow-hidden rounded-2xl lg:rounded-[4rem] border border-slate-100 shadow-xl bg-white"
+              className="relative w-full overflow-hidden rounded-2xl lg:rounded-[4rem] border border-slate-100 shadow-xl bg-white min-h-[550px] flex items-center justify-center p-6 md:p-12"
             >
-              <div className="bg-[#005FA3] px-6 py-10 md:p-12 text-white text-center">
-                 <h3 className="text-2xl md:text-4xl font-black uppercase tracking-tight">Send a Message</h3>
-                 <p className="text-white/70 text-xs mt-3 uppercase tracking-widest font-bold">Typical response time: 2-4 hours</p>
-              </div>
-              <div className="p-6 md:p-12 space-y-6 md:space-y-8">
-                {submitted ? (
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="text-center py-8 space-y-6"
-                  >
-                    <div className="relative mx-auto h-24 w-24 flex items-center justify-center bg-emerald-50 rounded-full border-4 border-emerald-500/10">
-                      <div className="h-16 w-16 bg-emerald-500 text-white rounded-full flex items-center justify-center shadow-lg shadow-emerald-500/20">
-                        <CheckCircle className="h-8 w-8 stroke-[3]" />
-                      </div>
+              {submitted ? (
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-center py-12 space-y-8 w-full max-w-md mx-auto"
+                >
+                  <div className="relative mx-auto h-32 w-32 flex items-center justify-center bg-emerald-50 rounded-full border-4 border-emerald-500/10">
+                    <div className="h-24 w-24 bg-emerald-500 text-white rounded-full flex items-center justify-center shadow-lg shadow-emerald-500/20">
+                      <CheckCircle className="h-12 w-12 stroke-[3]" />
                     </div>
-                    <div className="space-y-3">
-                      <h3 className="text-2xl font-black uppercase tracking-tight text-emerald-600">Message Sent Successfully</h3>
-                      <p className="text-[#5C5C5C] font-semibold text-sm md:text-base leading-relaxed max-w-md mx-auto">
-                        Thank you for reaching out. Your request has been securely transmitted. A Citicare representative will contact you shortly.
-                      </p>
+                  </div>
+                  <div className="space-y-4">
+                    <h3 className="text-3xl font-black uppercase tracking-tight text-[#1e3a8a]">
+                      Message Sent <span className="text-emerald-600">Successfully!</span>
+                    </h3>
+                    <p className="text-[#5C5C5C] font-semibold text-base leading-relaxed">
+                      Thank you for reaching out. Your request has been securely transmitted. A Citicare representative will contact you shortly.
+                    </p>
+                  </div>
+
+                  <div className="bg-slate-50 border border-slate-100 rounded-3xl p-6 max-w-sm mx-auto space-y-4 shadow-sm">
+                    <div className="flex items-center justify-center gap-3 text-slate-600 font-bold text-sm">
+                      <Loader2 className="h-5 w-5 animate-spin text-emerald-500" />
+                      <span>Redirecting in <strong className="text-emerald-600 text-lg font-black">{countdown}s</strong>...</span>
                     </div>
-                    <Button variant="outline" className="rounded-full h-12 md:h-14 px-8 border-emerald-500 text-emerald-600 hover:bg-emerald-50 font-bold uppercase tracking-wider mt-4" onClick={() => setSubmitted(false)}>Send another message</Button>
-                  </motion.div>
-                ) : (
+                    <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                      <motion.div 
+                        key={submitted ? "active-bar-contact" : "idle-bar-contact"}
+                        initial={{ width: "100%" }}
+                        animate={{ width: "0%" }}
+                        transition={{ duration: 5, ease: "linear" }}
+                        className="bg-emerald-500 h-full"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col gap-3 pt-2">
+                    <Button 
+                      variant="outline" 
+                      className="rounded-full h-12 px-8 border-slate-200 text-slate-700 hover:bg-slate-50 font-bold uppercase tracking-wider text-xs cursor-pointer" 
+                      onClick={() => {
+                        window.location.href = '/';
+                      }}
+                    >
+                      Go Back Now
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      className="rounded-full h-12 px-6 text-slate-400 hover:text-slate-600 font-bold uppercase tracking-wider text-xs cursor-pointer" 
+                      onClick={() => setSubmitted(false)}
+                    >
+                      Send Another Message
+                    </Button>
+                  </div>
+                </motion.div>
+              ) : (
+                <div className="w-full">
+                  <div className="bg-[#005FA3] -mx-6 md:-mx-12 -mt-6 md:-mt-12 px-6 py-10 md:p-12 text-white text-center mb-8">
+                     <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight">Send a Message</h3>
+                     <p className="text-white/70 text-xs mt-3 uppercase tracking-widest font-bold">Typical response time: 2-4 hours</p>
+                  </div>
                   <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8">
                     <div className="grid md:grid-cols-2 gap-6 md:gap-8">
                       <div className="space-y-2">
@@ -197,8 +247,8 @@ export default function Contact() {
                        )}
                     </Button>
                   </form>
-                )}
-              </div>
+                </div>
+              )}
             </motion.div>
          </div>
       </section>

@@ -29,6 +29,65 @@ const slides = [
   },
 ];
 
+interface AnimatedCounterProps {
+  value: string;
+}
+
+function AnimatedCounter({ value }: AnimatedCounterProps) {
+  const match = value.match(/^(\d+)(.*)$/);
+  const target = match ? parseInt(match[1]) : 0;
+  const suffix = match ? match[2] : "";
+
+  const [count, setCount] = React.useState(0);
+  const ref = React.useRef<HTMLSpanElement>(null);
+  const [isInView, setIsInView] = React.useState(false);
+
+  React.useEffect(() => {
+    if (!ref.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  React.useEffect(() => {
+    if (!isInView || target === 0) return;
+    let startTimestamp: number | null = null;
+    const duration = 1500; // 1.5 seconds
+
+    const step = (timestamp: number) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      const easeProgress = progress * (2 - progress); // easeOutQuad
+      setCount(Math.floor(easeProgress * target));
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      }
+    };
+
+    const animId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(animId);
+  }, [isInView, target]);
+
+  if (target === 0) {
+    return <span ref={ref}>{value}</span>;
+  }
+
+  return (
+    <span ref={ref}>
+      {count}
+      {suffix}
+    </span>
+  );
+}
+
 export default function Home() {
   const [currentSlide, setCurrentSlide] = React.useState(0);
   const [imagesLoaded, setImagesLoaded] = React.useState(false);
@@ -168,39 +227,50 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Brochure & License Strip */}
-      <section className="bg-[#1E3A8A] text-white py-12 border-b border-white/10">
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-24">
-          <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
-            <div 
-              className="w-full lg:w-auto flex items-center gap-6 bg-white/5 border-none lg:border-2 lg:border-dashed lg:border-white/20 p-6 md:px-10 rounded-none lg:rounded-[2.5rem] text-left select-none"
-            >
-              <div className="h-16 w-16 bg-white/10 rounded-2xl flex items-center justify-center border border-white/20 transition-colors shrink-0">
-                <FileText className="h-8 w-8 text-blue-200" />
-              </div>
-              <div>
-                <div className="text-xs font-black uppercase tracking-[0.3em] text-blue-300 mb-1">Company Profile</div>
-                <div className="text-xl md:text-2xl font-black uppercase tracking-tight flex items-center gap-2">
-                  <span>Company Brochure</span>
-                </div>
-              </div>
-            </div>
-            
-            <div className="hidden lg:block h-16 w-[1px] bg-white/15" />
+      {/* Performance Stats Section */}
+      <section className="bg-slate-50 border-y border-slate-100 py-20 lg:py-28 text-[#1E3A8A] relative overflow-hidden">
+        {/* Subtle decorative background gradients/lighting */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-[150px] pointer-events-none" />
 
-            <div 
-              className="w-full lg:w-auto flex items-center gap-6 bg-white/5 border-none lg:border-2 lg:border-dashed lg:border-white/20 p-6 md:px-10 rounded-none lg:rounded-[2.5rem] text-left select-none"
-            >
-              <div className="h-16 w-16 bg-white/10 rounded-2xl flex items-center justify-center border border-white/20 transition-colors shrink-0">
-                <ShieldCheck className="h-8 w-8 text-emerald-400" />
-              </div>
-              <div>
-                <div className="text-xs font-black uppercase tracking-[0.3em] text-blue-300 mb-1">Regulatory Standards</div>
-                <div className="text-xl md:text-2xl font-black uppercase tracking-tight flex items-center gap-2">
-                  <span>Government License</span>
-                </div>
-              </div>
-            </div>
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-24 relative z-10">
+          <div className="max-w-4xl mx-auto text-center mb-16 lg:mb-24 space-y-4">
+            <span className="text-[#005FA3] font-black uppercase tracking-[0.4em] text-xs md:text-sm block">Our Standard of Excellence</span>
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-sans font-black tracking-tight text-[#1E3A8A] leading-none uppercase">
+              Improving lives through <span className="text-blue-600 block sm:inline">quality care.</span>
+            </h2>
+            <p className="text-slate-600 text-sm md:text-lg max-w-2xl mx-auto leading-relaxed font-sans font-medium">
+              Delivering clinical excellence, professional medical insights, and specialized home healthcare services designed around your needs.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-y-16 gap-x-8 md:gap-x-12 text-center">
+            {[
+              { value: "98%", label: "Client Satisfaction" },
+              { value: "250+", label: "Licensed Providers" },
+              { value: "15+", label: "Medical Specialties" },
+              { value: "120+", label: "Clinic Partners" },
+              { value: "15k+", label: "In-Home Recoveries" }
+            ].map((stat, idx) => (
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                className={cn(
+                  "space-y-3 flex flex-col items-center justify-center",
+                  idx === 4 && "col-span-2 lg:col-span-1"
+                )}
+              >
+                <span className="font-sans text-5xl md:text-7xl lg:text-8xl font-black text-[#005FA3] tracking-tighter leading-none select-none">
+                  <AnimatedCounter value={stat.value} />
+                </span>
+                <span className="text-[10px] md:text-xs font-black font-sans tracking-[0.25em] text-slate-400 uppercase leading-snug break-words max-w-[180px]">
+                  {stat.label}
+                </span>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

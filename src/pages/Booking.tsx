@@ -12,6 +12,24 @@ import { handleFirestoreError, OperationType } from '@/lib/firestore-utils';
 export default function Booking() {
   const [loading, setLoading] = React.useState(false);
   const [submitted, setSubmitted] = React.useState(false);
+  const [countdown, setCountdown] = React.useState(5);
+
+  React.useEffect(() => {
+    if (!submitted) return;
+    setCountdown(5); // reset countdown
+    const interval = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          window.location.href = '/'; // hard-refresh and redirect to Home
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [submitted]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,36 +47,32 @@ export default function Booking() {
       type: 'booking',
     };
 
-    // 1. Submit to Formspree if configured
+    // 1. Submit to Formspree if configured (non-blocking so the spinner doesn't hang)
     const formspreeId = (import.meta as any).env.VITE_FORMSPREE_BOOKING_ID || "mkoeobyy";
     if (formspreeId) {
-      try {
-        await fetch(`https://formspree.io/f/${formspreeId}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({
-            ...data,
-            "submission_type": "Citicare Booking Appointment"
-          })
-        });
-      } catch (err) {
+      fetch(`https://formspree.io/f/${formspreeId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          ...data,
+          "submission_type": "Citicare Booking Appointment"
+        })
+      }).catch((err) => {
         console.warn("Formspree transmission warning: ", err);
-      }
+      });
     }
 
-    // 2. Submit to Firestore database backup
+    // 2. Submit to Firestore database backup (non-blocking so off-line or pending sync does not hang the UI)
     const path = 'appointments';
-    try {
-      await addDoc(collection(db, path), {
-        ...data,
-        createdAt: serverTimestamp(),
-      });
-    } catch (error) {
+    addDoc(collection(db, path), {
+      ...data,
+      createdAt: serverTimestamp(),
+    }).catch((error) => {
       console.warn("Firestore backup logging skipped or offline:", error);
-    }
+    });
 
     setSubmitted(true);
     setLoading(false);
@@ -78,69 +92,105 @@ export default function Booking() {
             </p>
           </div>
 
-          <div className="rounded-none lg:rounded-[4rem] border-none shadow-none lg:shadow-2xl overflow-hidden bg-white">
-            <div className="p-0 h-full">
-              <div className="grid lg:grid-cols-5 h-full overflow-hidden">
-                {/* Left Info Panel */}
-                <div className="lg:col-span-2 bg-[#1e3a8a] p-6 md:p-12 text-white space-y-12 flex flex-col justify-between">
-                  <div>
-                    <div className="space-y-4">
-                      <h3 className="text-3xl font-black uppercase tracking-tight">Booking Info</h3>
-                      <p className="text-blue-100/60 font-medium leading-relaxed">
-                        Please provide accurate details so we can match you with the right specialist.
-                      </p>
-                    </div>
-
-                    <div className="space-y-8 mt-12">
-                      <div className="flex gap-4">
-                        <div className="h-12 w-12 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
-                          <Calendar className="h-6 w-6" />
-                        </div>
-                        <div>
-                          <div className="font-bold text-sm text-blue-200 uppercase tracking-widest">Available Days</div>
-                          <div className="text-lg font-bold">Mon - Sun, 24/7</div>
-                        </div>
-                      </div>
-                      <div className="flex gap-4">
-                        <div className="h-12 w-12 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
-                          <Clock className="h-6 w-6" />
-                        </div>
-                        <div>
-                          <div className="font-bold text-sm text-blue-200 uppercase tracking-widest">Response Time</div>
-                          <div className="text-lg font-bold">Within 2 Hours</div>
-                        </div>
-                      </div>
-                    </div>
+          <div className="rounded-none lg:rounded-[4rem] border border-slate-100 shadow-2xl overflow-hidden bg-white min-h-[550px] flex items-center justify-center p-6 md:p-12">
+            {submitted ? (
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="w-full max-w-2xl mx-auto text-center space-y-8 py-12"
+              >
+                <div className="relative mx-auto h-32 w-32 flex items-center justify-center bg-emerald-50 rounded-full border-4 border-emerald-500/10">
+                  <div className="h-24 w-24 bg-emerald-500 text-white rounded-full flex items-center justify-center shadow-lg shadow-emerald-500/20">
+                    <CheckCircle className="h-12 w-12 stroke-[3]" />
                   </div>
+                </div>
+                <div className="space-y-4">
+                  <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tight text-[#1e3a8a]">
+                    Booking Sent <span className="text-emerald-600">Successfully!</span>
+                  </h3>
+                  <p className="text-[#334155] font-semibold text-base md:text-lg leading-relaxed max-w-xl mx-auto">
+                    We have received your requested consultation details. A professional Citicare representative will call or email you shortly to confirm details and dates.
+                  </p>
+                </div>
 
-                  <div className="pt-12 border-t border-white/10 mt-12">
-                    <p className="text-sm font-bold text-blue-200/50 uppercase tracking-[0.2em]">Contact Support</p>
-                    <p className="text-lg font-bold mt-2">+234 811 111 1111</p>
+                <div className="bg-slate-50 border border-slate-100 rounded-3xl p-6 max-w-md mx-auto space-y-4 shadow-sm">
+                  <div className="flex items-center justify-center gap-3 text-slate-600 font-bold text-sm">
+                    <Loader2 className="h-5 w-5 animate-spin text-emerald-500" />
+                    <span>Redirecting in <strong className="text-emerald-600 text-lg font-black">{countdown}s</strong>...</span>
+                  </div>
+                  <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                    <motion.div 
+                      key={submitted ? "active-bar" : "idle-bar"}
+                      initial={{ width: "100%" }}
+                      animate={{ width: "0%" }}
+                      transition={{ duration: 5, ease: "linear" }}
+                      className="bg-emerald-500 h-full"
+                    />
                   </div>
                 </div>
 
-                {/* Right Form Panel */}
-                <div className="lg:col-span-3 p-6 md:p-12 bg-white">
-                  {submitted ? (
-                    <motion.div 
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      className="text-center py-20 space-y-6"
-                    >
-                      <div className="relative mx-auto h-28 w-28 flex items-center justify-center bg-emerald-50 rounded-full border-4 border-emerald-500/10">
-                        <div className="h-20 w-20 bg-emerald-500 text-white rounded-full flex items-center justify-center shadow-lg shadow-emerald-500/20 animate-bounce">
-                          <CheckCircle className="h-10 w-10 stroke-[3]" />
-                        </div>
-                      </div>
-                      <div className="space-y-3">
-                        <h3 className="text-3xl font-black uppercase tracking-tight text-emerald-600">Booking Sent Successfully</h3>
-                        <p className="text-[#334155] font-semibold text-base leading-relaxed max-w-md mx-auto">
-                          We have received your requested consultation details. A professional Citicare representative will call or email you shortly to confirm details and dates.
+                <div className="flex flex-col sm:flex-row gap-4 items-center justify-center pt-2">
+                  <Button 
+                    variant="outline" 
+                    className="rounded-full h-12 px-8 border-slate-200 text-slate-700 hover:bg-slate-50 font-bold uppercase tracking-wider text-xs cursor-pointer" 
+                    onClick={() => {
+                      window.location.href = '/';
+                    }}
+                  >
+                    Go Back Now
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    className="rounded-full h-12 px-6 text-slate-400 hover:text-slate-600 font-bold uppercase tracking-wider text-xs cursor-pointer" 
+                    onClick={() => setSubmitted(false)}
+                  >
+                    Book Another Appointment
+                  </Button>
+                </div>
+              </motion.div>
+            ) : (
+              <div className="p-0 h-full w-full">
+                <div className="grid lg:grid-cols-5 h-full overflow-hidden">
+                  {/* Left Info Panel */}
+                  <div className="lg:col-span-2 bg-[#1e3a8a] p-6 md:p-12 text-white space-y-12 flex flex-col justify-between rounded-none lg:rounded-[3rem]">
+                    <div>
+                      <div className="space-y-4">
+                        <h3 className="text-3xl font-black uppercase tracking-tight">Booking Info</h3>
+                        <p className="text-blue-100/60 font-medium leading-relaxed">
+                          Please provide accurate details so we can match you with the right specialist.
                         </p>
                       </div>
-                      <Button variant="outline" className="rounded-full h-14 px-8 border-emerald-500 text-emerald-600 hover:bg-emerald-50 font-bold uppercase tracking-wider mt-4" onClick={() => setSubmitted(false)}>Make Another Booking</Button>
-                    </motion.div>
-                  ) : (
+
+                      <div className="space-y-8 mt-12">
+                        <div className="flex gap-4">
+                          <div className="h-12 w-12 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
+                            <Calendar className="h-6 w-6" />
+                          </div>
+                          <div>
+                            <div className="font-bold text-sm text-blue-200 uppercase tracking-widest">Available Days</div>
+                            <div className="text-lg font-bold">Mon - Sun, 24/7</div>
+                          </div>
+                        </div>
+                        <div className="flex gap-4">
+                          <div className="h-12 w-12 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
+                            <Clock className="h-6 w-6" />
+                          </div>
+                          <div>
+                            <div className="font-bold text-sm text-blue-200 uppercase tracking-widest">Response Time</div>
+                            <div className="text-lg font-bold">Within 2 Hours</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pt-12 border-t border-white/10 mt-12">
+                      <p className="text-sm font-bold text-blue-200/50 uppercase tracking-[0.2em]">Contact Support</p>
+                      <p className="text-lg font-bold mt-2">+234 811 111 1111</p>
+                    </div>
+                  </div>
+
+                  {/* Right Form Panel */}
+                  <div className="lg:col-span-3 p-6 md:p-12 bg-white">
                     <form onSubmit={handleSubmit} className="space-y-8">
                       <div className="space-y-6">
                         <div className="grid md:grid-cols-2 gap-6">
@@ -183,13 +233,13 @@ export default function Booking() {
                       </div>
 
                       <Button type="submit" className="w-full rounded-full h-16 text-lg font-black uppercase tracking-widest bg-blue-600 hover:bg-blue-700 shadow-2xl shadow-blue-600/20" disabled={loading}>
-                        {loading ? <Loader2 className="h-6 w-6 animate-spin" /> : "Confirm Request"}
+                        {loading ? <Loader2 className="h-6 w-6 animate-spin mx-auto" /> : "Confirm Request"}
                       </Button>
                     </form>
-                  )}
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </section>

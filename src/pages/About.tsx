@@ -66,9 +66,10 @@ export default function About() {
             <div className="flex-1 relative">
                <div className="rounded-none lg:rounded-[4rem] overflow-hidden shadow-none lg:shadow-[0_50px_100px_-20px_rgba(0,0,0,0.2)] relative z-10">
                  <img 
-                   src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&q=80&w=1400" 
+                   src="https://www.image2url.com/r2/default/images/1779305514894-9ec3c575-2b7a-4efc-a99a-cee8ca154dac.png" 
                    alt="Compassionate Medical Care" 
                    className="w-full h-[600px] object-cover"
+                   referrerPolicy="no-referrer"
                  />
                  <div className="absolute inset-0 bg-blue-600/5 mix-blend-multiply" />
                </div>
