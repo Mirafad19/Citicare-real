@@ -1,13 +1,11 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Calendar, Clock, CheckCircle, Loader2, User, Phone, Mail } from 'lucide-react';
+import { Calendar, Clock, CheckCircle, Loader2 } from 'lucide-react';
 import { db } from '@/lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { handleFirestoreError, OperationType } from '@/lib/firestore-utils';
 
 export default function Booking() {
   const [loading, setLoading] = React.useState(false);
@@ -16,12 +14,12 @@ export default function Booking() {
 
   React.useEffect(() => {
     if (!submitted) return;
-    setCountdown(5); // reset countdown
+    setCountdown(5);
     const interval = setInterval(() => {
       setCountdown((prev) => {
         if (prev <= 1) {
           clearInterval(interval);
-          window.location.href = '/'; // hard-refresh and redirect to Home
+          window.location.href = '/';
           return 0;
         }
         return prev - 1;
@@ -47,7 +45,6 @@ export default function Booking() {
       type: 'booking',
     };
 
-    // 1. Submit to Formspree if configured (non-blocking so the spinner doesn't hang)
     const formspreeId = (import.meta as any).env.VITE_FORMSPREE_BOOKING_ID || "mkoeobyy";
     if (formspreeId) {
       fetch(`https://formspree.io/f/${formspreeId}`, {
@@ -65,7 +62,6 @@ export default function Booking() {
       });
     }
 
-    // 2. Submit to Firestore database backup (non-blocking so off-line or pending sync does not hang the UI)
     const path = 'appointments';
     addDoc(collection(db, path), {
       ...data,
@@ -79,48 +75,46 @@ export default function Booking() {
   };
 
   return (
-    <div className="flex flex-col bg-[#F8FAFC] min-h-screen">
-      <section className="py-24 container mx-auto px-6 lg:px-12">
-        <div className="max-w-4xl mx-auto space-y-12">
-          <div className="text-center space-y-6">
-            <span className="text-[#005FA3] font-black uppercase tracking-[0.4em] text-xs block">Appointment Booking</span>
-            <h1 className="text-5xl md:text-7xl font-black text-[#1e3a8a] leading-tight tracking-tighter">
-              Schedule Your <br/><span className="text-blue-600">Health Visit.</span>
+    <div className="flex flex-col bg-slate-50 min-h-screen">
+      <section className="py-16 lg:py-24">
+        <div className="max-w-4xl mx-auto px-5 sm:px-6 space-y-10">
+          <div className="text-center space-y-4">
+            <span className="text-blue-600 font-semibold uppercase tracking-wider text-xs">Appointment Booking</span>
+            <h1 className="text-4xl sm:text-5xl font-bold text-[#1e3a8a] leading-tight">
+              Schedule Your <span className="text-blue-600">Health Visit</span>
             </h1>
-            <p className="text-xl text-[#334155] leading-relaxed font-medium max-w-2xl mx-auto">
+            <p className="text-base lg:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
               Select your preferred time and service. Our team will verify the availability and send you a confirmation.
             </p>
           </div>
 
-          <div className="rounded-none lg:rounded-[4rem] border border-slate-100 shadow-2xl overflow-hidden bg-white min-h-[550px] flex items-center justify-center p-6 md:p-12">
+          <div className="bg-white rounded-2xl lg:rounded-3xl shadow-xl overflow-hidden">
             {submitted ? (
               <motion.div 
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="w-full max-w-2xl mx-auto text-center space-y-8 py-12"
+                className="p-8 lg:p-12 text-center space-y-6"
               >
-                <div className="relative mx-auto h-32 w-32 flex items-center justify-center bg-emerald-50 rounded-full border-4 border-emerald-500/10">
-                  <div className="h-24 w-24 bg-emerald-500 text-white rounded-full flex items-center justify-center shadow-lg shadow-emerald-500/20">
-                    <CheckCircle className="h-12 w-12 stroke-[3]" />
-                  </div>
+                <div className="mx-auto h-20 w-20 bg-emerald-100 rounded-full flex items-center justify-center">
+                  <CheckCircle className="h-10 w-10 text-emerald-600" />
                 </div>
-                <div className="space-y-4">
-                  <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tight text-[#1e3a8a]">
-                    Booking Sent <span className="text-emerald-600">Successfully!</span>
+                <div className="space-y-3">
+                  <h3 className="text-2xl lg:text-3xl font-bold text-[#1e3a8a]">
+                    Booking Sent Successfully!
                   </h3>
-                  <p className="text-[#334155] font-semibold text-base md:text-lg leading-relaxed max-w-xl mx-auto">
-                    We have received your requested consultation details. A professional Citicare representative will call or email you shortly to confirm details and dates.
+                  <p className="text-slate-600 text-sm lg:text-base leading-relaxed max-w-md mx-auto">
+                    We have received your requested consultation details. A Citicare representative will contact you shortly to confirm.
                   </p>
                 </div>
 
-                <div className="bg-slate-50 border border-slate-100 rounded-3xl p-6 max-w-md mx-auto space-y-4 shadow-sm">
-                  <div className="flex items-center justify-center gap-3 text-slate-600 font-bold text-sm">
-                    <Loader2 className="h-5 w-5 animate-spin text-emerald-500" />
-                    <span>Redirecting in <strong className="text-emerald-600 text-lg font-black">{countdown}s</strong>...</span>
+                <div className="bg-slate-50 rounded-xl p-4 max-w-sm mx-auto space-y-3">
+                  <div className="flex items-center justify-center gap-2 text-slate-600 text-sm">
+                    <Loader2 className="h-4 w-4 animate-spin text-emerald-600" />
+                    <span>Redirecting in <strong className="text-emerald-600">{countdown}s</strong></span>
                   </div>
-                  <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                  <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
                     <motion.div 
-                      key={submitted ? "active-bar" : "idle-bar"}
+                      key={submitted ? "active" : "idle"}
                       initial={{ width: "100%" }}
                       animate={{ width: "0%" }}
                       transition={{ duration: 5, ease: "linear" }}
@@ -129,114 +123,152 @@ export default function Booking() {
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-4 items-center justify-center pt-2">
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <Button 
                     variant="outline" 
-                    className="rounded-full h-12 px-8 border-slate-200 text-slate-700 hover:bg-slate-50 font-bold uppercase tracking-wider text-xs cursor-pointer" 
-                    onClick={() => {
-                      window.location.href = '/';
-                    }}
+                    className="rounded-xl h-11 px-6 text-sm font-semibold" 
+                    onClick={() => window.location.href = '/'}
                   >
-                    Go Back Now
+                    Go Home Now
                   </Button>
                   <Button 
                     variant="ghost" 
-                    className="rounded-full h-12 px-6 text-slate-400 hover:text-slate-600 font-bold uppercase tracking-wider text-xs cursor-pointer" 
+                    className="rounded-xl h-11 px-6 text-sm text-slate-500" 
                     onClick={() => setSubmitted(false)}
                   >
-                    Book Another Appointment
+                    Book Another
                   </Button>
                 </div>
               </motion.div>
             ) : (
-              <div className="p-0 h-full w-full">
-                <div className="grid lg:grid-cols-5 h-full overflow-hidden">
-                  {/* Left Info Panel */}
-                  <div className="lg:col-span-2 bg-[#1e3a8a] p-6 md:p-12 text-white space-y-12 flex flex-col justify-between rounded-none lg:rounded-[3rem]">
-                    <div>
-                      <div className="space-y-4">
-                        <h3 className="text-3xl font-black uppercase tracking-tight">Booking Info</h3>
-                        <p className="text-blue-100/60 font-medium leading-relaxed">
-                          Please provide accurate details so we can match you with the right specialist.
-                        </p>
-                      </div>
+              <div className="grid lg:grid-cols-5">
+                {/* Left Info Panel */}
+                <div className="lg:col-span-2 bg-[#1e3a8a] p-8 lg:p-10 text-white space-y-8">
+                  <div>
+                    <h3 className="text-2xl font-bold mb-2">Booking Info</h3>
+                    <p className="text-white/60 text-sm leading-relaxed">
+                      Provide accurate details so we can match you with the right specialist.
+                    </p>
+                  </div>
 
-                      <div className="space-y-8 mt-12">
-                        <div className="flex gap-4">
-                          <div className="h-12 w-12 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
-                            <Calendar className="h-6 w-6" />
-                          </div>
-                          <div>
-                            <div className="font-bold text-sm text-blue-200 uppercase tracking-widest">Available Days</div>
-                            <div className="text-lg font-bold">Mon - Sun, 24/7</div>
-                          </div>
-                        </div>
-                        <div className="flex gap-4">
-                          <div className="h-12 w-12 rounded-2xl bg-white/10 flex items-center justify-center shrink-0">
-                            <Clock className="h-6 w-6" />
-                          </div>
-                          <div>
-                            <div className="font-bold text-sm text-blue-200 uppercase tracking-widest">Response Time</div>
-                            <div className="text-lg font-bold">Within 2 Hours</div>
-                          </div>
-                        </div>
+                  <div className="space-y-6">
+                    <div className="flex gap-4">
+                      <div className="h-11 w-11 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+                        <Calendar className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-1">Available Days</div>
+                        <div className="font-semibold">Mon - Sun, 24/7</div>
                       </div>
                     </div>
-
-                    <div className="pt-12 border-t border-white/10 mt-12">
-                      <p className="text-sm font-bold text-blue-200/50 uppercase tracking-[0.2em]">Contact Support</p>
-                      <p className="text-lg font-bold mt-2">+234 811 111 1111</p>
+                    <div className="flex gap-4">
+                      <div className="h-11 w-11 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+                        <Clock className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-1">Response Time</div>
+                        <div className="font-semibold">Within 2 Hours</div>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Right Form Panel */}
-                  <div className="lg:col-span-3 p-6 md:p-12 bg-white">
-                    <form onSubmit={handleSubmit} className="space-y-8">
-                      <div className="space-y-6">
-                        <div className="grid md:grid-cols-2 gap-6">
-                          <div className="space-y-2">
-                            <Label htmlFor="name" className="text-[10px] font-black uppercase tracking-widest text-[#1e3a8a]">Full Name</Label>
-                            <Input name="name" id="name" placeholder="Enter your full name" className="rounded-2xl h-14 bg-slate-50 border-slate-200 px-6 font-medium" required disabled={loading} />
-                          </div>
-                          <div className="space-y-2">
-                            <Label htmlFor="phone" className="text-[10px] font-black uppercase tracking-widest text-[#1e3a8a]">Phone Number</Label>
-                            <Input name="phone" id="phone" placeholder="+234..." className="rounded-2xl h-14 bg-slate-50 border-slate-200 px-6 font-medium" required disabled={loading} />
-                          </div>
-                        </div>
-
-                        <div className="space-y-2">
-                          <Label htmlFor="email" className="text-[10px] font-black uppercase tracking-widest text-[#1e3a8a]">Email Address</Label>
-                          <Input name="email" id="email" type="email" placeholder="email@example.com" className="rounded-2xl h-14 bg-slate-50 border-slate-200 px-6 font-medium" required disabled={loading} />
-                        </div>
-
-                        <div className="grid md:grid-cols-2 gap-6">
-                          <div className="space-y-2">
-                            <Label htmlFor="service" className="text-[10px] font-black uppercase tracking-widest text-[#1e3a8a]">Select Service</Label>
-                            <select name="service" id="service" className="w-full rounded-2xl h-14 bg-slate-50 border border-slate-200 px-6 font-medium text-sm focus:ring-2 focus:ring-blue-600 outline-none" required disabled={loading}>
-                              <option value="Online Consultation">Online Consultation</option>
-                              <option value="Home Visit">Home Visit</option>
-                              <option value="Specialist Consultation">Specialist Consultation</option>
-                              <option value="Elderly Care">Elderly Care</option>
-                              <option value="Nursing Care">Nursing Care</option>
-                            </select>
-                          </div>
-                          <div className="space-y-2">
-                            <Label htmlFor="date" className="text-[10px] font-black uppercase tracking-widest text-[#1e3a8a]">Preferred Date</Label>
-                            <Input name="date" id="date" type="date" className="rounded-2xl h-14 bg-slate-50 border-slate-200 px-6 font-medium" required disabled={loading} />
-                          </div>
-                        </div>
-
-                        <div className="space-y-2">
-                          <Label htmlFor="notes" className="text-[10px] font-black uppercase tracking-widest text-[#1e3a8a]">Additional Notes</Label>
-                          <textarea name="notes" id="notes" rows={4} className="w-full rounded-2xl p-6 bg-slate-50 border border-slate-200 font-medium text-sm focus:ring-2 focus:ring-blue-600 outline-none resize-none" placeholder="Any specific symptoms or requests?" disabled={loading}></textarea>
-                        </div>
-                      </div>
-
-                      <Button type="submit" className="w-full rounded-full h-16 text-lg font-black uppercase tracking-widest bg-blue-600 hover:bg-blue-700 shadow-2xl shadow-blue-600/20" disabled={loading}>
-                        {loading ? <Loader2 className="h-6 w-6 animate-spin mx-auto" /> : "Confirm Request"}
-                      </Button>
-                    </form>
+                  <div className="pt-6 border-t border-white/10">
+                    <p className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">Contact Support</p>
+                    <p className="font-semibold">+234 811 111 1111</p>
                   </div>
+                </div>
+
+                {/* Right Form Panel */}
+                <div className="lg:col-span-3 p-8 lg:p-10">
+                  <form onSubmit={handleSubmit} className="space-y-5">
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="name" className="text-xs font-semibold text-slate-600 uppercase tracking-wider">Full Name</Label>
+                        <Input 
+                          name="name" 
+                          id="name" 
+                          placeholder="Enter your full name" 
+                          className="rounded-xl h-12 bg-slate-50 border-slate-200 px-4"
+                          required 
+                          disabled={loading} 
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="phone" className="text-xs font-semibold text-slate-600 uppercase tracking-wider">Phone Number</Label>
+                        <Input 
+                          name="phone" 
+                          id="phone" 
+                          placeholder="+234..." 
+                          className="rounded-xl h-12 bg-slate-50 border-slate-200 px-4"
+                          required 
+                          disabled={loading} 
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="email" className="text-xs font-semibold text-slate-600 uppercase tracking-wider">Email Address</Label>
+                      <Input 
+                        name="email" 
+                        id="email" 
+                        type="email" 
+                        placeholder="email@example.com" 
+                        className="rounded-xl h-12 bg-slate-50 border-slate-200 px-4"
+                        required 
+                        disabled={loading} 
+                      />
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="service" className="text-xs font-semibold text-slate-600 uppercase tracking-wider">Select Service</Label>
+                        <select 
+                          name="service" 
+                          id="service" 
+                          className="w-full rounded-xl h-12 bg-slate-50 border border-slate-200 px-4 text-sm focus:ring-2 focus:ring-blue-600 outline-none"
+                          required 
+                          disabled={loading}
+                        >
+                          <option value="Online Consultation">Online Consultation</option>
+                          <option value="Home Visit">Home Visit</option>
+                          <option value="Specialist Consultation">Specialist Consultation</option>
+                          <option value="Elderly Care">Elderly Care</option>
+                          <option value="Nursing Care">Nursing Care</option>
+                        </select>
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="date" className="text-xs font-semibold text-slate-600 uppercase tracking-wider">Preferred Date</Label>
+                        <Input 
+                          name="date" 
+                          id="date" 
+                          type="date" 
+                          className="rounded-xl h-12 bg-slate-50 border-slate-200 px-4"
+                          required 
+                          disabled={loading} 
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="notes" className="text-xs font-semibold text-slate-600 uppercase tracking-wider">Additional Notes</Label>
+                      <textarea 
+                        name="notes" 
+                        id="notes" 
+                        rows={3} 
+                        className="w-full rounded-xl p-4 bg-slate-50 border border-slate-200 text-sm focus:ring-2 focus:ring-blue-600 outline-none resize-none"
+                        placeholder="Any specific symptoms or requests?"
+                        disabled={loading}
+                      />
+                    </div>
+
+                    <Button 
+                      type="submit" 
+                      className="w-full rounded-xl h-12 font-semibold bg-[#1e3a8a] hover:bg-[#1e3a8a]/90 shadow-lg"
+                      disabled={loading}
+                    >
+                      {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : "Confirm Request"}
+                    </Button>
+                  </form>
                 </div>
               </div>
             )}

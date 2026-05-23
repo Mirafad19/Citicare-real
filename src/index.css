@@ -6,7 +6,7 @@
   --font-display: "Outfit", sans-serif;
   --font-serif: "Playfair Display", serif;
   
-  --color-primary: #3B82F6;
+  --color-primary: #2563EB;
   --color-primary-foreground: #FFFFFF;
   
   --color-secondary: #059669;
@@ -25,6 +25,12 @@
   --radius-2xl: 1.5rem;
   --radius-3xl: 2rem;
   --radius-4xl: 2.5rem;
+  
+  /* Consistent spacing scale */
+  --section-padding-y: 6rem;
+  --section-padding-y-lg: 7rem;
+  --container-padding-x: 1.5rem;
+  --container-padding-x-lg: 6rem;
 }
 
 @layer base {
@@ -33,11 +39,25 @@
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif tracking-tight text-[#1A1A1A];
+    @apply font-sans tracking-tight text-[#1e3a8a];
   }
 
   .font-ui {
     @apply font-sans;
+  }
+  
+  /* Consistent section spacing utility */
+  .section-padding {
+    @apply py-20 lg:py-24;
+  }
+  
+  .section-padding-lg {
+    @apply py-24 lg:py-32;
+  }
+  
+  /* Consistent container utility */
+  .container-padding {
+    @apply px-5 sm:px-6 lg:px-20;
   }
 }
 
