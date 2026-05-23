@@ -69,7 +69,7 @@ export default function FAQ() {
             <div className="flex flex-col sm:flex-row justify-center gap-4 text-sm">
               <div className="flex items-center justify-center gap-2">
                 <Mail className="h-4 w-4 text-blue-300" />
-                <span>enquiries@citicarehealthltd.com</span>
+                <span>enquiries@citicarehealth.com</span>
               </div>
               <div className="flex items-center justify-center gap-2">
                 <Phone className="h-4 w-4 text-blue-300" />

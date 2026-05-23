@@ -155,8 +155,8 @@ export default function SpecialistCare() {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 {[
-                  { value: "50+", label: "Specialists" },
-                  { value: "15", label: "Departments" },
+                  { value: "25+", label: "Specialists" },
+                  { value: "10", label: "Departments" },
                   { value: "99%", label: "Success Rate" },
                   { value: "24/7", label: "Support" }
                 ].map((stat, i) => (

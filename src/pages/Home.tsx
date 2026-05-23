@@ -508,7 +508,7 @@ export default function Home() {
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                   <div className="text-center sm:text-left">
                     <div className="font-bold text-[#1e3a8a] text-lg">General Inquiries</div>
-                    <div className="text-blue-600 text-sm">enquiries@citicarehealthltd.com</div>
+                    <div className="text-blue-600 text-sm">enquiries@citicarehealth.com</div>
                   </div>
                   <div className="h-12 w-12 bg-[#1e3a8a] rounded-xl flex items-center justify-center text-white">
                     <Phone className="h-5 w-5" />

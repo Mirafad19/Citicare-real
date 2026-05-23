@@ -100,11 +100,11 @@ export default function HomeHealthcare() {
             </div>
 
             <div className="relative">
-              <div className="bg-white p-3 rounded-2xl lg:rounded-3xl shadow-xl">
+              <div className="rounded-2xl lg:rounded-3xl overflow-hidden shadow-xl">
                 <img 
                   src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&q=80&w=1000" 
                   alt="Quality care" 
-                  className="rounded-xl lg:rounded-2xl w-full object-cover h-[300px] lg:h-[500px]"
+                  className="w-full object-cover h-[300px] lg:h-[500px]"
                 />
               </div>
               

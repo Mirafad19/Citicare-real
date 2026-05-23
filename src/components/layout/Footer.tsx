@@ -113,7 +113,7 @@ export function Footer() {
               </div>
               <div className="flex gap-3 items-start">
                 <Mail className="h-5 w-5 text-emerald-400 shrink-0 mt-0.5" />
-                <p className="text-white/80 text-sm break-all">enquiries@citicarehealthltd.com</p>
+                <p className="text-white/80 text-sm break-all">enquiries@citicarehealth.com</p>
               </div>
             </div>
             

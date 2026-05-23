@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Mail, Phone, MapPin, Send, Instagram, Navigation2, Loader2, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Instagram, Twitter, Facebook, Linkedin, Loader2, CheckCircle } from 'lucide-react';
 import { db } from '@/lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
@@ -92,7 +92,7 @@ export default function Contact() {
                 {[
                   { icon: MapPin, label: "Main Office", value: "Lagos, Nigeria" },
                   { icon: Phone, label: "General Enquiries", value: "+234 XXX XXX XXXX" },
-                  { icon: Mail, label: "Email Support", value: "enquiries@citicarehealthltd.com" }
+                  { icon: Mail, label: "Email Support", value: "enquiries@citicarehealth.com" }
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-4 group">
                     <div className="h-12 w-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 group-hover:bg-[#1e3a8a] group-hover:text-white transition-colors shrink-0">
@@ -109,7 +109,7 @@ export default function Contact() {
               <div className="pt-6 border-t border-slate-200 space-y-4">
                 <h4 className="text-xs font-semibold text-blue-600 uppercase tracking-wider">Follow Us</h4>
                 <div className="flex gap-3">
-                  {[Instagram, Navigation2].map((Icon, i) => (
+                  {[Instagram, Twitter, Facebook, Linkedin].map((Icon, i) => (
                     <a 
                       key={i} 
                       href="#"
