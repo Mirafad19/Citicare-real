@@ -4,8 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-const SQRT_5000 = Math.sqrt(5000);
-
 const testimonials = [
   {
     tempId: 0,
@@ -54,60 +52,72 @@ interface TestimonialCardProps {
   testimonial: typeof testimonials[0];
   handleMove: (steps: number) => void;
   cardSize: number;
+  isMobile: boolean;
 }
 
 const TestimonialCard: React.FC<TestimonialCardProps> = ({ 
   position, 
   testimonial, 
   handleMove, 
-  cardSize 
+  cardSize,
+  isMobile
 }) => {
   const isCenter = position === 0;
+
+  // On mobile, only show center card and immediate neighbors
+  if (isMobile && Math.abs(position) > 1) {
+    return null;
+  }
 
   return (
     <div
       onClick={() => handleMove(position)}
       className={cn(
-        "absolute left-1/2 top-1/2 cursor-pointer p-8 transition-all duration-500 ease-in-out rounded-[2.5rem]",
+        "absolute left-1/2 top-1/2 cursor-pointer p-6 lg:p-8 transition-all duration-500 ease-out rounded-2xl lg:rounded-3xl",
         isCenter 
-          ? "z-10 bg-blue-600 text-white shadow-2xl" 
-          : "z-0 bg-white text-[#1e3a8a] shadow-lg opacity-40 hover:opacity-100"
+          ? "z-10 bg-[#1e3a8a] text-white shadow-2xl shadow-blue-900/30" 
+          : "z-0 bg-white text-slate-800 shadow-lg opacity-50 hover:opacity-80"
       )}
       style={{
         width: cardSize,
-        height: cardSize,
+        minHeight: isMobile ? cardSize * 0.9 : cardSize,
         transform: `
           translate(-50%, -50%) 
-          translateX(${(cardSize / 1.5) * position}px)
-          translateY(${isCenter ? -65 : position % 2 ? 15 : -15}px)
-          rotate(${isCenter ? 0 : position % 2 ? 2.5 : -2.5}deg)
+          translateX(${(cardSize / (isMobile ? 2.5 : 1.5)) * position}px)
+          translateY(${isCenter ? -40 : position % 2 ? 10 : -10}px)
+          rotate(${isCenter ? 0 : position % 2 ? 2 : -2}deg)
+          scale(${isCenter ? 1 : 0.9})
         `,
       }}
     >
       <div className={cn(
-        "mb-6 h-14 w-14 rounded-full flex items-center justify-center font-black text-2xl",
-        isCenter ? "bg-white/20 text-white" : "bg-blue-100 text-blue-600"
+        "mb-4 lg:mb-6 h-12 w-12 lg:h-14 lg:w-14 rounded-full flex items-center justify-center",
+        isCenter ? "bg-white/15" : "bg-slate-100"
       )}>
-        <User className="h-8 w-8" />
+        <User className={cn(
+          "h-6 w-6 lg:h-7 lg:w-7",
+          isCenter ? "text-white" : "text-slate-500"
+        )} />
       </div>
-      <h3 className={cn(
-        "text-lg sm:text-2xl font-bold leading-tight",
-        isCenter ? "text-white" : "text-[#1e3a8a]"
+      <blockquote className={cn(
+        "text-base lg:text-lg font-medium leading-relaxed mb-6",
+        isCenter ? "text-white" : "text-slate-700"
       )}>
         "{testimonial.testimonial}"
-      </h3>
-      <p className={cn(
-        "absolute bottom-10 left-10 right-10 mt-2 text-sm font-black uppercase tracking-widest",
-        isCenter ? "text-white/80" : "text-blue-500"
+      </blockquote>
+      <cite className={cn(
+        "not-italic text-sm font-semibold",
+        isCenter ? "text-white/70" : "text-slate-500"
       )}>
-        — {testimonial.by}
-      </p>
+        {testimonial.by}
+      </cite>
     </div>
   );
 };
 
 export const StaggerTestimonials: React.FC = () => {
-  const [cardSize, setCardSize] = useState(365);
+  const [cardSize, setCardSize] = useState(340);
+  const [isMobile, setIsMobile] = useState(false);
   const [testimonialsList, setTestimonialsList] = useState(testimonials);
 
   const handleMove = (steps: number) => {
@@ -130,8 +140,17 @@ export const StaggerTestimonials: React.FC = () => {
 
   useEffect(() => {
     const updateSize = () => {
-      const { matches } = window.matchMedia("(min-width: 640px)");
-      setCardSize(matches ? 400 : 300);
+      const width = window.innerWidth;
+      setIsMobile(width < 640);
+      if (width < 480) {
+        setCardSize(280);
+      } else if (width < 640) {
+        setCardSize(300);
+      } else if (width < 1024) {
+        setCardSize(340);
+      } else {
+        setCardSize(380);
+      }
     };
 
     updateSize();
@@ -141,8 +160,8 @@ export const StaggerTestimonials: React.FC = () => {
 
   return (
     <div
-      className="relative w-full overflow-hidden bg-slate-50/50"
-      style={{ height: 650 }}
+      className="relative w-full overflow-hidden"
+      style={{ height: isMobile ? 480 : 560 }}
     >
       {testimonialsList.map((testimonial, index) => {
         const position = testimonialsList.length % 2
@@ -155,29 +174,24 @@ export const StaggerTestimonials: React.FC = () => {
             handleMove={handleMove}
             position={position}
             cardSize={cardSize}
+            isMobile={isMobile}
           />
         );
       })}
-      <div className="absolute bottom-12 left-1/2 flex -translate-x-1/2 gap-4 z-30">
+      <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 gap-3 z-30">
         <button
           onClick={() => handleMove(-1)}
-          className={cn(
-            "flex h-16 w-16 items-center justify-center rounded-3xl transition-all shadow-xl",
-            "bg-white text-blue-600 hover:bg-blue-600 hover:text-white border border-slate-100",
-          )}
+          className="flex h-12 w-12 lg:h-14 lg:w-14 items-center justify-center rounded-xl transition-all shadow-lg bg-white text-[#1e3a8a] hover:bg-[#1e3a8a] hover:text-white border border-slate-200"
           aria-label="Previous testimonial"
         >
-          <ChevronLeft className="h-8 w-8" />
+          <ChevronLeft className="h-6 w-6" />
         </button>
         <button
           onClick={() => handleMove(1)}
-          className={cn(
-            "flex h-16 w-16 items-center justify-center rounded-3xl transition-all shadow-xl",
-            "bg-white text-blue-600 hover:bg-blue-600 hover:text-white border border-slate-100",
-          )}
+          className="flex h-12 w-12 lg:h-14 lg:w-14 items-center justify-center rounded-xl transition-all shadow-lg bg-white text-[#1e3a8a] hover:bg-[#1e3a8a] hover:text-white border border-slate-200"
           aria-label="Next testimonial"
         >
-          <ChevronRight className="h-8 w-8" />
+          <ChevronRight className="h-6 w-6" />
         </button>
       </div>
     </div>

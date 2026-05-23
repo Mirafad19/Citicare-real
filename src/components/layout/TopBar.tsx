@@ -14,47 +14,53 @@ export function TopBar() {
   };
 
   return (
-    <div className="w-full bg-[#005FA3] text-white">
-      <div className="max-w-[1440px] mx-auto flex h-14 items-center justify-between px-6 lg:px-24 text-[13px] font-bold tracking-wider">
+    <div className="w-full bg-[#1e3a8a] text-white">
+      <div className="max-w-[1440px] mx-auto flex h-12 items-center justify-between px-5 sm:px-6 lg:px-20 text-xs font-semibold tracking-wide">
         {/* Left Side */}
-        <div className="flex items-center gap-6">
-          <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <Home className="h-5 w-5 fill-white" />
-            <span className="uppercase">Citicare Integrated Health</span>
+        <div className="flex items-center gap-4 lg:gap-6">
+          <Link to="/" className="flex items-center gap-2 hover:text-blue-200 transition-colors">
+            <Home className="h-4 w-4" />
+            <span className="hidden sm:inline uppercase text-[11px] tracking-wider">Citicare Health</span>
           </Link>
           
-          <form onSubmit={handleSearch} className="hidden md:flex items-center bg-[#004d80] rounded-full px-4 py-1.5 gap-2 border border-white/20 transition-all focus-within:border-white/50 focus-within:bg-[#003d66]">
+          <form onSubmit={handleSearch} className="hidden md:flex items-center bg-white/10 rounded-full px-3 py-1.5 gap-2 border border-white/10 transition-all focus-within:border-white/30 focus-within:bg-white/15">
             <input 
               type="text" 
-              placeholder="SEARCH SITE..." 
+              placeholder="Search..." 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="bg-transparent border-none focus:outline-none placeholder:text-white/60 text-white w-40"
+              className="bg-transparent border-none focus:outline-none placeholder:text-white/50 text-white text-xs w-28 lg:w-36"
             />
-            <button type="submit">
-              <Search className="h-4 w-4 text-white/80 hover:text-white transition-colors" />
+            <button type="submit" className="hover:text-blue-200 transition-colors">
+              <Search className="h-3.5 w-3.5 text-white/70" />
             </button>
           </form>
         </div>
 
         {/* Right Side */}
-        <div className="hidden md:flex items-center gap-1">
-          <div className="flex items-center gap-4 mr-6 border-r border-white/20 pr-6 py-1">
-            <a href="#" className="hover:text-blue-200 transition-colors"><Facebook className="h-5 w-5" /></a>
-            <a href="#" className="hover:text-pink-200 transition-colors"><Instagram className="h-5 w-5" /></a>
-            <a href="#" className="hover:text-blue-300 transition-colors"><Linkedin className="h-5 w-5" /></a>
-            <a href="#" className="hover:text-sky-200 transition-colors"><Twitter className="h-5 w-5" /></a>
+        <div className="flex items-center gap-1">
+          <div className="flex items-center gap-3 mr-4 lg:mr-6 border-r border-white/20 pr-4 lg:pr-6">
+            {[
+              { Icon: Facebook, href: "#", hoverColor: "hover:text-blue-300" },
+              { Icon: Instagram, href: "#", hoverColor: "hover:text-pink-300" },
+              { Icon: Linkedin, href: "#", hoverColor: "hover:text-blue-300" },
+              { Icon: Twitter, href: "#", hoverColor: "hover:text-sky-300" }
+            ].map(({ Icon, href, hoverColor }, i) => (
+              <a key={i} href={href} className={`${hoverColor} transition-colors`}>
+                <Icon className="h-4 w-4" />
+              </a>
+            ))}
           </div>
           
-          <div className="hidden lg:flex items-center gap-6">
-            <div className="flex items-center gap-2 bg-white/5 px-4 py-1.5 rounded-full uppercase border border-white/10 select-none">
-              <FileText className="h-4 w-4 text-blue-300" />
-              <span>Company Brochure</span>
+          <div className="hidden lg:flex items-center gap-4">
+            <div className="flex items-center gap-2 text-white/80 text-[11px] uppercase tracking-wider">
+              <FileText className="h-3.5 w-3.5 text-blue-300" />
+              <span>Brochure</span>
             </div>
-            <div className="h-6 w-[1px] bg-white/20"></div>
-            <div className="flex items-center gap-2 bg-white/5 px-4 py-1.5 rounded-full uppercase border border-white/10 select-none">
-              <ShieldCheck className="h-4 w-4 text-emerald-400" />
-              <span>Government License</span>
+            <div className="h-4 w-px bg-white/20" />
+            <div className="flex items-center gap-2 text-white/80 text-[11px] uppercase tracking-wider">
+              <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
+              <span>Licensed</span>
             </div>
           </div>
         </div>

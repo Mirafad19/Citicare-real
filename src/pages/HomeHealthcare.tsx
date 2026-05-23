@@ -8,52 +8,55 @@ export default function HomeHealthcare() {
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Hero Section */}
-      <section className="relative min-h-[500px] md:h-[60vh] flex items-center py-20 md:py-0 overflow-hidden">
+      <section className="relative min-h-[450px] lg:min-h-[500px] flex items-center py-16 lg:py-0 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
             src="https://www.image2url.com/r2/default/images/1778861274282-fc3009b9-31a4-401b-b0a6-38c7a85c2cbb.png" 
             alt="Home Healthcare" 
-            className="w-full h-full object-cover grayscale-[20%]"
+            className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1e3a8a]/90 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1e3a8a]/90 via-[#1e3a8a]/70 to-transparent" />
         </div>
         
-        <div className="container mx-auto px-6 lg:px-24 relative z-10">
+        <div className="max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-20 relative z-10">
           <motion.div 
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            className="max-w-2xl text-white"
+            className="max-w-xl text-white"
           >
-            <div className="inline-flex items-center gap-2 bg-emerald-500/20 backdrop-blur-md px-4 py-2 rounded-full text-emerald-400 font-bold text-sm tracking-widest uppercase mb-6 border border-emerald-500/30">
+            <div className="inline-flex items-center gap-2 bg-emerald-500/20 px-4 py-2 rounded-full text-emerald-400 font-semibold text-xs uppercase tracking-wider mb-4 border border-emerald-500/30">
               <Home className="h-4 w-4" />
               Compassionate Care at Home
             </div>
-            <h1 className="text-5xl lg:text-7xl font-black uppercase tracking-tight mb-6 leading-[0.9]">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 leading-tight text-white">
               Home <span className="text-emerald-400">Healthcare</span> Services
             </h1>
-            <p className="text-xl text-blue-100/80 font-medium leading-relaxed mb-8">
-              Professional medical care delivered in the comfort and safety of your own home. Our dedicated team of nurses and specialists ensure you receive the highest quality treatment without leaving your doorstep.
+            <p className="text-base lg:text-lg text-white/80 leading-relaxed mb-6">
+              Professional medical care delivered in the comfort and safety of your own home. Our dedicated team ensures you receive the highest quality treatment without leaving your doorstep.
             </p>
-            <div className="flex flex-wrap gap-4">
-              <Button nativeButton={false} render={<Link to="/book" />} size="lg" className="bg-white text-[#1e3a8a] hover:bg-emerald-50 rounded-full px-12 h-16 text-lg font-black uppercase tracking-widest transition-colors duration-200">
-                Request Home Care
-              </Button>
-            </div>
+            <Button 
+              nativeButton={false} 
+              render={<Link to="/book" />} 
+              size="lg" 
+              className="bg-white text-[#1e3a8a] hover:bg-white/90 rounded-xl px-8 h-14 font-semibold"
+            >
+              Request Home Care
+            </Button>
           </motion.div>
         </div>
       </section>
 
       {/* Services Breakdown */}
-      <section className="py-24">
-        <div className="container mx-auto px-6 lg:px-24">
-          <div className="grid lg:grid-cols-2 gap-24 items-center">
-            <div className="space-y-8">
+      <section className="py-16 lg:py-24">
+        <div className="max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-20">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div className="space-y-6 lg:space-y-8">
               <div className="space-y-4">
-                <h2 className="text-4xl font-black uppercase text-[#1e3a8a]">Why Choose Home Care?</h2>
-                <div className="h-2 w-24 bg-emerald-500 rounded-full" />
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1e3a8a]">Why Choose Home Care?</h2>
+                <div className="h-1 w-16 bg-emerald-500 rounded-full" />
               </div>
               
-              <div className="grid gap-6">
+              <div className="space-y-4">
                 {[
                   {
                     icon: Heart,
@@ -82,14 +85,14 @@ export default function HomeHealthcare() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
-                    className="flex gap-6 p-6 rounded-3xl bg-white shadow-xl shadow-slate-200/50 border border-slate-100 group hover:border-emerald-200 transition-colors"
+                    className="flex gap-4 p-5 rounded-2xl bg-white shadow-sm border border-slate-100 group hover:border-emerald-200 transition-colors"
                   >
-                    <div className="h-14 w-14 rounded-2xl bg-emerald-50 flex items-center justify-center shrink-0 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
-                      <item.icon className="h-7 w-7 text-emerald-600 group-hover:text-white" />
+                    <div className="h-12 w-12 rounded-xl bg-emerald-50 flex items-center justify-center shrink-0 group-hover:bg-emerald-500 transition-colors">
+                      <item.icon className="h-6 w-6 text-emerald-600 group-hover:text-white" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-black text-[#1e3a8a] mb-2">{item.title}</h3>
-                      <p className="text-slate-500 font-medium leading-relaxed">{item.desc}</p>
+                      <h3 className="text-lg font-bold text-[#1e3a8a] mb-1">{item.title}</h3>
+                      <p className="text-slate-600 text-sm leading-relaxed">{item.desc}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -97,19 +100,18 @@ export default function HomeHealthcare() {
             </div>
 
             <div className="relative">
-              <div className="absolute -inset-4 bg-emerald-500/10 rounded-[4rem] blur-3xl -z-10" />
-              <div className="bg-white p-0 lg:p-4 rounded-none lg:rounded-[4rem] shadow-none lg:shadow-2xl">
+              <div className="bg-white p-3 rounded-2xl lg:rounded-3xl shadow-xl">
                 <img 
                   src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&q=80&w=1000" 
                   alt="Quality care" 
-                  className="rounded-none lg:rounded-[3rem] w-full object-cover h-[350px] lg:h-[600px]"
+                  className="rounded-xl lg:rounded-2xl w-full object-cover h-[300px] lg:h-[500px]"
                 />
               </div>
               
-              <div className="absolute -bottom-8 -right-8 bg-white p-8 rounded-3xl shadow-2xl border border-emerald-100 max-w-xs transition-transform hover:-translate-y-2">
-                <div className="text-4xl font-black text-emerald-600 mb-2">24/7</div>
-                <div className="text-[#1e3a8a] font-black uppercase tracking-widest text-sm mb-4">Response Guarantee</div>
-                <div className="flex items-center gap-2 text-emerald-600 font-bold">
+              <div className="absolute -bottom-6 -right-4 lg:-right-6 bg-white p-6 rounded-2xl shadow-xl border border-emerald-100 hidden sm:block">
+                <div className="text-3xl font-bold text-emerald-600 mb-1">24/7</div>
+                <div className="text-[#1e3a8a] font-semibold text-xs uppercase tracking-wider mb-3">Response Guarantee</div>
+                <div className="flex items-center gap-2 text-emerald-600 text-sm font-semibold">
                   <Phone className="h-4 w-4" />
                   +234 811 111 1111
                 </div>
@@ -119,16 +121,18 @@ export default function HomeHealthcare() {
         </div>
       </section>
 
-      {/* Services List Overlay */}
-      <section className="py-24 bg-[#1e3a8a] text-white overflow-hidden relative">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[120px] -mr-64 -mt-64" />
-        <div className="container mx-auto px-6 lg:px-24 relative z-10">
-          <div className="text-center mb-16 space-y-4">
-            <h2 className="text-4xl lg:text-5xl font-black uppercase tracking-tight">Our Specialty Home Services</h2>
-            <p className="text-blue-100/60 max-w-2xl mx-auto font-medium">Comprehensive medical solutions ranging from daily nursing to specialized psychiatric support.</p>
+      {/* Services List */}
+      <section className="py-16 lg:py-24 bg-[#1e3a8a] text-white overflow-hidden relative">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px] -mr-48 -mt-48" />
+        <div className="max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-20 relative z-10">
+          <div className="text-center mb-12 space-y-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">Our Specialty Home Services</h2>
+            <p className="text-white/60 max-w-2xl mx-auto text-sm lg:text-base">
+              Comprehensive medical solutions ranging from daily nursing to specialized psychiatric support.
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
               "Skilled Nursing Care",
               "Post-Operative Recovery",
@@ -142,10 +146,10 @@ export default function HomeHealthcare() {
             ].map((service, i) => (
               <motion.div 
                 key={i}
-                whileHover={{ scale: 1.05 }}
-                className="bg-white/5 border border-white/10 p-8 rounded-3xl backdrop-blur-sm flex items-center justify-between"
+                whileHover={{ scale: 1.02 }}
+                className="bg-white/5 border border-white/10 p-5 lg:p-6 rounded-xl flex items-center justify-between"
               >
-                <span className="text-lg font-bold">{service}</span>
+                <span className="font-semibold text-sm lg:text-base">{service}</span>
                 <ChevronRight className="h-5 w-5 text-emerald-400" />
               </motion.div>
             ))}
@@ -154,19 +158,28 @@ export default function HomeHealthcare() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6 lg:px-24">
-          <div className="bg-[#2E5AAB] rounded-none lg:rounded-[4rem] p-6 lg:p-24 text-center text-white relative overflow-hidden">
-            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/hexellence.png')] opacity-10" />
-            <h2 className="text-4xl lg:text-6xl font-black uppercase mb-8 relative z-10">Experience the Citicare Standard</h2>
-            <p className="text-xl text-white/80 max-w-2xl mx-auto mb-12 relative z-10">
-              Ready to bring hospital-quality care to your home? Let's discuss your requirements today.
+      <section className="py-16 lg:py-24 bg-white">
+        <div className="max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-20">
+          <div className="bg-[#1e3a8a] rounded-2xl lg:rounded-3xl p-8 lg:p-16 text-center text-white relative overflow-hidden">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 relative z-10">Experience the Citicare Standard</h2>
+            <p className="text-base lg:text-lg text-white/70 max-w-2xl mx-auto mb-8 relative z-10">
+              Ready to bring hospital-quality care to your home? Let&apos;s discuss your requirements today.
             </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center relative z-10">
-              <Button nativeButton={false} render={<Link to="/book" />} size="lg" className="bg-white text-[#1e3a8a] hover:bg-slate-50 rounded-full px-12 h-20 text-xl font-black uppercase tracking-widest transition-colors duration-200">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
+              <Button 
+                nativeButton={false} 
+                render={<Link to="/book" />} 
+                size="lg" 
+                className="bg-white text-[#1e3a8a] rounded-xl px-8 h-14 font-semibold"
+              >
                 Book Initial Visit
               </Button>
-              <Button nativeButton={false} render={<Link to="/contact" />} size="lg" className="bg-transparent border-2 border-white/40 text-white rounded-full px-12 h-20 text-xl font-black uppercase tracking-widest hover:bg-white transition-colors hover:text-[#1e3a8a]">
+              <Button 
+                nativeButton={false} 
+                render={<Link to="/contact" />} 
+                size="lg" 
+                className="bg-transparent border-2 border-white/30 text-white rounded-xl px-8 h-14 font-semibold hover:bg-white/10"
+              >
                 Contact Consultant
               </Button>
             </div>
