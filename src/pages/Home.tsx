@@ -14,7 +14,7 @@ const slides = [
     description: "A trusted digital healthcare platform delivering personalized medical services, expert consultations, and continuous follow up care tailored to meet your needs.",
   },
   {
-    image: "https://www.image2url.com/r2/default/images/1778798331921-6358ebab-1a6e-4082-a655-cf373bfac93a.png",
+    image: "https://www.image2url.com/r2/default/images/1779564983342-5f3d74fa-3758-44a4-af10-62c18c131dcd.png",
     subtitle: "Qualified Professionals",
     title: "Access to world class medical experts",
     description: "We connect you with licensed and verified healthcare professionals who are committed to your total wellbeing and long term health guidance.",
@@ -290,7 +290,7 @@ export default function Home() {
               },
               {
                 title: "Specialist Consultation",
-                image: "https://www.image2url.com/r2/default/images/1778798331921-6358ebab-1a6e-4082-a655-cf373bfac93a.png",
+                image: "https://www.image2url.com/r2/default/images/1779564983342-5f3d74fa-3758-44a4-af10-62c18c131dcd.png",
                 desc: "Direct access to experts in Cardiology, OB/GYN, Surgery, Orthopedics, Mental Health, and more specialty areas.",
                 buttonText: "View Specialties",
                 color: "bg-amber-50 hover:bg-amber-100",
@@ -404,7 +404,7 @@ export default function Home() {
               <div className="relative">
                 <div className="relative z-10 rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl">
                   <img 
-                    src="https://www.image2url.com/r2/default/images/1778798331921-6358ebab-1a6e-4082-a655-cf373bfac93a.png" 
+                    src="https://www.image2url.com/r2/default/images/1779564983342-5f3d74fa-3758-44a4-af10-62c18c131dcd.png" 
                     alt="Digital Healthcare Consultation" 
                     className="w-full h-[300px] lg:h-[450px] object-cover"
                   />
