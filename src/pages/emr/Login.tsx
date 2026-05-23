@@ -71,7 +71,7 @@ export default function EMRLogin() {
             <div className="space-y-6">
               <Button 
                 onClick={handleLogin} 
-                className="w-full h-16 rounded-3xl text-lg font-medium group shadow-2xl shadow-primary/20 gap-4 transition-all hover:scale-[1.02] active:scale-[0.98]" 
+                className="w-full h-16 rounded-3xl text-lg font-medium group shadow-xl gap-4 bg-[#005FA3] text-white hover:bg-[#004d80] transition-colors duration-200" 
                 disabled={loading}
               >
                 {loading ? <Loader2 className="h-6 w-6 animate-spin" /> : (

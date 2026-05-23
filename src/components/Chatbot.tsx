@@ -93,17 +93,13 @@ export function Chatbot() {
 
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="h-16 w-16 bg-[#005FA3] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all group relative border-2 border-white/20"
+        className="h-16 w-16 bg-[#005FA3] hover:bg-[#004d80] text-white rounded-full flex items-center justify-center shadow-2xl transition-all duration-200 group relative border-2 border-white/20"
       >
         <MessageSquare className={`h-7 w-7 transition-all ${isOpen ? 'rotate-90 opacity-0' : 'opacity-100'}`} />
         <X className={`h-7 w-7 absolute transition-all ${isOpen ? 'rotate-0 opacity-100' : '-rotate-90 opacity-0'}`} />
-        <motion.div 
-          animate={{ scale: [1, 1.2, 1] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-          className="absolute -top-1 -right-1 h-5 w-5 bg-red-500 border-2 border-white rounded-full flex items-center justify-center"
-        >
+        <div className="absolute -top-1 -right-1 h-5 w-5 bg-red-500 border-2 border-white rounded-full flex items-center justify-center">
           <span className="text-[8px] font-black">1</span>
-        </motion.div>
+        </div>
       </button>
     </div>
   );
