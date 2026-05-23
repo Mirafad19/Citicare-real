@@ -8,21 +8,21 @@ import { cn } from '@/lib/utils';
 const mainServices = [
   {
     title: "Online Consultations",
-    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=800",
+    image: "https://www.image2url.com/r2/default/images/1778798331921-6358ebab-1a6e-4082-a655-cf373bfac93a.png",
     desc: "Access qualified doctors from the comfort of your home. Get accurate diagnoses, prescriptions, and professional medical advice.",
     features: ["Virtual Diagnosis", "Digital Prescriptions", "Expert Advice", "24/7 Availability"],
     link: "/book"
   },
   {
     title: "Home Healthcare",
-    image: "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&q=80&w=800",
+    image: "https://www.image2url.com/r2/default/images/1778861274282-fc3009b9-31a4-401b-b0a6-38c7a85c2cbb.png",
     desc: "We bring care to your doorstep. Our services include medical consultations, psychiatric services, and specialized nursing care.",
     features: ["Nursing Care", "Psychiatric Support", "In-home Tests", "Vitals Monitoring"],
     link: "/home-healthcare"
   },
   {
     title: "Specialist Care",
-    image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&q=80&w=800",
+    image: "https://www.image2url.com/r2/default/images/1778863421981-11b203cd-3516-4af1-b896-2e0174ce5418.png",
     desc: "Direct access to specialty medical fields including Cardiology, Surgery, OB/GYN, Urology, and Mental Health practitioners.",
     features: ["General Surgery", "Cardiology", "OB/GYN", "Mental Health"],
     link: "/specialist-care"

@@ -128,7 +128,7 @@ export default function Career() {
             transition={{ delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold max-w-3xl mx-auto"
           >
-            A Career with <span className="text-emerald-400">Heart</span> & Purpose
+            A Career with <span className="text-emerald-400">Heart</span> & Excellence
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0 }}

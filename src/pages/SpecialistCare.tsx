@@ -129,7 +129,7 @@ export default function SpecialistCare() {
         <div className="max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-20">
           <div className="bg-[#1e3a8a] rounded-2xl lg:rounded-3xl p-8 lg:p-16 text-white relative overflow-hidden">
             <img 
-              src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=2000" 
+              src="https://www.image2url.com/r2/default/images/1778863421981-11b203cd-3516-4af1-b896-2e0174ce5418.png" 
               alt="Medical facility" 
               className="absolute inset-0 w-full h-full object-cover opacity-10"
             />

@@ -91,7 +91,7 @@ export default function Contact() {
               <div className="space-y-6">
                 {[
                   { icon: MapPin, label: "Main Office", value: "Lagos, Nigeria" },
-                  { icon: Phone, label: "General Enquiries", value: "+234 811 111 1111" },
+                  { icon: Phone, label: "General Enquiries", value: "+234 XXX XXX XXXX" },
                   { icon: Mail, label: "Email Support", value: "enquiries@citicarehealthltd.com" }
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-4 group">
