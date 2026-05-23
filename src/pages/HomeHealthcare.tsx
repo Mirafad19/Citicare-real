@@ -11,7 +11,7 @@ export default function HomeHealthcare() {
       <section className="relative min-h-[450px] lg:min-h-[500px] flex items-center py-16 lg:py-0 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://www.image2url.com/r2/default/images/1778861274282-fc3009b9-31a4-401b-b0a6-38c7a85c2cbb.png" 
+            src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&q=80&w=2000" 
             alt="Home Healthcare" 
             className="w-full h-full object-cover"
           />

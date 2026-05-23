@@ -8,19 +8,19 @@ import { StaggerTestimonials } from '@/components/StaggerTestimonials';
 
 const slides = [
   {
-    image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=2000",
+    image: "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&q=80&w=2000",
     subtitle: "Healthcare Reimagined",
     title: "Addressing your healthcare needs, Every Time",
     description: "A trusted digital healthcare platform delivering personalized medical services, expert consultations, and continuous follow up care tailored to meet your needs.",
   },
   {
-    image: "https://www.image2url.com/r2/default/images/1778798331921-6358ebab-1a6e-4082-a655-cf373bfac93a.png",
+    image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=2000",
     subtitle: "Qualified Professionals",
     title: "Access to world class medical experts",
     description: "We connect you with licensed and verified healthcare professionals who are committed to your total wellbeing and long term health guidance.",
   },
   {
-    image: "https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&q=80&w=2000",
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=2000",
     subtitle: "Continuous Care",
     title: "Healthcare that never ends at the door",
     description: "Our platform ensures continuous monitoring, personalized insights, and comprehensive health guidance even after your consultation.",
@@ -231,10 +231,10 @@ export default function Home() {
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6">
             {[
               { value: "98%", label: "Client Satisfaction" },
-              { value: "250+", label: "Licensed Providers" },
-              { value: "15+", label: "Medical Specialties" },
-              { value: "120+", label: "Clinic Partners" },
-              { value: "15k+", label: "In-Home Recoveries" }
+              { value: "25+", label: "Licensed Providers" },
+              { value: "10+", label: "Medical Specialties" },
+              { value: "5+", label: "Clinic Partners" },
+              { value: "200+", label: "In-Home Recoveries" }
             ].map((stat, idx) => (
               <motion.div 
                 key={idx}
@@ -272,7 +272,7 @@ export default function Home() {
             {[
               {
                 title: "Online Medical Consultations",
-                image: "https://www.image2url.com/r2/default/images/1779135029219-8df8ef4c-fc3b-4a62-a339-511279acff6c.png",
+                image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=800",
                 desc: "Access qualified doctors from the comfort of your home. Get accurate diagnoses, prescriptions, and professional advice.",
                 buttonText: "Book Now",
                 color: "bg-blue-50 hover:bg-blue-100",
@@ -281,7 +281,7 @@ export default function Home() {
               },
               {
                 title: "Home Healthcare Services",
-                image: "https://www.image2url.com/r2/default/images/1778861274282-fc3009b9-31a4-401b-b0a6-38c7a85c2cbb.png",
+                image: "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&q=80&w=800",
                 desc: "We bring professional care to your doorstep, including medical consultations, psychiatric services, and nursing care.",
                 buttonText: "Learn More",
                 color: "bg-emerald-50 hover:bg-emerald-100",
@@ -290,7 +290,7 @@ export default function Home() {
               },
               {
                 title: "Specialist Consultation",
-                image: "https://www.image2url.com/r2/default/images/1778798331921-6358ebab-1a6e-4082-a655-cf373bfac93a.png",
+                image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&q=80&w=800",
                 desc: "Direct access to experts in Cardiology, OB/GYN, Surgery, Orthopedics, Mental Health, and more specialty areas.",
                 buttonText: "View Specialties",
                 color: "bg-amber-50 hover:bg-amber-100",
@@ -378,7 +378,7 @@ export default function Home() {
               <div className="relative">
                 <div className="rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl shadow-slate-200/50">
                   <img 
-                    src="https://www.image2url.com/r2/default/images/1778861274282-fc3009b9-31a4-401b-b0a6-38c7a85c2cbb.png" 
+                    src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&q=80&w=1200" 
                     alt="Elderly Care" 
                     className="w-full h-[300px] lg:h-[500px] object-cover"
                   />
@@ -404,7 +404,7 @@ export default function Home() {
               <div className="relative">
                 <div className="relative z-10 rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl">
                   <img 
-                    src="https://www.image2url.com/r2/default/images/1778798331921-6358ebab-1a6e-4082-a655-cf373bfac93a.png" 
+                    src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=1200" 
                     alt="Digital Healthcare Consultation" 
                     className="w-full h-[300px] lg:h-[450px] object-cover"
                   />
@@ -499,7 +499,7 @@ export default function Home() {
             <div className="relative w-full">
               <div className="rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl shadow-slate-200/50 h-[300px] sm:h-[400px] lg:h-[500px]">
                 <img 
-                  src="https://www.image2url.com/r2/default/images/1778863421981-11b203cd-3516-4af1-b896-2e0174ce5418.png" 
+                  src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1200" 
                   alt="Citicare Medical Center" 
                   className="w-full h-full object-cover"
                 />
