@@ -9,10 +9,9 @@ export function Preloader() {
 
   // Initial landing loader
   useEffect(() => {
-    // End the initial load as soon as components render (with a polite transition delay)
     const timer = setTimeout(() => {
       setInitialLoading(false);
-    }, 800);
+    }, 600);
 
     return () => clearTimeout(timer);
   }, []);
@@ -24,7 +23,7 @@ export function Preloader() {
     setRouteLoading(true);
     const timeout = setTimeout(() => {
       setRouteLoading(false);
-    }, 450); // standard snappy transition
+    }, 400); // Standard quick transition
 
     return () => clearTimeout(timeout);
   }, [location.pathname, initialLoading]);
@@ -37,15 +36,12 @@ export function Preloader() {
             key="initial-loader"
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
             className="fixed inset-0 bg-white z-[9999] flex flex-col items-center justify-center pointer-events-auto"
           >
             <div className="flex flex-col items-center space-y-4">
-              {/* Standard circular spinner */}
-              <div className="relative">
-                <div className="w-12 h-12 rounded-full border-4 border-slate-100 border-t-[#1e3a8a] animate-spin" />
-              </div>
-              <span className="text-slate-400 font-sans font-medium text-xs tracking-wider uppercase">
+              <div className="w-12 h-12 rounded-full border-4 border-slate-100 border-t-[#1e3a8a] animate-spin" />
+              <span className="text-slate-500 font-sans font-semibold text-xs tracking-wider uppercase">
                 Loading Citicare...
               </span>
             </div>
@@ -53,21 +49,19 @@ export function Preloader() {
         )}
       </AnimatePresence>
 
-      {/* Traditional neat route spinner overlay */}
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {routeLoading && !initialLoading && (
           <motion.div
             key="route-loader"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
-            className="fixed inset-0 bg-white/70 backdrop-blur-[1px] z-[9998] flex items-center justify-center"
+            transition={{ duration: 0.15, ease: 'easeInOut' }}
+            className="fixed inset-0 bg-white z-[9998] flex flex-col items-center justify-center pointer-events-auto"
           >
-            <div className="flex flex-col items-center space-y-3 p-6 bg-white rounded-2xl shadow-lg border border-slate-100">
-              <div className="w-9 h-9 rounded-full border-3 border-slate-100 border-t-[#1e3a8a] animate-spin" />
-              <span className="text-slate-500 font-sans text-[11px] font-semibold uppercase tracking-wider">
-                Loading page...
+            <div className="flex flex-col items-center space-y-4">
+              <div className="w-10 h-10 rounded-full border-4 border-slate-100 border-t-[#1e3a8a] animate-spin" />
+              <span className="text-slate-500 font-sans font-semibold text-xs tracking-wider uppercase">
+                Page Loading...
               </span>
             </div>
           </motion.div>
@@ -76,4 +70,3 @@ export function Preloader() {
     </>
   );
 }
-
