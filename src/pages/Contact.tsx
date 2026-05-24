@@ -3,31 +3,12 @@ import { motion } from 'motion/react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Mail, Phone, MapPin, Send, Instagram, Twitter, Facebook, Linkedin, Loader2, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Instagram, Twitter, Facebook, Linkedin, Loader2 } from 'lucide-react';
 import { db } from '@/lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 export default function Contact() {
   const [loading, setLoading] = React.useState(false);
-  const [submitted, setSubmitted] = React.useState(false);
-  const [countdown, setCountdown] = React.useState(5);
-
-  React.useEffect(() => {
-    if (!submitted) return;
-    setCountdown(5);
-    const interval = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev <= 1) {
-          clearInterval(interval);
-          window.location.href = '/';
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [submitted]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -67,8 +48,11 @@ export default function Contact() {
       console.warn("Firestore backup logging skipped or offline:", error);
     });
 
-    setSubmitted(true);
-    setLoading(false);
+    // Hold loading spinner in button for 3 seconds of high-fidelity "processing", then redirect back to home page
+    setTimeout(() => {
+      setLoading(false);
+      window.location.href = '/';
+    }, 3000);
   };
 
   return (
@@ -129,144 +113,98 @@ export default function Contact() {
               transition={{ duration: 0.5 }}
               className="bg-white rounded-2xl lg:rounded-3xl shadow-xl overflow-hidden"
             >
-              {submitted ? (
-                <div className="p-8 lg:p-12 text-center space-y-6">
-                  <div className="mx-auto h-20 w-20 bg-emerald-100 rounded-full flex items-center justify-center">
-                    <CheckCircle className="h-10 w-10 text-emerald-600" />
-                  </div>
-                  <div className="space-y-3">
-                    <h3 className="text-2xl font-bold text-[#1e3a8a]">
-                      Message Sent Successfully!
-                    </h3>
-                    <p className="text-slate-600 text-sm leading-relaxed">
-                      Thank you for reaching out. A Citicare representative will contact you shortly.
-                    </p>
-                  </div>
-
-                  <div className="bg-slate-50 rounded-xl p-4 space-y-3">
-                    <div className="flex items-center justify-center gap-2 text-slate-600 text-sm">
-                      <Loader2 className="h-4 w-4 animate-spin text-emerald-600" />
-                      <span>Redirecting in <strong className="text-emerald-600">{countdown}s</strong></span>
-                    </div>
-                    <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
-                      <motion.div 
-                        key={submitted ? "active" : "idle"}
-                        initial={{ width: "100%" }}
-                        animate={{ width: "0%" }}
-                        transition={{ duration: 5, ease: "linear" }}
-                        className="bg-emerald-500 h-full"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col gap-2">
-                    <Button 
-                      variant="outline" 
-                      className="rounded-xl h-11 text-sm font-semibold" 
-                      onClick={() => window.location.href = '/'}
-                    >
-                      Go Home Now
-                    </Button>
-                    <Button 
-                      variant="ghost" 
-                      className="rounded-xl h-11 text-sm text-slate-500" 
-                      onClick={() => setSubmitted(false)}
-                    >
-                      Send Another Message
-                    </Button>
-                  </div>
+              <div>
+                <div className="bg-[#1e3a8a] px-8 py-6 text-white text-center">
+                  <h3 className="text-xl font-bold">Send a Message</h3>
+                  <p className="text-white/60 text-xs mt-1">Typical response time: 2-4 hours</p>
                 </div>
-              ) : (
-                <div>
-                  <div className="bg-[#1e3a8a] px-8 py-6 text-white text-center">
-                    <h3 className="text-xl font-bold">Send a Message</h3>
-                    <p className="text-white/60 text-xs mt-1">Typical response time: 2-4 hours</p>
-                  </div>
-                  <form onSubmit={handleSubmit} className="p-6 lg:p-8 space-y-5">
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="name" className="text-xs font-semibold text-slate-600 uppercase tracking-wider">Full Name</Label>
-                        <Input 
-                          name="name" 
-                          id="name" 
-                          placeholder="John Doe" 
-                          className="rounded-xl h-12 bg-slate-50 border-slate-200 px-4"
-                          required 
-                          disabled={loading} 
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="email" className="text-xs font-semibold text-slate-600 uppercase tracking-wider">Email Address</Label>
-                        <Input 
-                          name="email" 
-                          id="email" 
-                          type="email" 
-                          placeholder="john@email.com" 
-                          className="rounded-xl h-12 bg-slate-50 border-slate-200 px-4"
-                          required 
-                          disabled={loading} 
-                        />
-                      </div>
-                    </div>
-                    
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="phone" className="text-xs font-semibold text-slate-600 uppercase tracking-wider">Phone Number</Label>
-                        <Input 
-                          name="phone" 
-                          id="phone" 
-                          placeholder="+234 XXX..." 
-                          className="rounded-xl h-12 bg-slate-50 border-slate-200 px-4"
-                          required 
-                          disabled={loading} 
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="service" className="text-xs font-semibold text-slate-600 uppercase tracking-wider">Service Needed</Label>
-                        <select 
-                          name="service" 
-                          id="service" 
-                          className="w-full rounded-xl h-12 bg-slate-50 border border-slate-200 px-4 text-sm focus:ring-2 focus:ring-blue-600 outline-none"
-                          disabled={loading}
-                        >
-                          <option>Online Consultation</option>
-                          <option>Home Care</option>
-                          <option>Specialist Care</option>
-                          <option>Preventive Health</option>
-                        </select>
-                      </div>
-                    </div>
-
+                <form onSubmit={handleSubmit} className="p-6 lg:p-8 space-y-5">
+                  <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="message" className="text-xs font-semibold text-slate-600 uppercase tracking-wider">Your Message</Label>
-                      <textarea 
-                        name="message" 
-                        id="message" 
-                        rows={4} 
-                        className="w-full rounded-xl p-4 bg-slate-50 border border-slate-200 text-sm focus:ring-2 focus:ring-blue-600 outline-none resize-none"
-                        placeholder="Describe your healthcare needs or questions..."
+                      <Label htmlFor="name" className="text-xs font-semibold text-slate-600 uppercase tracking-wider">Full Name</Label>
+                      <Input 
+                        name="name" 
+                        id="name" 
+                        placeholder="John Doe" 
+                        className="rounded-xl h-12 bg-slate-50 border-slate-200 px-4"
                         required 
-                        disabled={loading}
+                        disabled={loading} 
                       />
                     </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="email" className="text-xs font-semibold text-slate-600 uppercase tracking-wider">Email Address</Label>
+                      <Input 
+                        name="email" 
+                        id="email" 
+                        type="email" 
+                        placeholder="john@email.com" 
+                        className="rounded-xl h-12 bg-slate-50 border-slate-200 px-4"
+                        required 
+                        disabled={loading} 
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="phone" className="text-xs font-semibold text-slate-600 uppercase tracking-wider">Phone Number</Label>
+                      <Input 
+                        name="phone" 
+                        id="phone" 
+                        placeholder="+234 XXX..." 
+                        className="rounded-xl h-12 bg-slate-50 border-slate-200 px-4"
+                        required 
+                        disabled={loading} 
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="service" className="text-xs font-semibold text-slate-600 uppercase tracking-wider">Service Needed</Label>
+                      <select 
+                        name="service" 
+                        id="service" 
+                        className="w-full rounded-xl h-12 bg-slate-50 border border-slate-200 px-4 text-sm focus:ring-2 focus:ring-blue-600 outline-none"
+                        disabled={loading}
+                      >
+                        <option>Online Consultation</option>
+                        <option>Home Care</option>
+                        <option>Specialist Care</option>
+                        <option>Preventive Health</option>
+                      </select>
+                    </div>
+                  </div>
 
-                    <Button 
-                      type="submit" 
-                      className="w-full rounded-xl h-12 font-semibold bg-[#1e3a8a] hover:bg-[#1e3a8a]/90 shadow-lg"
+                  <div className="space-y-2">
+                    <Label htmlFor="message" className="text-xs font-semibold text-slate-600 uppercase tracking-wider">Your Message</Label>
+                    <textarea 
+                      name="message" 
+                      id="message" 
+                      rows={4} 
+                      className="w-full rounded-xl p-4 bg-slate-50 border border-slate-200 text-sm focus:ring-2 focus:ring-blue-600 outline-none resize-none"
+                      placeholder="Describe your healthcare needs or questions..."
+                      required 
                       disabled={loading}
-                    >
-                      {loading ? (
+                    />
+                  </div>
+
+                  <Button 
+                    type="submit" 
+                    className="w-full rounded-xl h-12 font-semibold bg-[#1e3a8a] hover:bg-[#1e3a8a]/90 shadow-lg flex items-center justify-center gap-2"
+                    disabled={loading}
+                  >
+                    {loading ? (
+                      <>
                         <Loader2 className="h-5 w-5 animate-spin" />
-                      ) : (
-                        <span className="flex items-center justify-center gap-2">
-                          Send Inquiry 
-                          <Send className="h-4 w-4" />
-                        </span>
-                      )}
-                    </Button>
-                  </form>
-                </div>
-              )}
+                        <span>Sending message...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Send Inquiry</span>
+                        <Send className="h-4 w-4" />
+                      </>
+                    )}
+                  </Button>
+                </form>
+              </div>
             </motion.div>
           </div>
         </div>

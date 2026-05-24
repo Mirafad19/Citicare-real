@@ -5,6 +5,7 @@ import { Footer } from './components/layout/Footer';
 import { EMRLayout } from './components/emr/EMRLayout';
 import { AuthProvider } from './components/auth/AuthProvider';
 import ScrollToTop from './components/ScrollToTop';
+import { Preloader } from './components/layout/Preloader';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
@@ -25,6 +26,7 @@ import EMRLogin from './pages/emr/Login';
 export default function App() {
   return (
     <Router>
+      <Preloader />
       <ScrollToTop />
       <AuthProvider>
         <Routes>

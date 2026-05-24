@@ -1,6 +1,6 @@
 import React from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Briefcase, Award, Zap, ShieldCheck, CheckCircle2, Loader2 } from 'lucide-react';
+import { motion } from 'motion/react';
+import { Briefcase, Award, Zap, ShieldCheck, Loader2 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { db } from '../lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
@@ -15,26 +15,7 @@ export default function Career() {
     summary: '',
   });
 
-  const [isSubmitted, setIsSubmitted] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
-  const [countdown, setCountdown] = React.useState(5);
-
-  React.useEffect(() => {
-    if (!isSubmitted) return;
-    setCountdown(5);
-    const interval = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev <= 1) {
-          clearInterval(interval);
-          window.location.href = '/';
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [isSubmitted]);
 
   const roles = [
     {
@@ -103,8 +84,11 @@ export default function Career() {
       console.warn("Firestore backup logging skipped or offline:", error);
     });
 
-    setIsSubmitted(true);
-    setLoading(false);
+    // Hold loading spinner in button for 3 seconds, then refresh/redirect to home page
+    setTimeout(() => {
+      setLoading(false);
+      window.location.href = '/';
+    }, 3000);
   };
 
   return (
@@ -222,164 +206,109 @@ export default function Career() {
             {/* Application Form */}
             <div className="lg:col-span-5">
               <div className="bg-white p-6 lg:p-8 rounded-2xl lg:rounded-3xl shadow-lg border border-slate-100 sticky top-32">
-                <AnimatePresence mode="wait">
-                  {!isSubmitted ? (
-                    <motion.div 
-                      key="form"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="space-y-6"
-                    >
+                <div className="space-y-6">
+                  <div className="space-y-2">
+                    <h3 className="text-2xl font-bold text-[#1e3a8a]">Apply Now</h3>
+                    <p className="text-slate-500 text-sm">Submit your interest and build your career with us.</p>
+                  </div>
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="space-y-2">
+                      <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Full Name *</label>
+                      <input 
+                        type="text" 
+                        required
+                        disabled={loading}
+                        value={formData.fullName}
+                        onChange={(e) => setFormData({...formData, fullName: e.target.value})}
+                        placeholder="Your full name" 
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 h-12 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
                       <div className="space-y-2">
-                        <h3 className="text-2xl font-bold text-[#1e3a8a]">Apply Now</h3>
-                        <p className="text-slate-500 text-sm">Submit your interest and build your career with us.</p>
+                        <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Email *</label>
+                        <input 
+                          type="email" 
+                          required
+                          disabled={loading}
+                          value={formData.email}
+                          onChange={(e) => setFormData({...formData, email: e.target.value})}
+                          placeholder="Your email" 
+                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 h-12 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                        />
                       </div>
-                      <form onSubmit={handleSubmit} className="space-y-4">
-                        <div className="space-y-2">
-                          <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Full Name *</label>
-                          <input 
-                            type="text" 
-                            required
-                            value={formData.fullName}
-                            onChange={(e) => setFormData({...formData, fullName: e.target.value})}
-                            placeholder="Your full name" 
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 h-12 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
-                          />
-                        </div>
+                      <div className="space-y-2">
+                        <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Phone *</label>
+                        <input 
+                          type="tel" 
+                          required
+                          disabled={loading}
+                          value={formData.phone}
+                          onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                          placeholder="Your phone" 
+                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 h-12 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                        />
+                      </div>
+                    </div>
 
-                        <div className="grid grid-cols-2 gap-3">
-                          <div className="space-y-2">
-                            <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Email *</label>
-                            <input 
-                              type="email" 
-                              required
-                              value={formData.email}
-                              onChange={(e) => setFormData({...formData, email: e.target.value})}
-                              placeholder="Your email" 
-                              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 h-12 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
-                            />
-                          </div>
-                          <div className="space-y-2">
-                            <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Phone *</label>
-                            <input 
-                              type="tel" 
-                              required
-                              value={formData.phone}
-                              onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                              placeholder="Your phone" 
-                              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 h-12 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
-                            />
-                          </div>
-                        </div>
+                    <div className="space-y-2">
+                      <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Target Role *</label>
+                      <select 
+                        value={formData.role}
+                        disabled={loading}
+                        onChange={(e) => setFormData({...formData, role: e.target.value})}
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 h-12 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                      >
+                        <option>Registered Nurse (RN) - Home Healthcare</option>
+                        <option>Geriatric Care Specialist / Caregiver</option>
+                        <option>Psychiatric Support Assistant</option>
+                        <option>Other Support Role</option>
+                      </select>
+                    </div>
 
-                        <div className="space-y-2">
-                          <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Target Role *</label>
-                          <select 
-                            value={formData.role}
-                            onChange={(e) => setFormData({...formData, role: e.target.value})}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 h-12 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
-                          >
-                            <option>Registered Nurse (RN) - Home Healthcare</option>
-                            <option>Geriatric Care Specialist / Caregiver</option>
-                            <option>Psychiatric Support Assistant</option>
-                            <option>Other Support Role</option>
-                          </select>
-                        </div>
+                    <div className="space-y-2">
+                      <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Experience *</label>
+                      <select 
+                        value={formData.experience}
+                        disabled={loading}
+                        onChange={(e) => setFormData({...formData, experience: e.target.value})}
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 h-12 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                      >
+                        <option>1-2 Years</option>
+                        <option>3-5 Years</option>
+                        <option>5+ Years</option>
+                      </select>
+                    </div>
 
-                        <div className="space-y-2">
-                          <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Experience *</label>
-                          <select 
-                            value={formData.experience}
-                            onChange={(e) => setFormData({...formData, experience: e.target.value})}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 h-12 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
-                          >
-                            <option>1-2 Years</option>
-                            <option>3-5 Years</option>
-                            <option>5+ Years</option>
-                          </select>
-                        </div>
+                    <div className="space-y-2">
+                      <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Brief Background</label>
+                      <textarea 
+                        rows={3}
+                        disabled={loading}
+                        value={formData.summary}
+                        onChange={(e) => setFormData({...formData, summary: e.target.value})}
+                        placeholder="Share your credentials or passion for healthcare..." 
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 resize-none"
+                      />
+                    </div>
 
-                        <div className="space-y-2">
-                          <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Brief Background</label>
-                          <textarea 
-                            rows={3}
-                            value={formData.summary}
-                            onChange={(e) => setFormData({...formData, summary: e.target.value})}
-                            placeholder="Share your credentials or passion for healthcare..." 
-                            className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 resize-none"
-                          />
-                        </div>
-
-                        <Button 
-                          type="submit" 
-                          disabled={loading} 
-                          className="w-full bg-[#1e3a8a] hover:bg-[#1e3a8a]/90 text-white rounded-xl h-12 font-semibold shadow-lg"
-                        >
-                          {loading ? (
-                            <span className="flex items-center gap-2">
-                              <Loader2 className="h-4 w-4 animate-spin" />
-                              Submitting...
-                            </span>
-                          ) : (
-                            "Submit Application"
-                          )}
-                        </Button>
-                      </form>
-                    </motion.div>
-                  ) : (
-                    <motion.div 
-                      key="success"
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="text-center py-8 space-y-6"
+                    <Button 
+                      type="submit" 
+                      disabled={loading} 
+                      className="w-full bg-[#1e3a8a] hover:bg-[#1e3a8a]/90 text-white rounded-xl h-12 font-semibold shadow-lg"
                     >
-                      <div className="mx-auto h-20 w-20 bg-emerald-100 rounded-full flex items-center justify-center">
-                        <CheckCircle2 className="h-10 w-10 text-emerald-600" />
-                      </div>
-                      <div className="space-y-3">
-                        <h4 className="text-xl font-bold text-[#1e3a8a]">Application Received!</h4>
-                        <p className="text-slate-600 text-sm leading-relaxed">
-                          Thank you, <strong>{formData.fullName}</strong>. We will reach out within 2-3 business days.
-                        </p>
-                      </div>
-
-                      <div className="bg-slate-50 rounded-xl p-4 space-y-3">
-                        <div className="flex items-center justify-center gap-2 text-slate-600 text-sm">
-                          <Loader2 className="h-4 w-4 animate-spin text-emerald-600" />
-                          <span>Redirecting in <strong className="text-emerald-600">{countdown}s</strong></span>
-                        </div>
-                        <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
-                          <motion.div 
-                            key={isSubmitted ? "active" : "idle"}
-                            initial={{ width: "100%" }}
-                            animate={{ width: "0%" }}
-                            transition={{ duration: 5, ease: "linear" }}
-                            className="bg-emerald-500 h-full"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col gap-2">
-                        <Button 
-                          variant="outline" 
-                          className="rounded-xl h-11 text-sm font-semibold" 
-                          onClick={() => window.location.href = '/'}
-                        >
-                          Go Home Now
-                        </Button>
-                        <Button 
-                          variant="ghost" 
-                          className="rounded-xl h-11 text-sm text-slate-500" 
-                          onClick={() => setIsSubmitted(false)}
-                        >
-                          Apply for Another Role
-                        </Button>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                      {loading ? (
+                        <span className="flex items-center justify-center gap-2">
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                          Submitting...
+                        </span>
+                      ) : (
+                        "Submit Application"
+                      )}
+                    </Button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
@@ -388,3 +317,4 @@ export default function Career() {
     </div>
   );
 }
+
