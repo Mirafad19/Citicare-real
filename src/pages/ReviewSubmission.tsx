@@ -16,7 +16,7 @@ export default function ReviewSubmission() {
   const [loading, setLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
@@ -27,28 +27,28 @@ export default function ReviewSubmission() {
       approved: true // Auto-approved for instant satisfaction, but configurable
     };
 
-    try {
-      // Send to Formspree if configured, or direct to Firestore
-      const formspreeId = (import.meta as any).env.VITE_FORMSPREE_BOOKING_ID || "mkoeobyy";
-      if (formspreeId) {
-        await fetch(`https://formspree.io/f/${formspreeId}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({
-            ...payload,
-            "submission_type": "Citicare Client Testimonial"
-          })
-        }).catch(err => console.warn(err));
-      }
-
-      await addDoc(collection(db, 'reviews'), payload);
-    } catch (error) {
-      console.warn("Error submitting review to Firestore:", error);
+    // 1. Dispatch Formspree transmission in background
+    const formspreeId = (import.meta as any).env.VITE_FORMSPREE_BOOKING_ID || "mkoeobyy";
+    if (formspreeId) {
+      fetch(`https://formspree.io/f/${formspreeId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          ...payload,
+          "submission_type": "Citicare Client Testimonial"
+        })
+      }).catch(err => console.warn("Formspree transmission skipped or offline:", err));
     }
 
+    // 2. Dispatch Firestore write in background (Firestore's offline queue will buffer this safely if slow or offline)
+    addDoc(collection(db, 'reviews'), payload).catch((error) => {
+      console.warn("Firestore backup logging skipped or offline:", error);
+    });
+
+    // 3. Immediately transition the UI to success for flawless user experience
     setTimeout(() => {
       setLoading(false);
       setIsSubmitted(true);
@@ -56,7 +56,7 @@ export default function ReviewSubmission() {
       setTimeout(() => {
         window.location.href = '/';
       }, 3500);
-    }, 2500);
+    }, 2000);
   };
 
   return (
