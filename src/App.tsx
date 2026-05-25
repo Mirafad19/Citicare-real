@@ -11,6 +11,8 @@ import About from './pages/About';
 import Services from './pages/Services';
 import HomeHealthcare from './pages/HomeHealthcare';
 import SpecialistCare from './pages/SpecialistCare';
+import SpecialtyDetail from './pages/SpecialtyDetail';
+import ReviewSubmission from './pages/ReviewSubmission';
 import Search from './pages/Search';
 import Values from './pages/Values';
 import Contact from './pages/Contact';
@@ -36,6 +38,8 @@ export default function App() {
           <Route path="/services" element={<WebsiteLayout><Services /></WebsiteLayout>} />
           <Route path="/home-healthcare" element={<WebsiteLayout><HomeHealthcare /></WebsiteLayout>} />
           <Route path="/specialist-care" element={<WebsiteLayout><SpecialistCare /></WebsiteLayout>} />
+          <Route path="/specialist-care/:specialtySlug" element={<WebsiteLayout><SpecialtyDetail /></WebsiteLayout>} />
+          <Route path="/review" element={<WebsiteLayout><ReviewSubmission /></WebsiteLayout>} />
           <Route path="/search" element={<WebsiteLayout><Search /></WebsiteLayout>} />
           <Route path="/values" element={<WebsiteLayout><Values /></WebsiteLayout>} />
           <Route path="/contact" element={<WebsiteLayout><Contact /></WebsiteLayout>} />

@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'motion/react';
+import { useSearchParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Calendar, Clock, Loader2 } from 'lucide-react';
+import { Calendar, Clock, Loader2, Award } from 'lucide-react';
 import { db } from '@/lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 export default function Booking() {
   const [loading, setLoading] = React.useState(false);
+  const [searchParams] = useSearchParams();
+  const initSpecialty = searchParams.get('specialty') || '';
+  const [notesText, setNotesText] = React.useState('');
+
+  useEffect(() => {
+    if (initSpecialty) {
+      setNotesText(`Consultation request for the ${initSpecialty} Department.`);
+    }
+  }, [initSpecialty]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -113,6 +123,19 @@ export default function Booking() {
               {/* Right Form Panel */}
               <div className="lg:col-span-3 p-8 lg:p-10">
                 <form onSubmit={handleSubmit} className="space-y-5">
+                  {initSpecialty && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-4 rounded-xl bg-blue-50 border border-blue-100 flex items-center gap-3.5 text-[#1e3a8a] text-xs font-bold"
+                    >
+                      <Award className="h-5 w-5 text-blue-600 animate-pulse" />
+                      <div>
+                        Selected: <span className="underline">{initSpecialty} Department</span> Specialist Consultation
+                      </div>
+                    </motion.div>
+                  )}
+
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="name" className="text-xs font-semibold text-slate-600 uppercase tracking-wider">Full Name</Label>
@@ -153,10 +176,11 @@ export default function Booking() {
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="service" className="text-xs font-semibold text-slate-600 uppercase tracking-wider">Select Service</Label>
-                      <select 
+                       <Label htmlFor="service" className="text-xs font-semibold text-slate-600 uppercase tracking-wider">Select Service</Label>
+                       <select 
                         name="service" 
                         id="service" 
+                        defaultValue={initSpecialty ? "Specialist Consultation" : "Online Consultation"}
                         className="w-full rounded-xl h-12 bg-slate-50 border border-slate-200 px-4 text-sm focus:ring-2 focus:ring-blue-600 outline-none"
                         required 
                         disabled={loading}
@@ -187,6 +211,8 @@ export default function Booking() {
                       name="notes" 
                       id="notes" 
                       rows={3} 
+                      value={notesText}
+                      onChange={(e) => setNotesText(e.target.value)}
                       className="w-full rounded-xl p-4 bg-slate-50 border border-slate-200 text-sm focus:ring-2 focus:ring-blue-600 outline-none resize-none"
                       placeholder="Any specific symptoms or requests?"
                       disabled={loading}

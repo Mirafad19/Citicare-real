@@ -87,7 +87,7 @@ export function Footer() {
                 { name: "Critical Nursing Support", href: "/specialist-care" },
                 { name: "Geriatric Care Specialists", href: "/home-healthcare" },
                 { name: "Advanced Telemedicine", href: "/services" },
-                { name: "Corporate Health Plans", href: "/about" },
+                { name: "Patient Support Desk", href: "/faq" },
                 { name: "Health Tech Integration", href: "/about" }
               ].map((item, i) => (
                 <li key={i}>

@@ -1,45 +1,79 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Stethoscope, Heart, Brain, Scissors, Baby, Activity, ShieldCheck, Star } from 'lucide-react';
+import { Stethoscope, Heart, Brain, Scissors, Baby, Activity, ShieldCheck, Star, Apple, Sparkles } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Link } from 'react-router-dom';
 
 const specialties = [
   {
+    slug: "cardiology",
     icon: Heart,
     name: "Cardiology",
     desc: "Comprehensive heart health monitoring and expert cardiac assessments from top-tier specialists.",
     color: "bg-red-50 text-red-600"
   },
   {
+    slug: "mental-health",
     icon: Brain,
     name: "Mental Health",
     desc: "Holistic psychiatric evaluations and psychotherapy sessions delivered with empathy and expertise.",
     color: "bg-indigo-50 text-indigo-600"
   },
   {
+    slug: "general-surgery",
     icon: Scissors,
     name: "General Surgery",
     desc: "Pre operative consultations and surgical management from board certified surgical experts.",
     color: "bg-slate-100 text-slate-600"
   },
   {
+    slug: "ob-gyn",
     icon: Baby,
     name: "OB/GYN",
     desc: "Dedicated women's health services including prenatal care, gynecology, and reproductive health.",
     color: "bg-pink-50 text-pink-600"
   },
   {
+    slug: "orthopedics",
     icon: Activity,
     name: "Orthopedics",
     desc: "Expert diagnosis and treatment of musculo skeletal issues, joint pain, and sports injuries.",
     color: "bg-emerald-50 text-emerald-600"
   },
   {
+    slug: "urology",
     icon: Stethoscope,
     name: "Urology",
     desc: "Specialized care for urinary tract conditions and male reproductive health systems.",
     color: "bg-blue-50 text-blue-600"
+  },
+  {
+    slug: "general-practice",
+    icon: Stethoscope,
+    name: "General Practice",
+    desc: "Primary medical evaluations, disease prevention, physical exams, and holistic family health consultations.",
+    color: "bg-teal-50 text-teal-600"
+  },
+  {
+    slug: "endocrinology",
+    icon: Activity,
+    name: "Endocrinology",
+    desc: "Specialized care for hormone balance, diabetes mellitus, thyroid wellness, and metabolic disorders.",
+    color: "bg-amber-50 text-amber-600"
+  },
+  {
+    slug: "plastic-surgery",
+    icon: Sparkles,
+    name: "Plastic Surgery",
+    desc: "Reconstructive consultations and advanced aesthetic medical assessments with board-certified surgeons.",
+    color: "bg-purple-50 text-purple-600"
+  },
+  {
+    slug: "nutritionist",
+    icon: Apple,
+    name: "Nutritionist",
+    desc: "Empathetic, scientifically backed dietary planning, weight management, and custom metabolic nutrition reviews.",
+    color: "bg-orange-50 text-orange-600"
   }
 ];
 
@@ -112,10 +146,10 @@ export default function SpecialistCare() {
                 <h3 className="text-2xl font-bold text-[#1e3a8a] mb-3">{item.name}</h3>
                 <p className="text-slate-600 text-sm leading-relaxed mb-6">{item.desc}</p>
                 <Link 
-                  to="/book" 
+                  to={`/specialist-care/${item.slug}`} 
                   className="inline-flex items-center gap-2 text-blue-600 font-semibold text-sm hover:gap-3 transition-all"
                 >
-                  Book Slot
+                  View Details & Book
                   <Activity className="h-4 w-4" />
                 </Link>
               </motion.div>

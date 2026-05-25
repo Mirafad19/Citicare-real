@@ -1,8 +1,12 @@
 "use client"
 
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, User } from 'lucide-react';
+import { ChevronLeft, ChevronRight, User, FormInput } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Link } from 'react-router-dom';
+import { db } from '@/lib/firebase';
+import { collection, getDocs } from 'firebase/firestore';
+import { motion } from 'motion/react';
 
 const testimonials = [
   {
@@ -76,7 +80,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         "absolute left-1/2 top-1/2 cursor-pointer p-6 lg:p-8 transition-all duration-500 ease-out rounded-2xl lg:rounded-3xl",
         isCenter 
           ? "z-10 bg-[#1e3a8a] text-white shadow-2xl shadow-blue-900/30" 
-          : "z-0 bg-white text-slate-800 shadow-lg opacity-50 hover:opacity-80"
+          : "z-0 bg-white text-slate-800 shadow-lg opacity-50 hover:opacity-80 border border-slate-100"
       )}
       style={{
         width: cardSize,
@@ -100,7 +104,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         )} />
       </div>
       <blockquote className={cn(
-        "text-base lg:text-lg font-medium leading-relaxed mb-6",
+        "text-base lg:text-lg font-medium leading-relaxed mb-6 line-clamp-4 lg:line-clamp-none",
         isCenter ? "text-white" : "text-slate-700"
       )}>
         "{testimonial.testimonial}"
@@ -139,6 +143,40 @@ export const StaggerTestimonials: React.FC = () => {
   };
 
   useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'reviews'));
+        const dynamicReviews: typeof testimonials = [];
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          if (data.testimonial) {
+            dynamicReviews.push({
+              tempId: Math.random(),
+              testimonial: data.testimonial,
+              by: `${data.fullName}, ${data.location || 'Client'}`
+            });
+          }
+        });
+        if (dynamicReviews.length > 0) {
+          // Merge dynamic firestore reviews with pre-coded list seamlessly
+          setTestimonialsList((prev) => {
+            const merged = [...prev];
+            dynamicReviews.forEach(item => {
+              if (!merged.some(m => m.testimonial === item.testimonial)) {
+                merged.push(item);
+              }
+            });
+            return merged;
+          });
+        }
+      } catch (err) {
+        console.warn("Firestore feedback fallback logger:", err);
+      }
+    };
+    fetchReviews();
+  }, []);
+
+  useEffect(() => {
     const updateSize = () => {
       const width = window.innerWidth;
       setIsMobile(width < 640);
@@ -159,41 +197,60 @@ export const StaggerTestimonials: React.FC = () => {
   }, []);
 
   return (
-    <div
-      className="relative w-full overflow-hidden"
-      style={{ height: isMobile ? 480 : 560 }}
-    >
-      {testimonialsList.map((testimonial, index) => {
-        const position = testimonialsList.length % 2
-          ? index - (testimonialsList.length + 1) / 2
-          : index - testimonialsList.length / 2;
-        return (
-          <TestimonialCard
-            key={testimonial.tempId}
-            testimonial={testimonial}
-            handleMove={handleMove}
-            position={position}
-            cardSize={cardSize}
-            isMobile={isMobile}
-          />
-        );
-      })}
-      <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 gap-3 z-30">
-        <button
-          onClick={() => handleMove(-1)}
-          className="flex h-12 w-12 lg:h-14 lg:w-14 items-center justify-center rounded-xl transition-all shadow-lg bg-white text-[#1e3a8a] hover:bg-[#1e3a8a] hover:text-white border border-slate-200"
-          aria-label="Previous testimonial"
-        >
-          <ChevronLeft className="h-6 w-6" />
-        </button>
-        <button
-          onClick={() => handleMove(1)}
-          className="flex h-12 w-12 lg:h-14 lg:w-14 items-center justify-center rounded-xl transition-all shadow-lg bg-white text-[#1e3a8a] hover:bg-[#1e3a8a] hover:text-white border border-slate-200"
-          aria-label="Next testimonial"
-        >
-          <ChevronRight className="h-6 w-6" />
-        </button>
+    <div className="flex flex-col items-center">
+      <div
+        className="relative w-full overflow-hidden"
+        style={{ height: isMobile ? 480 : 560 }}
+      >
+        {testimonialsList.map((testimonial, index) => {
+          const position = testimonialsList.length % 2
+            ? index - (testimonialsList.length + 1) / 2
+            : index - testimonialsList.length / 2;
+          return (
+            <TestimonialCard
+              key={testimonial.tempId || index}
+              testimonial={testimonial}
+              handleMove={handleMove}
+              position={position}
+              cardSize={cardSize}
+              isMobile={isMobile}
+            />
+          );
+        })}
+        <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 gap-3 z-30">
+          <button
+            onClick={() => handleMove(-1)}
+            className="flex h-12 w-12 lg:h-14 lg:w-14 items-center justify-center rounded-xl transition-all shadow-lg bg-white text-[#1e3a8a] hover:bg-[#1e3a8a] hover:text-white border border-slate-200"
+            aria-label="Previous testimonial"
+          >
+            <ChevronLeft className="h-6 w-6" />
+          </button>
+          <button
+            onClick={() => handleMove(1)}
+            className="flex h-12 w-12 lg:h-14 lg:w-14 items-center justify-center rounded-xl transition-all shadow-lg bg-white text-[#1e3a8a] hover:bg-[#1e3a8a] hover:text-white border border-slate-200"
+            aria-label="Next testimonial"
+          >
+            <ChevronRight className="h-6 w-6" />
+          </button>
+        </div>
       </div>
+      
+      {/* Client Feedback shareable block */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.3 }}
+        className="mt-6 text-center z-40 relative group"
+      >
+        <Link 
+          to="/review" 
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-blue-100 bg-blue-50/50 hover:bg-white text-xs font-bold text-[#1e3a8a] hover:text-[#1e3a8a]/80 shadow-sm transition-all"
+        >
+          <FormInput className="h-4 w-4 text-blue-600 group-hover:rotate-12 transition-transform" />
+          Previous Patient? Submit Your Testimonial / Review Here
+        </Link>
+      </motion.div>
     </div>
   );
 };
