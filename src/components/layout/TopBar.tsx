@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Home, Search, Facebook, Instagram, Linkedin, Twitter, FileText, ShieldCheck } from 'lucide-react';
+import { Home, Search, Facebook, Instagram, Linkedin, Twitter, ShieldCheck } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 export function TopBar() {
@@ -52,15 +52,10 @@ export function TopBar() {
             ))}
           </div>
           
-          <div className="hidden lg:flex items-center gap-4">
-            <div className="flex items-center gap-2 text-white/80 text-[11px] uppercase tracking-wider">
-              <FileText className="h-3.5 w-3.5 text-blue-300" />
-              <span>Brochure</span>
-            </div>
-            <div className="h-4 w-px bg-white/20" />
-            <div className="flex items-center gap-2 text-white/80 text-[11px] uppercase tracking-wider">
-              <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
-              <span>Licensed</span>
+          <div className="hidden lg:flex items-center">
+            <div className="flex items-center gap-2 bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider select-none">
+              <ShieldCheck className="h-4 w-4 shrink-0 text-[#25D366]" />
+              <span>Licensed & Verified</span>
             </div>
           </div>
         </div>

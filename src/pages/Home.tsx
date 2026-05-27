@@ -272,7 +272,7 @@ export default function Home() {
             {[
               {
                 title: "Online Medical Consultations",
-                image: "https://www.image2url.com/r2/default/images/1779135029219-8df8ef4c-fc3b-4a62-a339-511279acff6c.png",
+                image: "https://www.image2url.com/r2/default/images/1779889907424-b02c4a99-b324-4cef-8cac-7eedd561a33a.jpg",
                 desc: "Access qualified doctors from the comfort of your home. Get accurate diagnoses, prescriptions, and professional advice.",
                 buttonText: "Book Now",
                 color: "bg-blue-50 hover:bg-blue-100",
@@ -521,25 +521,39 @@ export default function Home() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-20 lg:py-28 bg-[#1e3a8a] text-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5" />
-        <div className="max-w-3xl mx-auto px-5 sm:px-6 space-y-8 relative z-10">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
-            Ready to experience quality healthcare?
-          </h2>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link 
-              to="/book" 
-              className="inline-flex items-center justify-center bg-white text-[#1e3a8a] hover:bg-white/90 rounded-xl px-10 h-14 text-base font-semibold shadow-lg transition-all"
-            >
-              Book Now
-            </Link>
-            <Link 
-              to="/contact" 
-              className="inline-flex items-center justify-center border-2 border-white/30 text-white hover:bg-white/10 rounded-xl px-10 h-14 text-base font-semibold transition-colors"
-            >
-              Contact Us Now
-            </Link>
+      <section className="py-16 md:py-24 bg-slate-50 relative overflow-hidden">
+        <div className="max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-20 relative z-10">
+          <div className="w-full bg-gradient-to-br from-[#1e3a8a] to-[#0f172a] rounded-3xl p-10 md:p-16 lg:p-20 shadow-2xl shadow-blue-950/15 border border-white/10 text-center relative overflow-hidden">
+            {/* Ambient background decoration */}
+            <div className="absolute -right-20 -top-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none select-none animate-pulse" />
+            <div className="absolute -left-20 -bottom-20 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none select-none" />
+            
+            <div className="max-w-2xl mx-auto space-y-6 md:space-y-8 relative z-10 text-white">
+              <span className="inline-flex items-center gap-1.5 bg-white/10 px-4 py-1.5 rounded-full text-emerald-400 font-bold text-[10px] uppercase tracking-widest select-none">
+                <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                Get Started Today
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight tracking-tight">
+                Ready to experience quality healthcare?
+              </h2>
+              <p className="text-sm sm:text-base lg:text-lg text-white/80 max-w-lg mx-auto leading-relaxed font-medium">
+                Connect with our certified medical professionals and take control of your health.
+              </p>
+              <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4">
+                <Link 
+                  to="/book" 
+                  className="w-full sm:w-auto inline-flex items-center justify-center bg-white text-[#1e3a8a] hover:bg-slate-50 rounded-xl px-10 h-14 text-base font-semibold shadow-lg transition-all"
+                >
+                  Book Now
+                </Link>
+                <Link 
+                  to="/contact" 
+                  className="w-full sm:w-auto inline-flex items-center justify-center border-2 border-white/30 text-white hover:bg-white/10 rounded-xl px-10 h-14 text-base font-semibold transition-colors"
+                >
+                  Contact Us Now
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>

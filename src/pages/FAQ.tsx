@@ -73,7 +73,7 @@ export default function FAQ() {
               </div>
               <div className="flex items-center justify-center gap-2">
                 <Phone className="h-4 w-4 text-blue-300" />
-                <span>+234 XXX XXX XXXX</span>
+                <span>+234 811 986 8201</span>
               </div>
             </div>
           </div>

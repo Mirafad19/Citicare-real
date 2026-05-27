@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Briefcase, Award, Zap, ShieldCheck, Loader2 } from 'lucide-react';
+import { Award, Zap, ShieldCheck, Loader2 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { db } from '../lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
@@ -99,17 +99,9 @@ export default function Career() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#1e3a8a] via-[#1e3a8a]/80 to-transparent" />
         
         <div className="max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-20 relative z-10 text-center space-y-6">
-          <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full text-white/80 font-semibold text-xs uppercase tracking-wider"
-          >
-            <Briefcase className="h-4 w-4 text-emerald-400" /> Join Citicare Team
-          </motion.div>
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold max-w-3xl mx-auto text-white"
           >
             A Career with <span className="text-emerald-400">Heart</span> & Excellence

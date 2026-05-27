@@ -75,7 +75,7 @@ export default function Contact() {
               <div className="space-y-6">
                 {[
                   { icon: MapPin, label: "Main Office", value: "Lagos, Nigeria" },
-                  { icon: Phone, label: "General Enquiries", value: "+234 XXX XXX XXXX" },
+                  { icon: Phone, label: "General Enquiries", value: "+234 811 986 8201" },
                   { icon: Mail, label: "Email Support", value: "enquiries@citicarehealth.com" }
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-4 group">
@@ -151,7 +151,7 @@ export default function Contact() {
                       <Input 
                         name="phone" 
                         id="phone" 
-                        placeholder="+234 XXX..." 
+                        placeholder="e.g. +234 811 986 8201" 
                         className="rounded-xl h-12 bg-slate-50 border-slate-200 px-4"
                         required 
                         disabled={loading} 

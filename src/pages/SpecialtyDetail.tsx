@@ -206,17 +206,7 @@ export default function SpecialtyDetail() {
                 {info.longDesc}
               </p>
 
-              {/* doctor card in header */}
-              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 flex items-center gap-4 max-w-md">
-                <div className={`h-12 w-12 rounded-xl ${info.color} flex items-center justify-center font-bold text-lg`}>
-                  {info.leadDoc.split(' ').pop()?.charAt(0) || <Award className="h-5 w-5" />}
-                </div>
-                <div>
-                  <div className="text-xs text-slate-400 font-bold uppercase tracking-wider">Clinical Lead</div>
-                  <div className="font-bold text-[#1e3a8a] text-base">{info.leadDoc}</div>
-                  <div className="text-xs font-semibold text-blue-600">{info.specialistTitle}</div>
-                </div>
-              </div>
+
             </div>
 
             {/* quick numbers column */}

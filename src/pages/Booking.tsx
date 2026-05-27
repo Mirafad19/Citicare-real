@@ -12,13 +12,16 @@ export default function Booking() {
   const [loading, setLoading] = React.useState(false);
   const [searchParams] = useSearchParams();
   const initSpecialty = searchParams.get('specialty') || '';
+  const initNursingService = searchParams.get('nursingService') || '';
   const [notesText, setNotesText] = React.useState('');
 
   useEffect(() => {
     if (initSpecialty) {
       setNotesText(`Consultation request for the ${initSpecialty} Department.`);
+    } else if (initNursingService) {
+      setNotesText(`Consultation request for ${initNursingService} Home Healthcare service.`);
     }
-  }, [initSpecialty]);
+  }, [initSpecialty, initNursingService]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -116,7 +119,7 @@ export default function Booking() {
 
                 <div className="pt-6 border-t border-white/10">
                   <p className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">Contact Support</p>
-                  <p className="font-semibold">+234 811 111 1111</p>
+                  <p className="font-semibold">+234 811 986 8201</p>
                 </div>
               </div>
 
@@ -180,11 +183,14 @@ export default function Booking() {
                        <select 
                         name="service" 
                         id="service" 
-                        defaultValue={initSpecialty ? "Specialist Consultation" : "Online Consultation"}
+                        defaultValue={initNursingService ? initNursingService : (initSpecialty ? "Specialist Consultation" : "Online Consultation")}
                         className="w-full rounded-xl h-12 bg-slate-50 border border-slate-200 px-4 text-sm focus:ring-2 focus:ring-blue-600 outline-none"
                         required 
                         disabled={loading}
                       >
+                        {initNursingService && (
+                          <option value={initNursingService}>{initNursingService}</option>
+                        )}
                         <option value="Online Consultation">Online Consultation</option>
                         <option value="Home Visit">Home Visit</option>
                         <option value="Specialist Consultation">Specialist Consultation</option>

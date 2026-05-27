@@ -102,7 +102,7 @@ export default function HomeHealthcare() {
             <div className="relative">
               <div className="rounded-2xl lg:rounded-3xl overflow-hidden shadow-xl">
                 <img 
-                  src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&q=80&w=1000" 
+                  src="https://www.image2url.com/r2/default/images/1779888683542-a33ea00e-33af-40dd-9968-8347e35b6f28.png" 
                   alt="Quality care" 
                   className="w-full object-cover h-[300px] lg:h-[500px]"
                 />
@@ -113,7 +113,7 @@ export default function HomeHealthcare() {
                 <div className="text-[#1e3a8a] font-semibold text-xs uppercase tracking-wider mb-3">Response Guarantee</div>
                 <div className="flex items-center gap-2 text-emerald-600 text-sm font-semibold">
                   <Phone className="h-4 w-4" />
-                  +234 811 111 1111
+                  +234 811 986 8201
                 </div>
               </div>
             </div>

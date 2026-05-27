@@ -211,30 +211,41 @@ export default function Services() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 lg:py-28 bg-[#1e3a8a] relative overflow-hidden text-center">
-        <div className="max-w-3xl mx-auto px-5 sm:px-6 relative z-10 text-white space-y-8">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
-            Let&apos;s build a customized care plan for you
-          </h2>
-          <p className="text-base lg:text-lg text-white/70">
-            Schedule a free home assessment with our care coordinators today.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button 
-              nativeButton={false} 
-              render={<Link to="/contact" />} 
-              size="lg" 
-              className="bg-white text-[#1e3a8a] hover:bg-white/90 rounded-xl px-8 h-14 font-semibold shadow-lg"
-            >
-              Contact Us Now
-            </Button>
-            <Button 
-              size="lg" 
-              variant="ghost" 
-              className="border-2 border-white/30 text-white hover:bg-white/10 rounded-xl px-8 h-14 font-semibold"
-            >
-              Call Direct
-            </Button>
+      <section className="py-16 md:py-24 bg-slate-50 relative overflow-hidden">
+        <div className="max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-20 relative z-10">
+          <div className="w-full bg-gradient-to-br from-[#1e3a8a] to-[#0f172a] rounded-3xl p-10 md:p-16 lg:p-20 shadow-2xl shadow-blue-950/15 border border-white/10 text-center relative overflow-hidden">
+            {/* Ambient background decoration */}
+            <div className="absolute -right-20 -top-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none select-none animate-pulse" />
+            <div className="absolute -left-20 -bottom-20 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none select-none" />
+            
+            <div className="max-w-2xl mx-auto space-y-6 md:space-y-8 relative z-10 text-white">
+              <span className="inline-flex items-center gap-1.5 bg-white/10 px-4 py-1.5 rounded-full text-emerald-400 font-bold text-[10px] uppercase tracking-widest select-none">
+                <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                Customized Care Plans
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight tracking-tight">
+                Let&apos;s build a customized care plan for you
+              </h2>
+              <p className="text-sm sm:text-base lg:text-lg text-white/80 max-w-lg mx-auto leading-relaxed font-medium">
+                Schedule a free home assessment with our experienced care coordinators today.
+              </p>
+              <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4">
+                <Button 
+                  nativeButton={false} 
+                  render={<Link to="/contact" />} 
+                  size="lg" 
+                  className="w-full sm:w-auto bg-white text-[#1e3a8a] hover:bg-slate-50 rounded-xl px-10 h-14 font-bold shadow-lg transition-all"
+                >
+                  Contact Us Now
+                </Button>
+                <a 
+                  href="tel:+2348119868201"
+                  className="w-full sm:w-auto flex items-center justify-center border-2 border-white/30 text-white hover:bg-white/10 rounded-xl px-10 h-14 font-bold transition-all"
+                >
+                  Call Direct
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>

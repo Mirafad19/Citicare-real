@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, ChevronRight, X } from 'lucide-react';
+import { Menu, ChevronRight, ChevronDown, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
@@ -15,9 +15,25 @@ const navLinks = [
   { name: 'Contact', href: '/contact' },
 ];
 
+const nursingServices = [
+  "On-Site Nursing",
+  "Baby Nursing",
+  "Specialty Care",
+  "24-Hour Care",
+  "Cosmetic Surgery Care",
+  "Hospice Care",
+  "Home Care",
+  "Hotel Care",
+  "Travel Nurses",
+  "Post Op Care",
+  "Senior Care",
+  "Health Seminars"
+];
+
 export function Navbar() {
   const location = useLocation();
   const [isOpen, setIsOpen] = React.useState(false);
+  const [isMobileNursingOpen, setIsMobileNursingOpen] = React.useState(false);
 
   return (
     <div className="w-full flex flex-col">
@@ -38,7 +54,47 @@ export function Navbar() {
           
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-1">
-            {navLinks.map((link) => (
+            {/* Home link */}
+            <Link
+              to="/"
+              className={cn(
+                "px-4 py-2 text-sm font-semibold transition-colors rounded-full",
+                location.pathname === "/" 
+                  ? "text-white bg-[#1e3a8a]" 
+                  : "text-slate-600 hover:text-[#1e3a8a] hover:bg-slate-50"
+              )}
+            >
+              Home
+            </Link>
+
+            {/* Nursing Services Dropdown */}
+            <div className="relative group py-2">
+              <button 
+                className={cn(
+                  "flex items-center gap-1.5 px-4 py-2 text-sm font-semibold transition-colors rounded-full text-slate-600 hover:text-[#1e3a8a] hover:bg-slate-50 select-none cursor-pointer"
+                )}
+              >
+                Nursing Services
+                <ChevronDown className="h-4 w-4 text-slate-400 group-hover:text-[#1e3a8a] transition-colors shrink-0" />
+              </button>
+              
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 hidden group-hover:block w-72 bg-white border border-slate-200 rounded-xl shadow-xl overflow-hidden z-50">
+                <div className="flex flex-col">
+                  {nursingServices.map((service) => (
+                    <Link
+                      key={service}
+                      to={`/book?nursingService=${encodeURIComponent(service)}`}
+                      className="px-5 py-3 text-sm text-slate-800 hover:text-white hover:bg-[#1e3a8a] transition-colors border-b border-slate-100 last:border-b-0 text-left font-medium"
+                    >
+                      {service}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Other links */}
+            {navLinks.slice(1).map((link) => (
               <Link
                 key={link.name}
                 to={link.href}
@@ -87,7 +143,58 @@ export function Navbar() {
                     />
                   </div>
                   <nav className="flex-grow flex flex-col p-6 gap-1 overflow-y-auto">
-                    {navLinks.map((link) => (
+                    {/* Mobile Home */}
+                    <Link
+                      to="/"
+                      onClick={() => setIsOpen(false)}
+                      className={cn(
+                        "flex items-center justify-between py-4 px-4 text-lg font-semibold transition-all rounded-2xl",
+                        location.pathname === "/" 
+                          ? "text-white bg-[#1e3a8a]" 
+                          : "text-slate-700 hover:bg-slate-50"
+                      )}
+                    >
+                      Home
+                      <ChevronRight className={cn(
+                        "h-5 w-5",
+                        location.pathname === "/" ? "text-white/60" : "text-slate-300"
+                      )} />
+                    </Link>
+
+                    {/* Mobile Nursing Services Dropdown (Accordion) */}
+                    <div className="flex flex-col">
+                      <button
+                        onClick={() => setIsMobileNursingOpen(!isMobileNursingOpen)}
+                        className="flex items-center justify-between py-4 px-4 text-lg font-semibold transition-all rounded-2xl text-slate-700 hover:bg-slate-50 select-none cursor-pointer text-left w-full"
+                      >
+                        <span>Nursing Services</span>
+                        <ChevronDown className={cn(
+                          "h-5 w-5 transition-transform duration-200",
+                          isMobileNursingOpen ? "rotate-180" : ""
+                        )} />
+                      </button>
+                      
+                      {isMobileNursingOpen && (
+                        <div className="pl-6 pr-4 py-2 flex flex-col gap-2.5 border-l-2 border-[#1e3a8a]/20 ml-4">
+                          {nursingServices.map((service) => (
+                            <Link
+                              key={service}
+                              to={`/book?nursingService=${encodeURIComponent(service)}`}
+                              onClick={() => {
+                                setIsMobileNursingOpen(false);
+                                setIsOpen(false);
+                              }}
+                              className="py-2.5 text-base font-medium text-slate-600 hover:text-[#1e3a8a] transition-colors"
+                            >
+                              {service || ''}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Rest of links */}
+                    {navLinks.slice(1).map((link) => (
                       <Link
                         key={link.name}
                         to={link.href}
