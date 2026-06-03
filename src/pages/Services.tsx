@@ -16,8 +16,8 @@ const mainServices = [
   {
     title: "Home Healthcare",
     image: "https://www.image2url.com/r2/default/images/1778861274282-fc3009b9-31a4-401b-b0a6-38c7a85c2cbb.png",
-    desc: "We bring care to your doorstep. Our services include medical consultations, psychiatric services, and specialized nursing care.",
-    features: ["Nursing Care", "Psychiatric Support", "In-home Tests", "Vitals Monitoring"],
+    desc: "We bring care to your doorstep. Our services include medical consultations, psychiatric services, Physiotherapy, and specialized nursing care.",
+    features: ["Nursing & Physiotherapy", "Psychiatric Support", "In-home Tests", "Vitals Monitoring"],
     link: "/home-healthcare"
   },
   {

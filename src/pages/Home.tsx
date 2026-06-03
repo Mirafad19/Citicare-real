@@ -282,7 +282,7 @@ export default function Home() {
               {
                 title: "Home Healthcare Services",
                 image: "https://www.image2url.com/r2/default/images/1778861274282-fc3009b9-31a4-401b-b0a6-38c7a85c2cbb.png",
-                desc: "We bring professional care to your doorstep, including medical consultations, psychiatric services, and nursing care.",
+                desc: "We bring professional care to your doorstep, including medical consultations, psychiatric services, Physiotherapy, and nursing care.",
                 buttonText: "Learn More",
                 color: "bg-emerald-50 hover:bg-emerald-100",
                 buttonColor: "bg-emerald-600 hover:bg-emerald-700",

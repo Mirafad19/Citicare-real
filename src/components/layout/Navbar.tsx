@@ -18,6 +18,7 @@ const navLinks = [
 const nursingServices = [
   "On-Site Nursing",
   "Baby Nursing",
+  "Physiotherapy",
   "Specialty Care",
   "24-Hour Care",
   "Cosmetic Surgery Care",

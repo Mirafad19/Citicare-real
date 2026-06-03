@@ -137,7 +137,7 @@ export default function HomeHealthcare() {
               "Skilled Nursing Care",
               "Post-Operative Recovery",
               "Elderly Companion Care",
-              "Physical Therapy",
+              "Physiotherapy (Physical Therapy)",
               "Psychiatric Home Support",
               "Medication Management",
               "Wound Care Services",
