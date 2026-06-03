@@ -17,7 +17,7 @@ const slides = [
     image: "https://www.image2url.com/r2/default/images/1779564983342-5f3d74fa-3758-44a4-af10-62c18c131dcd.png",
     subtitle: "Qualified Professionals",
     title: "Access to world class medical experts",
-    description: "We connect you with licensed and verified healthcare professionals who are committed to your total wellbeing and long term health guidance.",
+    description: "We have licensed and verified professionals who are committed to your total well-being and long term health guidance.",
   },
   {
     image: "https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&q=80&w=2000",

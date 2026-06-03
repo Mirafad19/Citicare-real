@@ -3,8 +3,48 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Dynamic Robots Directive to prevent staging/preview domain indexing -->
+    <script>
+      (function() {
+        var hostname = window.location.hostname;
+        var isProduction = hostname === 'citicarehealth.com' || hostname === 'www.citicarehealth.com';
+        var meta = document.createElement('meta');
+        meta.name = 'robots';
+        if (isProduction) {
+          meta.content = 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
+        } else {
+          meta.content = 'noindex, nofollow';
+        }
+        document.head.appendChild(meta);
+      })();
+    </script>
+
+    <!-- Professional SEO Meta Tags -->
+    <title>Citicare Integrated Health Solutions - Your Trusted Care Partner</title>
+    <meta name="description" content="Citicare Integrated Health Solutions offers exceptional client-centered home nursing, specialty care, baby nursing, geriatric care, and specialist consultations." />
+    <meta name="keywords" content="home nursing, care solutions, medical companion, baby nursing, geriatric care, specialty care, doctor consultations, Citicare, Citicare Health" />
+    <meta name="author" content="Citicare Integrated Health Solutions" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.citicarehealth.com/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.citicarehealth.com/" />
+    <meta property="og:title" content="Citicare Integrated Health Solutions - Your Trusted Care Partner" />
+    <meta property="og:description" content="Exceptional, secure client-centered digital healthcare and nursing solutions delivered professionally directly to your comfort zone." />
+    <meta property="og:image" content="https://www.image2url.com/r2/default/images/1778793792491-b1b6686e-ac45-4d5b-b39c-d970f1d5d1da.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://www.citicarehealth.com/" />
+    <meta property="twitter:title" content="Citicare Integrated Health Solutions - Your Trusted Care Partner" />
+    <meta property="twitter:description" content="Exceptional, secure client-centered digital healthcare and nursing solutions delivered professionally directly to your comfort zone." />
+    <meta property="twitter:image" content="https://www.image2url.com/r2/default/images/1778793792491-b1b6686e-ac45-4d5b-b39c-d970f1d5d1da.png" />
+
     <link rel="icon" type="image/png" href="https://www.image2url.com/r2/default/images/1778793792491-b1b6686e-ac45-4d5b-b39c-d970f1d5d1da.png" />
-    <title>Citicare Health - Your Digital Healthcare Partner</title>
+    
     <!-- Start of HubSpot Embed Code -->
     <script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/148575871.js"></script>
     <!-- End of HubSpot Embed Code -->
