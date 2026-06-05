@@ -533,7 +533,7 @@ export default function Home() {
                 <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
                 Get Started Today
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight tracking-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight tracking-tight">
                 Ready to experience quality healthcare?
               </h2>
               <p className="text-sm sm:text-base lg:text-lg text-white/80 max-w-lg mx-auto leading-relaxed font-medium">

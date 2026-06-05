@@ -63,7 +63,7 @@ const specialties = [
   },
   {
     slug: "plastic-surgery",
-    icon: Sparkles,
+    icon: ShieldCheck,
     name: "Plastic Surgery",
     desc: "Reconstructive consultations and advanced aesthetic medical assessments with board-certified surgeons.",
     color: "bg-purple-50 text-purple-600"

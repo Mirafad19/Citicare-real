@@ -128,7 +128,7 @@ const specialtyData: Record<string, SpecialtyInfo> = {
   },
   "plastic-surgery": {
     name: "Plastic Surgery",
-    icon: Sparkles,
+    icon: ShieldCheck,
     leadDoc: "Dr. Babatunde Sanwo, MBA, FRCS (Plast)",
     specialistTitle: "Consultant Reconstructive & Plastic Surgeon",
     color: "text-purple-600 bg-purple-50",

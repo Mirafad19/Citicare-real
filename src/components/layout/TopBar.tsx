@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Home, Search, Facebook, Instagram, Linkedin, Twitter, ShieldCheck } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 export function TopBar() {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const query = params.get('q');
+    if (location.pathname === '/search' && query) {
+      setSearchQuery(query);
+    } else {
+      setSearchQuery('');
+    }
+  }, [location]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
