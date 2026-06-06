@@ -1,5 +1,4 @@
 import { ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
 
 export default function Privacy() {
   return (
@@ -8,13 +7,13 @@ export default function Privacy() {
         
         {/* Navigation Breadcrumb */}
         <div className="mb-10">
-          <Link 
-            to="/" 
+          <a 
+            href="/" 
             className="inline-flex items-center gap-2 text-[#1e3a8a] hover:text-blue-700 font-semibold text-sm transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to home
-          </Link>
+          </a>
         </div>
 
         {/* Professional Document Layout */}
@@ -92,7 +91,7 @@ export default function Privacy() {
           <div className="border-t border-slate-200 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
             <span>© 2026 Citicare Integrated Health Solutions Ltd. All rights reserved.</span>
             <div className="flex gap-4">
-              <Link to="/terms" className="hover:text-[#1e3a8a] underline transition-colors">Terms of Service</Link>
+              <a href="/terms" className="hover:text-[#1e3a8a] underline transition-colors">Terms of Service</a>
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { 
   Heart, Brain, Scissors, Baby, Activity, Stethoscope, 
@@ -168,9 +168,9 @@ export default function SpecialtyDetail() {
           </div>
           <h2 className="text-2xl font-bold text-slate-800">Specialty Path Not Found</h2>
           <p className="text-slate-500 text-sm">We could not locate this health expertise. Please return to the Specialist section to explore other departments.</p>
-          <Button nativeButton={false} render={<Link to="/specialist-care" />} className="bg-[#1e3a8a] text-white rounded-xl">
+          <a href="/specialist-care" className="bg-[#1e3a8a] text-white rounded-xl px-5 py-2.5 inline-flex items-center justify-center text-sm font-semibold transition-colors shadow-md">
             Return to Specialist Care
-          </Button>
+          </a>
         </div>
       </div>
     );
@@ -184,13 +184,13 @@ export default function SpecialtyDetail() {
       <section className="relative py-16 lg:py-24 overflow-hidden bg-white border-b border-slate-100">
         <div className={`absolute inset-0 bg-gradient-to-r ${info.bgGrad} -z-10`} />
         <div className="max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-20">
-          <Link 
-            to="/specialist-care" 
+          <a 
+            href="/specialist-care" 
             className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-blue-600 font-semibold mb-8 transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Specialists
-          </Link>
+          </a>
 
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             {/* title / lead info */}
@@ -222,13 +222,12 @@ export default function SpecialtyDetail() {
                   <div className="text-xs text-blue-200 font-semibold uppercase tracking-wider">Ready to connect?</div>
                   <div className="font-bold text-lg">Instant Care Allocation</div>
                 </div>
-                <Button 
-                  nativeButton={false}
-                  render={<Link to={`/book?specialty=${info.name}`} />}
-                  className="bg-white text-[#1e3a8a] hover:bg-white/90 rounded-xl px-5 h-11 text-xs uppercase tracking-wider font-bold"
+                <a 
+                  href={`/book?specialty=${info.name}`}
+                  className="bg-white text-[#1e3a8a] hover:bg-white/90 rounded-xl px-5 h-11 text-xs uppercase tracking-wider font-bold inline-flex items-center justify-center transition-colors"
                 >
                   Book Slot
-                </Button>
+                </a>
               </div>
             </div>
           </div>
@@ -297,14 +296,12 @@ export default function SpecialtyDetail() {
               </div>
 
               {/* large CTA Booking trigger */}
-              <Button 
-                nativeButton={false}
-                render={<Link to={`/book?specialty=${info.name}`} />}
-                size="lg"
-                className="w-full bg-[#1e3a8a] text-white rounded-xl shadow-lg mt-4 h-12 font-bold uppercase tracking-wider text-xs"
+              <a 
+                href={`/book?specialty=${info.name}`}
+                className="w-full bg-[#1e3a8a] hover:bg-[#1e3a8a]/90 text-white rounded-xl shadow-lg mt-4 h-12 font-bold uppercase tracking-wider text-xs flex items-center justify-center transition-colors"
               >
                 Schedule Consultation
-              </Button>
+              </a>
             </div>
           </div>
 

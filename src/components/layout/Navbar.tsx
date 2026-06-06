@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Menu, ChevronRight, ChevronDown, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
@@ -41,7 +41,7 @@ export function Navbar() {
       <header className="sticky top-0 z-50 w-full bg-white border-b border-slate-100">
         <div className="max-w-[1440px] mx-auto flex h-20 lg:h-24 items-center justify-between px-5 sm:px-6 lg:px-20">
           {/* Logo Area */}
-          <Link to="/" className="flex items-center gap-3 shrink-0">
+          <a href="/" className="flex items-center gap-3 shrink-0">
             <div className="h-14 lg:h-18 w-auto flex items-center justify-start overflow-hidden">
               <img 
                 src="https://www.image2url.com/r2/default/images/1778793792491-b1b6686e-ac45-4d5b-b39c-d970f1d5d1da.png" 
@@ -50,13 +50,13 @@ export function Navbar() {
                 referrerPolicy="no-referrer"
               />
             </div>
-          </Link>
+          </a>
           
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-1">
             {/* Home link */}
-            <Link
-              to="/"
+            <a
+              href="/"
               className={cn(
                 "px-4 py-2 text-sm font-semibold transition-colors rounded-full",
                 location.pathname === "/" 
@@ -65,7 +65,7 @@ export function Navbar() {
               )}
             >
               Home
-            </Link>
+            </a>
 
             {/* Nursing Services Dropdown */}
             <div className="relative group py-2">
@@ -81,13 +81,13 @@ export function Navbar() {
               <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 hidden group-hover:block w-72 bg-white border border-slate-200 rounded-xl shadow-xl overflow-hidden z-50">
                 <div className="flex flex-col">
                   {nursingServices.map((service) => (
-                    <Link
+                    <a
                       key={service}
-                      to={`/book?nursingService=${encodeURIComponent(service)}`}
+                      href={`/book?nursingService=${encodeURIComponent(service)}`}
                       className="px-5 py-3 text-sm text-slate-800 hover:text-white hover:bg-[#1e3a8a] transition-colors border-b border-slate-100 last:border-b-0 text-left font-medium"
                     >
                       {service}
-                    </Link>
+                    </a>
                   ))}
                 </div>
               </div>
@@ -95,9 +95,9 @@ export function Navbar() {
 
             {/* Other links */}
             {navLinks.slice(1).map((link) => (
-              <Link
+              <a
                 key={link.name}
-                to={link.href}
+                href={link.href}
                 className={cn(
                   "px-4 py-2 text-sm font-semibold transition-colors rounded-full",
                   location.pathname === link.href 
@@ -106,20 +106,20 @@ export function Navbar() {
                 )}
               >
                 {link.name}
-              </Link>
+              </a>
             ))}
           </nav>
 
           <div className="flex items-center gap-4">
-            <Link 
-              to="/book" 
+            <a 
+              href="/book" 
               className="hidden md:flex items-center gap-3 bg-[#1e3a8a] hover:bg-[#1e3a8a]/90 text-white pl-2 pr-6 py-2 rounded-full font-semibold text-sm transition-all shadow-lg shadow-blue-900/10 group"
             >
               <div className="h-9 w-9 flex items-center justify-center bg-white/15 rounded-full group-hover:bg-white/25 transition-colors">
                 <ChevronRight className="h-5 w-5" />
               </div>
               Book Now
-            </Link>
+            </a>
 
             {/* Mobile Menu Trigger */}
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -144,8 +144,8 @@ export function Navbar() {
                   </div>
                   <nav className="flex-grow flex flex-col p-6 gap-1 overflow-y-auto">
                     {/* Mobile Home */}
-                    <Link
-                      to="/"
+                    <a
+                      href="/"
                       onClick={() => setIsOpen(false)}
                       className={cn(
                         "flex items-center justify-between py-4 px-4 text-lg font-semibold transition-all rounded-2xl",
@@ -159,7 +159,7 @@ export function Navbar() {
                         "h-5 w-5",
                         location.pathname === "/" ? "text-white/60" : "text-slate-300"
                       )} />
-                    </Link>
+                    </a>
 
                     {/* Mobile Nursing Services Dropdown (Accordion) */}
                     <div className="flex flex-col">
@@ -177,9 +177,9 @@ export function Navbar() {
                       {isMobileNursingOpen && (
                         <div className="pl-6 pr-4 py-2 flex flex-col gap-2.5 border-l-2 border-[#1e3a8a]/20 ml-4">
                           {nursingServices.map((service) => (
-                            <Link
+                            <a
                               key={service}
-                              to={`/book?nursingService=${encodeURIComponent(service)}`}
+                              href={`/book?nursingService=${encodeURIComponent(service)}`}
                               onClick={() => {
                                 setIsMobileNursingOpen(false);
                                 setIsOpen(false);
@@ -187,7 +187,7 @@ export function Navbar() {
                               className="py-2.5 text-base font-medium text-slate-600 hover:text-[#1e3a8a] transition-colors"
                             >
                               {service || ''}
-                            </Link>
+                            </a>
                           ))}
                         </div>
                       )}
@@ -195,9 +195,9 @@ export function Navbar() {
 
                     {/* Rest of links */}
                     {navLinks.slice(1).map((link) => (
-                      <Link
+                      <a
                         key={link.name}
-                        to={link.href}
+                        href={link.href}
                         onClick={() => setIsOpen(false)}
                         className={cn(
                           "flex items-center justify-between py-4 px-4 text-lg font-semibold transition-all rounded-2xl",
@@ -211,24 +211,24 @@ export function Navbar() {
                           "h-5 w-5",
                           location.pathname === link.href ? "text-white/60" : "text-slate-300"
                         )} />
-                      </Link>
+                      </a>
                     ))}
                   </nav>
                   <div className="p-6 border-t border-slate-100">
-                    <Link 
-                      to="/book" 
+                    <a 
+                      href="/book" 
                       onClick={() => setIsOpen(false)}
                       className="flex items-center justify-center gap-3 bg-[#1e3a8a] text-white py-4 rounded-2xl font-semibold text-base shadow-lg"
                     >
                       Book Consultation
-                    </Link>
-                    <Link 
-                      to="/contact" 
+                    </a>
+                    <a 
+                      href="/contact" 
                       onClick={() => setIsOpen(false)}
                       className="mt-3 flex items-center justify-center gap-3 bg-slate-100 text-slate-700 py-4 rounded-2xl font-semibold text-base"
                     >
                       Contact Us
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </SheetContent>

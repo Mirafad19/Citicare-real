@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Stethoscope, Heart, Brain, Scissors, Baby, Activity, ShieldCheck, Star, Apple, Sparkles } from 'lucide-react';
 import { Button } from '../components/ui/button';
-import { Link } from 'react-router-dom';
 
 const specialties = [
   {
@@ -114,14 +113,12 @@ export default function SpecialistCare() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
             >
-              <Button 
-                nativeButton={false} 
-                render={<Link to="/book" />} 
-                size="lg" 
-                className="bg-[#1e3a8a] text-white rounded-xl px-8 h-14 font-semibold shadow-lg"
+              <a 
+                href="/book" 
+                className="bg-[#1e3a8a] text-white rounded-xl px-8 h-14 font-semibold shadow-lg inline-flex items-center justify-center transition-colors hover:bg-opacity-90 text-sm"
               >
                 Book a Specialist
-              </Button>
+              </a>
             </motion.div>
           </div>
         </div>
@@ -145,13 +142,13 @@ export default function SpecialistCare() {
                 </div>
                 <h3 className="text-2xl font-bold text-[#1e3a8a] mb-3">{item.name}</h3>
                 <p className="text-slate-600 text-sm leading-relaxed mb-6">{item.desc}</p>
-                <Link 
-                  to={`/specialist-care/${item.slug}`} 
+                <a 
+                  href={`/specialist-care/${item.slug}`} 
                   className="inline-flex items-center gap-2 text-blue-600 font-semibold text-sm hover:gap-3 transition-all"
                 >
                   View Details & Book
                   <Activity className="h-4 w-4" />
-                </Link>
+                </a>
               </motion.div>
             ))}
           </div>
@@ -210,14 +207,12 @@ export default function SpecialistCare() {
         <div className="max-w-2xl mx-auto px-5 sm:px-6 space-y-6">
           <h2 className="text-3xl sm:text-4xl font-bold text-[#1e3a8a]">Need an Urgent Appointment?</h2>
           <p className="text-slate-600">Contact our specialized coordination desk for priority booking for acute cases.</p>
-          <Button 
-            nativeButton={false} 
-            render={<Link to="/contact" />} 
-            size="lg" 
-            className="border-2 border-[#1e3a8a] text-[#1e3a8a] bg-transparent hover:bg-[#1e3a8a] hover:text-white rounded-xl px-8 h-14 font-semibold"
+          <a 
+            href="/contact" 
+            className="border-2 border-[#1e3a8a] text-[#1e3a8a] bg-transparent hover:bg-[#1e3a8a] hover:text-white rounded-xl px-8 h-12 font-semibold inline-flex items-center justify-center text-sm transition-colors"
           >
             Enquire Now
-          </Button>
+          </a>
         </div>
       </section>
     </div>

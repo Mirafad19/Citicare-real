@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Mail, MapPin, Phone, Instagram, Facebook, Linkedin, Twitter, ArrowRight, ChevronUp, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 import { db } from '../../lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
@@ -49,7 +48,7 @@ export function Footer() {
       {/* Top Bar: Logo & Socials */}
       <div className="border-b border-white/10">
         <div className="max-w-[1440px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 px-5 sm:px-6 lg:px-20 py-8">
-          <Link to="/" className="flex items-center shrink-0 group">
+          <a href="/" className="flex items-center shrink-0 group">
             <div className="bg-white rounded-2xl px-6 py-3 flex items-center justify-center">
               <img 
                 src="https://www.image2url.com/r2/default/images/1778793792491-b1b6686e-ac45-4d5b-b39c-d970f1d5d1da.png" 
@@ -58,7 +57,7 @@ export function Footer() {
                 referrerPolicy="no-referrer"
               />
             </div>
-          </Link>
+          </a>
           <div className="flex gap-3">
             {[
               { Icon: Facebook, href: "#" },
@@ -134,13 +133,13 @@ export function Footer() {
                 { name: 'Specialist Consultations', href: '/services' },
               ].map((link, i) => (
                 <li key={i}>
-                  <Link 
-                    to={link.href} 
+                  <a 
+                    href={link.href} 
                     className="group flex items-center gap-2 text-white/70 hover:text-white transition-colors text-sm"
                   >
                     <ArrowRight className="h-4 w-4 text-blue-400 group-hover:translate-x-1 transition-transform" />
                     {link.name}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -158,13 +157,13 @@ export function Footer() {
                 { name: "Health Tech Integration", href: "/about" }
               ].map((item, i) => (
                 <li key={i}>
-                  <Link 
-                    to={item.href} 
+                  <a 
+                    href={item.href} 
                     className="flex items-center gap-2 text-white/70 hover:text-white transition-colors text-sm group"
                   >
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 group-hover:scale-150 transition-transform" />
                     {item.name}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -247,11 +246,11 @@ export function Footer() {
       <div className="bg-[#162d6b] py-6 border-t border-white/10">
         <div className="max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-20 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-white/60 text-xs">
-            2026 Citicare. All rights reserved.
+            © 2026 Citicare. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <Link to="/privacy" className="text-white/60 hover:text-white transition-colors text-xs">Privacy Policy</Link>
-            <Link to="/terms" className="text-white/60 hover:text-white transition-colors text-xs">Terms of Service</Link>
+            <a href="/privacy" className="text-white/60 hover:text-white transition-colors text-xs">Privacy Policy</a>
+            <a href="/terms" className="text-white/60 hover:text-white transition-colors text-xs">Terms of Service</a>
           </div>
           <button 
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}

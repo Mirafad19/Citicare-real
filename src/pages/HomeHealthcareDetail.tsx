@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { ArrowLeft, CheckCircle2, ChevronRight, Phone, Calendar, Heart, ShieldCheck } from 'lucide-react';
 import { Button } from '../components/ui/button';
 
@@ -142,9 +142,9 @@ export default function HomeHealthcareDetail() {
       <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-6 text-center">
         <h2 className="text-2xl font-bold text-[#1e3a8a] mb-2">Service Not Found</h2>
         <p className="text-slate-500 mb-6">The requested home healthcare service could not be located.</p>
-        <Link to="/home-healthcare" className="text-emerald-600 hover:text-emerald-700 font-bold flex items-center gap-2">
+        <a href="/home-healthcare" className="text-emerald-600 hover:text-emerald-700 font-bold flex items-center gap-2">
           <ArrowLeft className="h-4 w-4" /> Back to Home Healthcare
-        </Link>
+        </a>
       </div>
     );
   }
@@ -163,13 +163,13 @@ export default function HomeHealthcareDetail() {
         </div>
 
         <div className="max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-20 relative z-10">
-          <Link 
-            to="/home-healthcare" 
+          <a 
+            href="/home-healthcare" 
             className="inline-flex items-center gap-2 text-white/75 hover:text-white font-medium text-xs mb-8 transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
             Home Healthcare Services
-          </Link>
+          </a>
 
           <div className="max-w-2xl space-y-4">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#1e3a8a] text-blue-200 uppercase tracking-widest">
@@ -240,13 +240,12 @@ export default function HomeHealthcareDetail() {
               </div>
 
               <div className="space-y-3 pt-2">
-                <Button
-                  nativeButton={false}
-                  render={<Link to={`/book?nursingService=${encodeURIComponent(detail.title)}`} />}
+                <a
+                  href={`/book?nursingService=${encodeURIComponent(detail.title)}`}
                   className="w-full bg-[#10b981] hover:bg-emerald-500 text-white rounded-xl h-12 font-bold text-xs flex items-center justify-center gap-2 shadow-lg transition-colors"
                 >
                   <Calendar className="h-4 w-4" /> Schedule Outpatient Service
-                </Button>
+                </a>
                 <a 
                   href="tel:+2348119868201"
                   className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-xl h-12 font-bold text-xs flex items-center justify-center gap-2 transition-colors"
@@ -262,12 +261,12 @@ export default function HomeHealthcareDetail() {
                 Need details regarding specific insurance coverage, payment cycles, or therapist rosters? Our clinical coordinators are here to assist.
               </p>
               <div className="flex flex-col gap-2 pt-2">
-                <Link
-                  to="/contact"
+                <a
+                  href="/contact"
                   className="w-full text-center bg-slate-50 hover:bg-slate-100 text-slate-700 py-2.5 rounded-xl text-xs font-bold border border-slate-100 transition-colors block"
                 >
                   Contact Help Desk
-                </Link>
+                </a>
               </div>
             </div>
 

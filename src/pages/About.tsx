@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
 import { Target, Shield, Heart, Zap, Star, ShieldCheck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 

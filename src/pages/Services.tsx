@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
 import { CheckCircle2, Heart, Activity, UserCheck, ShieldCheck, Zap, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -88,13 +87,12 @@ export default function Services() {
                       </div>
                     ))}
                   </div>
-                  <Button 
-                    nativeButton={false} 
-                    render={<Link to={service.link} />} 
-                    className="mt-auto bg-[#1e3a8a] hover:bg-[#1e3a8a]/90 text-white rounded-xl h-12 font-semibold text-sm w-full"
+                  <a 
+                    href={service.link} 
+                    className="mt-auto bg-[#1e3a8a] hover:bg-[#1e3a8a]/90 text-white rounded-xl h-12 font-semibold text-sm w-full flex items-center justify-center shadow-sm transition-colors"
                   >
                     Learn More
-                  </Button>
+                  </a>
                 </div>
               </motion.div>
             ))}
@@ -198,13 +196,12 @@ export default function Services() {
                   </li>
                 ))}
               </ul>
-              <Button 
-                nativeButton={false} 
-                render={<Link to="/book" />} 
-                className="bg-[#1e3a8a] hover:bg-[#1e3a8a]/90 text-white rounded-xl px-8 h-12 font-semibold flex items-center gap-2"
+              <a 
+                href="/book" 
+                className="bg-[#1e3a8a] hover:bg-[#1e3a8a]/90 text-white rounded-xl px-8 h-12 font-semibold flex items-center justify-center gap-2 shadow-sm transition-colors w-max"
               >
                 Book Assessment <ChevronRight className="h-4 w-4" />
-              </Button>
+              </a>
             </div>
           </div>
         </div>
@@ -230,14 +227,12 @@ export default function Services() {
                 Schedule a free home assessment with our experienced care coordinators today.
               </p>
               <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4">
-                <Button 
-                  nativeButton={false} 
-                  render={<Link to="/contact" />} 
-                  size="lg" 
-                  className="w-full sm:w-auto bg-white text-[#1e3a8a] hover:bg-slate-50 rounded-xl px-10 h-14 font-bold shadow-lg transition-all"
+                <a 
+                  href="/contact" 
+                  className="w-full sm:w-auto bg-white text-[#1e3a8a] hover:bg-slate-50 rounded-xl px-10 h-14 font-bold shadow-lg transition-all flex items-center justify-center text-sm"
                 >
                   Contact Us Now
-                </Button>
+                </a>
                 <a 
                   href="tel:+2348119868201"
                   className="w-full sm:w-auto flex items-center justify-center border-2 border-white/30 text-white hover:bg-white/10 rounded-xl px-10 h-14 font-bold transition-all"

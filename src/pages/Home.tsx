@@ -2,7 +2,6 @@ import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Button } from '@/components/ui/button';
 import { ChevronRight, Zap, ArrowRight, ShieldCheck, Phone } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { StaggerTestimonials } from '@/components/StaggerTestimonials';
 
@@ -146,15 +145,15 @@ export default function Home() {
                     {slides[currentSlide].description}
                   </p>
                   <div className="pt-4 relative z-30">
-                    <Link 
-                      to="/services" 
+                    <a 
+                      href="/services" 
                       className="inline-flex items-center gap-4 bg-[#1e3a8a] hover:bg-[#1e3a8a]/90 text-white pl-2 pr-6 py-2 rounded-full font-semibold text-sm transition-all shadow-lg shadow-blue-900/20 group"
                     >
                       <div className="h-10 w-10 flex items-center justify-center bg-white/15 rounded-full group-hover:bg-white/25 transition-colors">
                         <Zap className="h-5 w-5" />
                       </div>
                       View All Services
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </motion.div>
@@ -321,16 +320,15 @@ export default function Home() {
                   <p className="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">
                     {service.desc}
                   </p>
-                  <Button 
-                    nativeButton={false} 
-                    render={<Link to={service.link} />} 
+                  <a 
+                    href={service.link}
                     className={cn(
-                      "w-full text-white rounded-xl h-12 font-semibold text-sm transition-colors",
+                      "w-full text-white rounded-xl h-12 font-semibold text-sm transition-colors flex items-center justify-center shadow-md",
                       service.buttonColor
                     )}
                   >
                     {service.buttonText}
-                  </Button>
+                  </a>
                 </div>
               </motion.div>
             ))}
@@ -365,14 +363,12 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-              <Button 
-                nativeButton={false} 
-                render={<Link to="/about" />} 
-                size="lg" 
-                className="bg-[#1e3a8a] hover:bg-[#1e3a8a]/90 text-white rounded-xl px-8 h-14 text-sm font-semibold"
+              <a 
+                href="/about" 
+                className="bg-[#1e3a8a] hover:bg-[#1e3a8a]/90 text-white rounded-xl px-8 h-14 text-sm font-semibold flex items-center justify-center w-max shadow-md transition-colors"
               >
                 Learn About Citicare
-              </Button>
+              </a>
             </div>
             <div className="flex-1 w-full">
               <div className="relative">
@@ -423,20 +419,18 @@ export default function Home() {
                 Book a consultation with our licensed and verified healthcare professionals. Join thousands of patients who trust Citicare for their medical needs and ongoing wellness guidance.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-2">
-                <Button 
-                  nativeButton={false} 
-                  render={<Link to="/book" />} 
-                  size="lg" 
-                  className="bg-white text-[#1e3a8a] hover:bg-white/90 rounded-xl px-8 h-14 font-semibold shadow-lg"
+                <a 
+                  href="/book" 
+                  className="bg-white text-[#1e3a8a] hover:bg-white/90 rounded-xl px-8 h-14 font-semibold shadow-lg flex items-center justify-center"
                 >
                   Book Appointment
-                </Button>
-                <Link 
-                  to="/contact" 
+                </a>
+                <a 
+                  href="/contact" 
                   className="inline-flex items-center justify-center border-2 border-white/30 text-white hover:bg-white/10 rounded-xl px-8 h-14 font-semibold transition-colors"
                 >
                   General Inquiry
-                </Link>
+                </a>
               </div>
             </div>
           </div>
@@ -540,18 +534,18 @@ export default function Home() {
                 Connect with our certified medical professionals and take control of your health.
               </p>
               <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4">
-                <Link 
-                  to="/book" 
+                <a 
+                  href="/book" 
                   className="w-full sm:w-auto inline-flex items-center justify-center bg-white text-[#1e3a8a] hover:bg-slate-50 rounded-xl px-10 h-14 text-base font-semibold shadow-lg transition-all"
                 >
                   Book Now
-                </Link>
-                <Link 
-                  to="/contact" 
+                </a>
+                <a 
+                  href="/contact" 
                   className="w-full sm:w-auto inline-flex items-center justify-center border-2 border-white/30 text-white hover:bg-white/10 rounded-xl px-10 h-14 text-base font-semibold transition-colors"
                 >
                   Contact Us Now
-                </Link>
+                </a>
               </div>
             </div>
           </div>

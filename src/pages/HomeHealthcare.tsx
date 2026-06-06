@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Home, Heart, Activity, UserCheck, Shield, ChevronRight, Phone } from 'lucide-react';
 import { Button } from '../components/ui/button';
-import { Link } from 'react-router-dom';
 
 export default function HomeHealthcare() {
   return (
@@ -34,14 +33,12 @@ export default function HomeHealthcare() {
             <p className="text-base lg:text-lg text-white/80 leading-relaxed mb-6">
               Professional medical care delivered in the comfort and safety of your own home. Our dedicated team ensures you receive the highest quality treatment without leaving your doorstep.
             </p>
-            <Button 
-              nativeButton={false} 
-              render={<Link to="/book" />} 
-              size="lg" 
-              className="bg-white text-[#1e3a8a] hover:bg-white/90 rounded-xl px-8 h-14 font-semibold"
+            <a 
+              href="/book" 
+              className="bg-white text-[#1e3a8a] hover:bg-white/95 rounded-xl px-8 h-14 font-semibold inline-flex items-center justify-center text-sm transition-colors shadow-lg"
             >
               Request Home Care
-            </Button>
+            </a>
           </motion.div>
         </div>
       </section>
@@ -144,14 +141,14 @@ export default function HomeHealthcare() {
               { name: "Lab Sample Collection", slug: "lab-sample-collection" },
               { name: "Palliative Care", slug: "palliative-care" }
             ].map((service, i) => (
-              <Link
+              <a
                 key={i}
-                to={`/home-healthcare/${service.slug}`}
+                href={`/home-healthcare/${service.slug}`}
                 className="bg-white/5 border border-white/10 hover:border-emerald-400 hover:bg-white/10 p-5 lg:p-6 rounded-xl flex items-center justify-between transition-all duration-300 group block"
               >
                 <span className="font-semibold text-sm lg:text-base text-white group-hover:text-emerald-300 transition-colors">{service.name}</span>
                 <ChevronRight className="h-5 w-5 text-emerald-400 group-hover:text-emerald-300 group-hover:translate-x-1 transition-all" />
-              </Link>
+              </a>
             ))}
           </div>
         </div>
@@ -166,22 +163,18 @@ export default function HomeHealthcare() {
               Ready to bring hospital-quality care to your home? Let&apos;s discuss your requirements today.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
-              <Button 
-                nativeButton={false} 
-                render={<Link to="/book" />} 
-                size="lg" 
-                className="bg-white text-[#1e3a8a] rounded-xl px-8 h-14 font-semibold"
+              <a 
+                href="/book" 
+                className="bg-white text-[#1e3a8a] hover:bg-white/95 rounded-xl px-8 h-12 font-semibold inline-flex items-center justify-center text-sm transition-colors"
               >
                 Book Initial Visit
-              </Button>
-              <Button 
-                nativeButton={false} 
-                render={<Link to="/contact" />} 
-                size="lg" 
-                className="bg-transparent border-2 border-white/30 text-white rounded-xl px-8 h-14 font-semibold hover:bg-white/10"
+              </a>
+              <a 
+                href="/contact" 
+                className="bg-transparent border-2 border-white/30 text-white rounded-xl px-8 h-12 font-semibold hover:bg-white/10 inline-flex items-center justify-center text-sm transition-colors"
               >
                 Contact Consultant
-              </Button>
+              </a>
             </div>
           </div>
         </div>

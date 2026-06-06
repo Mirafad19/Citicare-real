@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { 
   Search as SearchIcon, 
   FileText, 
@@ -419,8 +419,8 @@ export default function Search() {
                   transition={{ delay: Math.min(i * 0.05, 0.3) }}
                   layoutId={result.title}
                 >
-                  <Link 
-                    to={result.link}
+                  <a 
+                    href={result.link}
                     className="block bg-white p-5 lg:p-6 rounded-2xl border border-slate-100 hover:border-blue-200 hover:shadow-md transition-all relative overflow-hidden group"
                   >
                     <div className="flex items-start justify-between">
@@ -442,7 +442,7 @@ export default function Search() {
                       </div>
                       <ChevronRight className="h-5 w-5 text-slate-300 group-hover:text-blue-600 transition-colors group-hover:translate-x-1 shrink-0 mt-1" />
                     </div>
-                  </Link>
+                  </a>
                 </motion.div>
               ))}
             </motion.div>
@@ -459,9 +459,9 @@ export default function Search() {
               We couldn&apos;t match an exact word or service description for <strong className="text-red-500 font-bold">&quot;{query}&quot;</strong>. Let&apos;s browse general healthcare support packages.
             </p>
             <div className="flex gap-4 justify-center">
-              <Link to="/services" className="px-5 py-2.5 bg-[#1e3a8a] text-white rounded-xl text-xs font-semibold hover:bg-blue-800 transition-colors">
+              <a href="/services" className="px-5 py-2.5 bg-[#1e3a8a] text-white rounded-xl text-xs font-semibold hover:bg-blue-800 transition-colors">
                 View All Services
-              </Link>
+              </a>
               <button onClick={clearSearch} className="px-5 py-2.5 text-[#1e3a8a] bg-slate-150 rounded-xl text-xs font-semibold hover:bg-slate-200 transition-colors">
                 Start Over
               </button>
