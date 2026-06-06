@@ -1,82 +1,205 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { HelpCircle, Mail, Phone } from "lucide-react";
+import React, { useState } from 'react';
+import { HelpCircle, Mail, Phone, ChevronDown, CheckCircle2, MessageSquare, ShieldAlert } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 
-const faqs = [
+interface FAQItem {
+  question: string;
+  answer: string;
+  category: 'booking' | 'clinical' | 'logistics';
+}
+
+const faqs: FAQItem[] = [
   {
-    question: "How do I book a consultation?",
-    answer: "Simply sign up through our platform and select your preferred service from the 'Services' menu. Alternatively, you can use the 'Book Now' button on our contact page."
+    category: 'booking',
+    question: "How do I book a consultation or home healthcare assessment?",
+    answer: "Simply navigate to our online booking system and fill out your name, contact information, and desired service. Within a brief timeframe, our care coordinators will review your files and reach out to complete the coordination and confirm your clinical timing."
   },
   {
-    question: "Do you offer home visits?",
-    answer: "Yes, we provide home healthcare services tailored to your needs, including medical consultations, physiotherapy, and nursing care."
+    category: 'logistics',
+    question: "Do you offer home clinical visits and therapy?",
+    answer: "Yes. Citicare provides fully compliant, certified home healthcare services including registered nurse visits, specialized physiotherapy sessions, palliative care, and post-operative monitoring directly inside patient residences."
   },
   {
-    question: "Are your doctors certified?",
-    answer: "Yes, all our healthcare professionals are licensed, verified, and go through a rigorous vetting process to ensure quality care."
+    category: 'clinical',
+    question: "Are your doctors, nurses, and physical therapists certified?",
+    answer: "Absolutely. Every professional on our registry undergoes a rigorous validation process. We verify local medical licenses, perform background checks, evaluate clinical experience, and maintain active EMR monitoring to ensure standard-setting patient security."
   },
   {
-    question: "Do you provide follow-up care?",
-    answer: "Absolutely. Follow-up care is a core part of our service. We believe in continuous monitoring to ensure optimal health outcomes."
+    category: 'clinical',
+    question: "Do you provide critical continuous follow-up care?",
+    answer: "Yes, follow-up care is the foundation of the Citicare model. Post-consultation, our staff monitors your healing progression, schedules subsequent checks, and documents clinical metrics in your personal electronic medical record (EMR)."
   },
   {
-    question: "What areas do you serve?",
-    answer: "We currently provide services across Lagos, Nigeria including Ikeja, Victoria Island, Ikoyi, Lekki, Surulere, and many other areas."
+    category: 'logistics',
+    question: "What geographical areas does Citicare serve?",
+    answer: "We offer comprehensive on-site home healthcare and physical consultations across major residential districts of Lagos, Nigeria (including Lekki, Ikeja, Ikoyi, Victoria Island, Surulere, and surrounding areas)."
   },
   {
-    question: "How quickly can I get an appointment?",
-    answer: "Most appointments can be scheduled within 24-48 hours. For urgent cases, we offer priority booking with same-day availability."
+    category: 'booking',
+    question: "How quickly can a medical coordinator reach my home?",
+    answer: "Normal care assessments are put in place within 24 to 48 hours. For urgent recovery or specialty post-op setups, we offer priority coordination to make assistance available on a shorter lead-time depending on specialist schedules."
   }
 ];
 
 export default function FAQ() {
+  const [activeCategory, setActiveCategory] = useState<'all' | 'booking' | 'clinical' | 'logistics'>('all');
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const filteredFaqs = activeCategory === 'all' 
+    ? faqs 
+    : faqs.filter(faq => faq.category === activeCategory);
+
+  const toggleFaq = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
   return (
-    <div className="flex flex-col bg-slate-50 min-h-screen">
-      <section className="py-16 lg:py-24">
-        <div className="max-w-3xl mx-auto px-5 sm:px-6">
-          <div className="text-center space-y-4 mb-12 lg:mb-16">
-            <div className="h-14 w-14 bg-[#1e3a8a] rounded-2xl flex items-center justify-center text-white mx-auto">
-              <HelpCircle className="h-7 w-7" />
-            </div>
-            <h1 className="text-4xl sm:text-5xl font-bold text-[#1e3a8a]">Got Questions?</h1>
-            <p className="text-base lg:text-lg text-slate-600 leading-relaxed">
-              Find answers to common questions about our services and delivery.
+    <div className="flex flex-col bg-[#f8fafc] min-h-screen">
+      
+      {/* Editorial Header */}
+      <section className="bg-gradient-to-b from-slate-900 to-slate-950 text-white py-16 lg:py-24 relative overflow-hidden flex items-center">
+        {/* Subtle background decoration */}
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center opacity-5 pointer-events-none" />
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+        
+        <div className="max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-20 relative z-10 w-full text-center">
+          <div className="max-w-2xl mx-auto space-y-4">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-blue-500/20 text-blue-300 uppercase tracking-widest">
+              Support Center
+            </span>
+            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white">
+              Citicare Portal Help & FAQ
+            </h1>
+            <p className="text-sm sm:text-base text-slate-300 max-w-lg mx-auto leading-relaxed">
+              Find answers to common questions about our physical specialist Consultations, home nursing, and clinic logistics.
             </p>
           </div>
+        </div>
+      </section>
 
-          <div className="bg-white rounded-2xl lg:rounded-3xl p-6 lg:p-8 shadow-xl">
-            <Accordion type="single" collapsible className="w-full">
-              {faqs.map((faq, idx) => (
-                <AccordionItem key={idx} value={`item-${idx}`} className="border-b border-slate-100 last:border-0">
-                  <AccordionTrigger className="text-base lg:text-lg font-semibold hover:text-blue-600 hover:no-underline text-left py-5 text-[#1e3a8a]">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-slate-600 leading-relaxed pb-5">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </div>
-
-          <div className="mt-12 lg:mt-16 p-8 lg:p-10 bg-[#1e3a8a] rounded-2xl lg:rounded-3xl text-white text-center space-y-6">
-            <h3 className="text-2xl font-bold">Still have questions?</h3>
-            <p className="text-white/70 text-sm">Our team is available 24/7 to help you with your healthcare needs.</p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4 text-sm">
-              <div className="flex items-center justify-center gap-2">
-                <Mail className="h-4 w-4 text-blue-300" />
-                <span>enquiries@citicarehealth.com</span>
-              </div>
-              <div className="flex items-center justify-center gap-2">
-                <Phone className="h-4 w-4 text-blue-300" />
-                <span>+234 811 986 8201</span>
+      {/* Main Content Layout */}
+      <section className="max-w-[1440px] mx-auto px-5 sm:px-6 lg:px-20 py-12 lg:py-20 flex-grow">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+          
+          {/* Left Column Sticky Sidebar */}
+          <div className="lg:col-span-4 lg:sticky lg:top-28 space-y-6">
+            <div className="space-y-4">
+              <h3 className="text-xs font-bold uppercase tracking-widest text-[#1e3a8a]">Filter Topics</h3>
+              <div className="flex flex-wrap lg:flex-col gap-2">
+                {[
+                  { key: 'all', label: 'All Questions' },
+                  { key: 'booking', label: 'Booking & Consultations' },
+                  { key: 'clinical', label: 'Staff & Clinical Vetting' },
+                  { key: 'logistics', label: 'Home Care Logistics' }
+                ].map((cat) => (
+                  <button
+                    key={cat.key}
+                    onClick={() => {
+                      setActiveCategory(cat.key as any);
+                      setOpenIndex(null);
+                    }}
+                    className={`px-4 py-3 rounded-xl text-xs font-bold text-left transition-all w-full leading-none flex items-center justify-between border ${
+                      activeCategory === cat.key
+                        ? 'bg-[#1e3a8a] text-white border-transparent shadow-md'
+                        : 'bg-white text-slate-700 hover:bg-slate-100 border-slate-100'
+                    }`}
+                  >
+                    <span>{cat.label}</span>
+                    <span className={`h-2 w-2 rounded-full ${activeCategory === cat.key ? 'bg-emerald-400' : 'bg-slate-300'}`} />
+                  </button>
+                ))}
               </div>
             </div>
+
+            {/* Quick Contact Resource Hub */}
+            <div className="bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm space-y-4">
+              <h4 className="text-xs font-extrabold text-slate-900 uppercase tracking-widest">Still need assistance?</h4>
+              <p className="text-xs text-slate-500 leading-relaxed font-medium">
+                Our active clinical desks work round-the-clock to coordinate services. Don't hesitate to reach us directly.
+              </p>
+              
+              <div className="space-y-2.5 pt-2">
+                <a 
+                  href="tel:+2348119868201" 
+                  className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 hover:bg-slate-100/80 border border-slate-100 text-slate-800 transition-colors"
+                >
+                  <div className="h-8 w-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                    <Phone className="h-4 w-4" />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-[10px] font-black uppercase text-slate-400 leading-none mb-1">Call Representative</p>
+                    <p className="text-xs font-bold font-mono tracking-wide">+234 811 986 8201</p>
+                  </div>
+                </a>
+
+                <a 
+                  href="mailto:enquiries@citicarehealth.com" 
+                  className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 hover:bg-slate-100/80 border border-slate-100 text-slate-800 transition-colors"
+                >
+                  <div className="h-8 w-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                    <Mail className="h-4 w-4" />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-[10px] font-black uppercase text-slate-400 leading-none mb-1">Send Enquiries</p>
+                    <p className="text-xs font-bold">enquiries@citicarehealth.com</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+
           </div>
+
+          {/* Right Column Interactive FAQ Roster */}
+          <div className="lg:col-span-8 space-y-3">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 px-1">
+              Currently Showing {filteredFaqs.length} Help Resources
+            </h3>
+
+            <div className="space-y-4">
+              {filteredFaqs.map((faq, idx) => {
+                const isOpen = openIndex === idx;
+                return (
+                  <div
+                    key={idx}
+                    className={`bg-white rounded-2xl border transition-all duration-300 ${
+                      isOpen 
+                        ? 'border-blue-200 shadow-md ring-1 ring-blue-50' 
+                        : 'border-slate-100 shadow-sm hover:border-slate-300'
+                    }`}
+                  >
+                    <button
+                      onClick={() => toggleFaq(idx)}
+                      className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-slate-800 select-none cursor-pointer"
+                    >
+                      <span className="leading-snug text-slate-900">{faq.question}</span>
+                      <div className={`h-8 w-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-500 shrink-0 transition-transform duration-300 ${
+                        isOpen ? 'rotate-180 bg-blue-50 text-blue-600' : ''
+                      }`}>
+                        <ChevronDown className="h-4 w-4" />
+                      </div>
+                    </button>
+
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.25 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="px-6 pb-6 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed font-semibold border-t border-slate-50">
+                            {faq.answer}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
         </div>
       </section>
     </div>

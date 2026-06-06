@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
 import HomeHealthcare from './pages/HomeHealthcare';
+import HomeHealthcareDetail from './pages/HomeHealthcareDetail';
 import SpecialistCare from './pages/SpecialistCare';
 import SpecialtyDetail from './pages/SpecialtyDetail';
 import ReviewSubmission from './pages/ReviewSubmission';
@@ -37,6 +38,7 @@ export default function App() {
           <Route path="/about" element={<WebsiteLayout><About /></WebsiteLayout>} />
           <Route path="/services" element={<WebsiteLayout><Services /></WebsiteLayout>} />
           <Route path="/home-healthcare" element={<WebsiteLayout><HomeHealthcare /></WebsiteLayout>} />
+          <Route path="/home-healthcare/:serviceSlug" element={<WebsiteLayout><HomeHealthcareDetail /></WebsiteLayout>} />
           <Route path="/specialist-care" element={<WebsiteLayout><SpecialistCare /></WebsiteLayout>} />
           <Route path="/specialist-care/:specialtySlug" element={<WebsiteLayout><SpecialtyDetail /></WebsiteLayout>} />
           <Route path="/review" element={<WebsiteLayout><ReviewSubmission /></WebsiteLayout>} />

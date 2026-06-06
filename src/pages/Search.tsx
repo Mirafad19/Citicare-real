@@ -65,63 +65,63 @@ const mockData = [
   {
     title: "Skilled Nursing Care at Home",
     type: "Home Healthcare",
-    link: "/home-healthcare",
+    link: "/home-healthcare/skilled-nursing",
     desc: "Professional registered nurse visits for clinical procedures, injections, and overall physical assessment.",
     keywords: ["nursing", "nurse", "nursing care", "home nursing", "medical care", "injections", "clinical assessment"]
   },
   {
     title: "Post-Operative Home Recovery",
     type: "Home Healthcare",
-    link: "/home-healthcare",
+    link: "/home-healthcare/post-op-recovery",
     desc: "Rehabilitation, surgical incision care, and assistance in regaining full function at home after surgery.",
     keywords: ["post-operative", "recovery", "post-op", "surgery recovery", "rehabilitation", "incision", "wound", "healing"]
   },
   {
-    title: "Physical Therapy at Home",
+    title: "Physiotherapy at Home",
     type: "Home Healthcare",
-    link: "/home-healthcare",
+    link: "/home-healthcare/physiotherapy",
     desc: "Guided mobility training, exercises, and muscle strengthening routines provided by a dedicated specialist.",
     keywords: ["physical therapy", "physiotherapy", "therapist", "mobility", "exercise", "movement", "massage", "rehabilitation", "walking", "joints"]
   },
   {
     title: "Elderly Companion Care",
     type: "Home Healthcare",
-    link: "/home-healthcare",
+    link: "/home-healthcare/elderly-companion",
     desc: "Help for elderly loved ones in their daily activities, nutrition support, and warm, compassionate companionship.",
     keywords: ["elderly", "companion", "senior", "geriatric", "companion care", "aged", "grand", "parent", "home help"]
   },
   {
     title: "Palliative & Compassionate Care",
     type: "Home Healthcare",
-    link: "/home-healthcare",
+    link: "/home-healthcare/palliative-care",
     desc: "Symptom management and premium wellness support designed comfortingly for progressive or chronic conditions.",
     keywords: ["palliative", "chronic", "cancer", "comfort", "pain management", "end of life", "compassionate"]
   },
   {
     title: "Psychiatric Home Support",
     type: "Home Healthcare",
-    link: "/home-healthcare",
+    link: "/home-healthcare/psychiatric-home-support",
     desc: "Specialized in-home therapeutic support for patients overcoming mental health and cognitive challenges.",
     keywords: ["psychiatric home support", "psychiatric home care", "mental wellness home"]
   },
   {
     title: "Medication Management",
     type: "Home Healthcare",
-    link: "/home-healthcare",
+    link: "/home-healthcare/medication-management",
     desc: "Professional prescription sorting, dosage timing, and safety assessments for complex medicine regimens.",
     keywords: ["medication", "pills", "prescription", "drug", "sorting", "medicine", "pharmacy", "dose", "dosage"]
   },
   {
     title: "Wound Care Services",
     type: "Home Healthcare",
-    link: "/home-healthcare",
+    link: "/home-healthcare/wound-care",
     desc: "Advanced sterile dressings, diabetic wound monitoring, and infection checks for rapid, safe healing.",
     keywords: ["wound care", "dressing", "bandage", "diabetes", "infection", "heal", "sterile", "sore"]
   },
   {
     title: "Lab Sample Collection at Home",
     type: "Home Healthcare",
-    link: "/home-healthcare",
+    link: "/home-healthcare/lab-sample-collection",
     desc: "Convenient, sterile blood draw and diagnostics sampling done in your house and sent directly to the lab.",
     keywords: ["lab", "blood", "test", "sample", "diagnostic", "draw", "blood draw", "test sample", "screening"]
   },

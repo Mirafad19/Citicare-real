@@ -96,5 +96,10 @@ service cloud.firestore {
     match /admins/{adminId} {
       allow read: if isSignedIn();
     }
+
+    match /newsletter_subscribers/{subscriberId} {
+      allow create: if true;
+      allow read, list: if isAdmin();
+    }
   }
 }

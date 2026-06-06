@@ -134,24 +134,24 @@ export default function HomeHealthcare() {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
-              "Skilled Nursing Care",
-              "Post-Operative Recovery",
-              "Elderly Companion Care",
-              "Physiotherapy (Physical Therapy)",
-              "Psychiatric Home Support",
-              "Medication Management",
-              "Wound Care Services",
-              "Lab Sample Collection",
-              "Palliative Care"
+              { name: "Skilled Nursing Care", slug: "skilled-nursing" },
+              { name: "Post-Operative Recovery", slug: "post-op-recovery" },
+              { name: "Elderly Companion Care", slug: "elderly-companion" },
+              { name: "Physiotherapy", slug: "physiotherapy" },
+              { name: "Psychiatric Home Support", slug: "psychiatric-home-support" },
+              { name: "Medication Management", slug: "medication-management" },
+              { name: "Wound Care Services", slug: "wound-care" },
+              { name: "Lab Sample Collection", slug: "lab-sample-collection" },
+              { name: "Palliative Care", slug: "palliative-care" }
             ].map((service, i) => (
-              <motion.div 
+              <Link
                 key={i}
-                whileHover={{ scale: 1.02 }}
-                className="bg-white/5 border border-white/10 p-5 lg:p-6 rounded-xl flex items-center justify-between"
+                to={`/home-healthcare/${service.slug}`}
+                className="bg-white/5 border border-white/10 hover:border-emerald-400 hover:bg-white/10 p-5 lg:p-6 rounded-xl flex items-center justify-between transition-all duration-300 group block"
               >
-                <span className="font-semibold text-sm lg:text-base">{service}</span>
-                <ChevronRight className="h-5 w-5 text-emerald-400" />
-              </motion.div>
+                <span className="font-semibold text-sm lg:text-base text-white group-hover:text-emerald-300 transition-colors">{service.name}</span>
+                <ChevronRight className="h-5 w-5 text-emerald-400 group-hover:text-emerald-300 group-hover:translate-x-1 transition-all" />
+              </Link>
             ))}
           </div>
         </div>

@@ -128,19 +128,19 @@ export default function Services() {
             ].map((item, i) => (
               <div 
                 key={i} 
-                className="bg-white p-8 lg:p-10 rounded-2xl lg:rounded-3xl space-y-6 group hover:bg-[#1e3a8a] hover:text-white transition-all duration-300"
+                className="bg-white p-8 lg:p-10 rounded-2xl lg:rounded-3xl space-y-6 group hover:bg-[#1e3a8a] hover:text-white transition-all duration-300 border border-slate-100 shadow-sm"
               >
                 <div className="h-16 w-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 group-hover:bg-white/15 group-hover:text-white transition-colors">
                   {item.icon}
                 </div>
-                <h3 className="text-2xl font-bold">{item.title}</h3>
-                <p className="leading-relaxed opacity-80">
+                <h3 className="text-2xl font-bold text-[#1e3a8a] group-hover:text-white transition-colors">{item.title}</h3>
+                <p className="leading-relaxed text-slate-600 group-hover:text-slate-200 transition-colors text-sm">
                   {item.desc}
                 </p>
-                <ul className="space-y-2">
+                <ul className="space-y-2 text-slate-600 group-hover:text-slate-200 transition-colors">
                   {item.items.map((listItem, idx) => (
                     <li key={idx} className="flex items-center gap-2 font-medium text-sm">
-                      <span className="h-1.5 w-1.5 rounded-full bg-current opacity-50" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-blue-500 group-hover:bg-white transition-colors opacity-70" />
                       {listItem}
                     </li>
                   ))}
@@ -223,7 +223,7 @@ export default function Services() {
                 <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
                 Customized Care Plans
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight tracking-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-white m-0">
                 Let&apos;s build a customized care plan for you
               </h2>
               <p className="text-sm sm:text-base lg:text-lg text-white/80 max-w-lg mx-auto leading-relaxed font-medium">
